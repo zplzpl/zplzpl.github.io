@@ -432,30 +432,18 @@
 <p>路由器的缓存饱和或者溢出时，甚至可能发生分组数据丢失、无法发送到对端的情况</p>
 </blockquote>
 <p><img src="/uploads/packet-switching2.png" alt="分组交换2"></p>
-<h2 id="单播、广播、多播-组播-、任播"><a href="#单播、广播、多播-组播-、任播" class="headerlink" title="单播、广播、多播(组播)、任播"></a>单播、广播、多播(组播)、任播</h2><ul>
-<li>单播 unicast</li>
-</ul>
-<p><img src="/uploads/unicast.png" alt></p>
+<h2 id="单播、广播、多播-组播-、任播"><a href="#单播、广播、多播-组播-、任播" class="headerlink" title="单播、广播、多播(组播)、任播"></a>单播、广播、多播(组播)、任播</h2><h3 id="单播-unicast"><a href="#单播-unicast" class="headerlink" title="单播 unicast"></a>单播 unicast</h3><p><img src="/uploads/unicast.png" alt></p>
 <p>指1对1的通信，常用的非多播非广播的UDP、TCP消息就是单播</p>
 <blockquote>
 <p>早期互联网单播的传输足以满足需求，直到1993年，BSD4.4版本中实现了多播，互联网也发生了很大的变化，人们也想分享看的（视频）和听的（音频）。</p>
 </blockquote>
-<ul>
-<li>广播 broadcast</li>
-</ul>
-<p><img src="/uploads/broadcast.png" alt></p>
+<h3 id="广播-broadcast"><a href="#广播-broadcast" class="headerlink" title="广播 broadcast"></a>广播 broadcast</h3><p><img src="/uploads/broadcast.png" alt></p>
 <p>将消息从1台主机发送给与之相连的所有其他主机，广播通信一个典型例子就是电视播放，它将电视信号一起发送给非特定的多个对象。</p>
 <p>我们知道电视一般都有自己的频段，只有相应的频段的可接收范围内才能收到电视信号。与之相似，进行广播通信计算机也有它们的广播范围，只有在这个范围内的计算机才能收到相应的广播消息。这个范围叫广播域。</p>
-<ul>
-<li>多播 multicast</li>
-</ul>
-<p><img src="/uploads/multicast.png" alt></p>
+<h3 id="多播-multicast"><a href="#多播-multicast" class="headerlink" title="多播 multicast"></a>多播 multicast</h3><p><img src="/uploads/multicast.png" alt></p>
 <p>多播与广播类似，也是将消息发给多个主机，不同的是多播限定某一组主机作为接收端。</p>
 <p>典型的例子是电视会议，由多组人不同地方参加一种远程会议，在这种形式下，会由一台主机发送特定的多台主机。</p>
-<ul>
-<li>任播 anycast</li>
-</ul>
-<p><img src="/uploads/anycast.png" alt></p>
+<h3 id="任播-anycast"><a href="#任播-anycast" class="headerlink" title="任播 anycast"></a>任播 anycast</h3><p><img src="/uploads/anycast.png" alt></p>
 <p>是指在特定的多台主机选择一台作为接收端的一种通信方式，虽然与多播有相似之处，<br>都是面向特定的一群主机，但行为却与多播不同，任播通信是从目标主机群里选择一台最符合网络条件的主机作为目标主机发送消息。<br>通常被选中的主机将返回一个单播信号，虽然发送端主机会只跟这台主机进行通信</p>
 <p>典型的例子就是DNS根域名解析服务器</p>
 <h1 id="TCP-IP-基础知识"><a href="#TCP-IP-基础知识" class="headerlink" title="TCP/IP 基础知识"></a>TCP/IP 基础知识</h1><h1 id="数据链路"><a href="#数据链路" class="headerlink" title="数据链路"></a>数据链路</h1><h1 id="IP-协议"><a href="#IP-协议" class="headerlink" title="IP 协议"></a>IP 协议</h1><h1 id="ARP-地址解析协议"><a href="#ARP-地址解析协议" class="headerlink" title="ARP 地址解析协议"></a>ARP 地址解析协议</h1><h1 id="ICMP-互联网控制消息协议"><a href="#ICMP-互联网控制消息协议" class="headerlink" title="ICMP 互联网控制消息协议"></a>ICMP 互联网控制消息协议</h1><h1 id="UDP-协议"><a href="#UDP-协议" class="headerlink" title="UDP 协议"></a>UDP 协议</h1><ul>
