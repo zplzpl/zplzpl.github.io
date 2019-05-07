@@ -357,7 +357,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="OSI参考模型"><a href="#OSI参考模型" class="headerlink" title="OSI参考模型"></a>OSI参考模型</h1><p><img src="/uploads/osi.png" alt="OSI参考模型"></p>
+<h1 id="网络基础知识"><a href="#网络基础知识" class="headerlink" title="网络基础知识"></a>网络基础知识</h1><h2 id="OSI参考模型"><a href="#OSI参考模型" class="headerlink" title="OSI参考模型"></a>OSI参考模型</h2><p><img src="/uploads/osi.png" alt="OSI参考模型"></p>
 <p>OSI将通信功能划分了7个分层，称作为OSI参考模型，只是一个模型，它也只是对各层的作用做了一些粗略的界定，并没有对协议和接口进行详细的定义。<br>许多通信协议，都对应了7层中的某个层次，大致可以了解该协议在通信功能中的位置和作用。</p>
 <p><strong>OSI协议与OSI参考模型</strong></p>
 <p>OSI协议：是为了让异构的计算机之间能够互相通信的、由ISO与ITU-T推进标准化的一种网络体系结构</p>
@@ -384,10 +384,13 @@
 <li>会话层</li>
 </ul>
 <p>负责建立与管理会话</p>
+<blockquote>
+<p>实际的建立连接与断开连接是由传输层进行，会话层主要是负责建立与断开的判断（时机）</p>
+</blockquote>
 <ul>
 <li>传输层</li>
 </ul>
-<p>主要是提供不同主机上的进程之间的逻辑通信（端到端的通信）</p>
+<p>主要是提供不同主机上的进程之间的逻辑通信（端到端的通信），传输层可以提供可靠传输是该层非常重要的一个作用</p>
 <ul>
 <li>网络层</li>
 </ul>
@@ -400,8 +403,8 @@
 <li>物理层</li>
 </ul>
 <p>负责0、1比特流（0，1序列)与电压高低、光的闪灭之间的互换</p>
-<p>再放一张，OSI分层定义与TCP/IP之间的参照关系图<br><img src="/uploads/osi-tcp-ip.jpg" alt="OSI TCP/IP"></p>
-<h1 id="IP-协议"><a href="#IP-协议" class="headerlink" title="IP 协议"></a>IP 协议</h1><h1 id="ARP-地址解析协议"><a href="#ARP-地址解析协议" class="headerlink" title="ARP 地址解析协议"></a>ARP 地址解析协议</h1><h1 id="ICMP-互联网控制消息协议"><a href="#ICMP-互联网控制消息协议" class="headerlink" title="ICMP 互联网控制消息协议"></a>ICMP 互联网控制消息协议</h1><h1 id="UDP-协议"><a href="#UDP-协议" class="headerlink" title="UDP 协议"></a>UDP 协议</h1><ul>
+<h2 id="OSI分层定义与TCP-IP之间的参照关系图"><a href="#OSI分层定义与TCP-IP之间的参照关系图" class="headerlink" title="OSI分层定义与TCP/IP之间的参照关系图"></a>OSI分层定义与TCP/IP之间的参照关系图</h2><p><img src="/uploads/osi-tcp-ip.jpg" alt="OSI TCP/IP"></p>
+<h2 id="分组交换技术"><a href="#分组交换技术" class="headerlink" title="分组交换技术"></a>分组交换技术</h2><h2 id="单播、广播、组播、任播"><a href="#单播、广播、组播、任播" class="headerlink" title="单播、广播、组播、任播"></a>单播、广播、组播、任播</h2><h1 id="TCP-IP-基础知识"><a href="#TCP-IP-基础知识" class="headerlink" title="TCP/IP 基础知识"></a>TCP/IP 基础知识</h1><h1 id="数据链路"><a href="#数据链路" class="headerlink" title="数据链路"></a>数据链路</h1><h1 id="IP-协议"><a href="#IP-协议" class="headerlink" title="IP 协议"></a>IP 协议</h1><h1 id="ARP-地址解析协议"><a href="#ARP-地址解析协议" class="headerlink" title="ARP 地址解析协议"></a>ARP 地址解析协议</h1><h1 id="ICMP-互联网控制消息协议"><a href="#ICMP-互联网控制消息协议" class="headerlink" title="ICMP 互联网控制消息协议"></a>ICMP 互联网控制消息协议</h1><h1 id="UDP-协议"><a href="#UDP-协议" class="headerlink" title="UDP 协议"></a>UDP 协议</h1><ul>
 <li>UDP是一个简单的面向数据报的运输层协议</li>
 </ul>
 <h1 id="TCP-协议"><a href="#TCP-协议" class="headerlink" title="TCP 协议"></a>TCP 协议</h1><h1 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h1><h1 id="HTTPS-协议"><a href="#HTTPS-协议" class="headerlink" title="HTTPS 协议"></a>HTTPS 协议</h1><h1 id="TCP与UDP的区别"><a href="#TCP与UDP的区别" class="headerlink" title="TCP与UDP的区别"></a>TCP与UDP的区别</h1><h1 id="HTTP与HTTPS的区别"><a href="#HTTP与HTTPS的区别" class="headerlink" title="HTTP与HTTPS的区别"></a>HTTP与HTTPS的区别</h1>
