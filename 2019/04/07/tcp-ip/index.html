@@ -94,13 +94,13 @@
 
 
 
-<meta name="description" content="过去几年中，一直沉溺在业务的开发，当遇到一些疑难杂症网络问题，虽即时可以解决（通过谷歌），但是没有系统性学习网络，现在处于深入做技术的需求，把这个以前遗留的网络知识好好恶补。 在学习资料的选择中，有视频、图书、文章等  视频资料  https://www.bilibili.com/video/av10610680 （在B站学习） 感觉先看完一遍书再看视频会更好些     图书资料  https:/">
+<meta name="description" content="过去几年中，一直沉溺在业务的开发，当遇到一些疑难杂症网络问题，虽即时可以解决（通过谷歌），但是没有系统性学习网络，现在处于深入做技术的需求，把这个以前遗留的网络知识好好恶补。 在学习资料的选择中，有视频、图书、文章等  视频资料  https://www.bilibili.com/video/av10610680 （在B站学习） 感觉先看完一遍书再看视频会更好些     图书资料  《图解TCP/">
 <meta name="keywords" content="TCP&#x2F;IP,网络通讯,OSI,TCP,UDP,IP,ARP,ICMP,HTTP,HTTPS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TCP&#x2F;IP 学习笔记">
 <meta property="og:url" content="http://yoursite.com/2019/04/07/tcp-ip/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="过去几年中，一直沉溺在业务的开发，当遇到一些疑难杂症网络问题，虽即时可以解决（通过谷歌），但是没有系统性学习网络，现在处于深入做技术的需求，把这个以前遗留的网络知识好好恶补。 在学习资料的选择中，有视频、图书、文章等  视频资料  https://www.bilibili.com/video/av10610680 （在B站学习） 感觉先看完一遍书再看视频会更好些     图书资料  https:/">
+<meta property="og:description" content="过去几年中，一直沉溺在业务的开发，当遇到一些疑难杂症网络问题，虽即时可以解决（通过谷歌），但是没有系统性学习网络，现在处于深入做技术的需求，把这个以前遗留的网络知识好好恶补。 在学习资料的选择中，有视频、图书、文章等  视频资料  https://www.bilibili.com/video/av10610680 （在B站学习） 感觉先看完一遍书再看视频会更好些     图书资料  《图解TCP/">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/uploads/osi.png">
 <meta property="og:image" content="http://yoursite.com/uploads/osi-func.png">
@@ -108,10 +108,13 @@
 <meta property="og:image" content="http://yoursite.com/uploads/transport-type.png">
 <meta property="og:image" content="http://yoursite.com/uploads/packet-switching.png">
 <meta property="og:image" content="http://yoursite.com/uploads/packet-switching2.png">
-<meta property="og:updated_time" content="2019-05-07T11:19:15.104Z">
+<meta property="og:image" content="http://yoursite.com/uploads/unicast.png">
+<meta property="og:image" content="http://yoursite.com/uploads/broadcast.png">
+<meta property="og:image" content="http://yoursite.com/uploads/anycast.png">
+<meta property="og:updated_time" content="2019-05-07T12:11:34.932Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP&#x2F;IP 学习笔记">
-<meta name="twitter:description" content="过去几年中，一直沉溺在业务的开发，当遇到一些疑难杂症网络问题，虽即时可以解决（通过谷歌），但是没有系统性学习网络，现在处于深入做技术的需求，把这个以前遗留的网络知识好好恶补。 在学习资料的选择中，有视频、图书、文章等  视频资料  https://www.bilibili.com/video/av10610680 （在B站学习） 感觉先看完一遍书再看视频会更好些     图书资料  https:/">
+<meta name="twitter:description" content="过去几年中，一直沉溺在业务的开发，当遇到一些疑难杂症网络问题，虽即时可以解决（通过谷歌），但是没有系统性学习网络，现在处于深入做技术的需求，把这个以前遗留的网络知识好好恶补。 在学习资料的选择中，有视频、图书、文章等  视频资料  https://www.bilibili.com/video/av10610680 （在B站学习） 感觉先看完一遍书再看视频会更好些     图书资料  《图解TCP/">
 <meta name="twitter:image" content="http://yoursite.com/uploads/osi.png">
 
 
@@ -350,9 +353,8 @@
 </li>
 <li><p>图书资料</p>
 <ul>
-<li><a href="https://www.kancloud.cn/lifei6671/tcp-ip" target="_blank" rel="noopener">https://www.kancloud.cn/lifei6671/tcp-ip</a> (不全面)</li>
 <li>《图解TCP/IP》第5版 <blockquote>
-<p>推荐这本书通俗易懂 下面学习笔记也主要依据这本书进行</p>
+<p>这本书通俗易懂 下面学习笔记也主要依据这本书进行</p>
 </blockquote>
 </li>
 </ul>
@@ -439,10 +441,35 @@
 <p>路由器的缓存饱和或者溢出时，甚至可能发生分组数据丢失、无法发送到对端的情况</p>
 </blockquote>
 <p><img src="/uploads/packet-switching2.png" alt="分组交换2"></p>
-<h2 id="单播、广播、组播、任播"><a href="#单播、广播、组播、任播" class="headerlink" title="单播、广播、组播、任播"></a>单播、广播、组播、任播</h2><h1 id="TCP-IP-基础知识"><a href="#TCP-IP-基础知识" class="headerlink" title="TCP/IP 基础知识"></a>TCP/IP 基础知识</h1><h1 id="数据链路"><a href="#数据链路" class="headerlink" title="数据链路"></a>数据链路</h1><h1 id="IP-协议"><a href="#IP-协议" class="headerlink" title="IP 协议"></a>IP 协议</h1><h1 id="ARP-地址解析协议"><a href="#ARP-地址解析协议" class="headerlink" title="ARP 地址解析协议"></a>ARP 地址解析协议</h1><h1 id="ICMP-互联网控制消息协议"><a href="#ICMP-互联网控制消息协议" class="headerlink" title="ICMP 互联网控制消息协议"></a>ICMP 互联网控制消息协议</h1><h1 id="UDP-协议"><a href="#UDP-协议" class="headerlink" title="UDP 协议"></a>UDP 协议</h1><ul>
+<h2 id="单播、广播、多播-组播-、任播"><a href="#单播、广播、多播-组播-、任播" class="headerlink" title="单播、广播、多播(组播)、任播"></a>单播、广播、多播(组播)、任播</h2><ul>
+<li>单播 unicast</li>
+</ul>
+<p><img src="/uploads/unicast.png" alt></p>
+<p>指1对1的通信，常用的非多播非广播的UDP、TCP消息就是单播</p>
+<blockquote>
+<p>早期互联网单播的传输足以满足需求，直到1993年，BSD4.4版本中实现了多播，互联网也发生了很大的变化，人们也想分享看的（视频）和听的（音频）。</p>
+</blockquote>
+<ul>
+<li>广播 broadcast</li>
+</ul>
+<p><img src="/uploads/broadcast.png" alt></p>
+<p>将消息从1台主机发送给与之相连的所有其他主机，广播通信一个典型例子就是电视播放，它将电视信号一起发送给非特定的多个对象。</p>
+<p>我们知道电视一般都有自己的频段，只有相应的频段的可接收范围内才能收到电视信号。与之相似，进行广播通信计算机也有它们的广播范围，只有在这个范围内的计算机才能收到相应的广播消息。这个范围叫广播域。</p>
+<ul>
+<li>多播 multicast</li>
+</ul>
+<p>多播与广播类似，也是将消息发给多个主机，不同的是多播限定某一组主机作为接收端。</p>
+<p>典型的例子是电视会议，由多组人不同地方参加一种远程会议，在这种形式下，会由一台主机发送特定的多台主机。</p>
+<ul>
+<li>任播 anycast</li>
+</ul>
+<p><img src="/uploads/anycast.png" alt></p>
+<p>是指在特定的多台主机选择一台作为接收端的一种通信方式，虽然与多播有相似之处，<br>都是面向特定的一群主机，但行为却与多播不同，任播通信是从目标主机群里选择一台最符合网络条件的主机作为目标主机发送消息。<br>通常被选中的主机将返回一个单播信号，虽然发送端主机会只跟这台主机进行通信</p>
+<p>典型的例子就是DNS根域名解析服务器</p>
+<h1 id="TCP-IP-基础知识"><a href="#TCP-IP-基础知识" class="headerlink" title="TCP/IP 基础知识"></a>TCP/IP 基础知识</h1><h1 id="数据链路"><a href="#数据链路" class="headerlink" title="数据链路"></a>数据链路</h1><h1 id="IP-协议"><a href="#IP-协议" class="headerlink" title="IP 协议"></a>IP 协议</h1><h1 id="ARP-地址解析协议"><a href="#ARP-地址解析协议" class="headerlink" title="ARP 地址解析协议"></a>ARP 地址解析协议</h1><h1 id="ICMP-互联网控制消息协议"><a href="#ICMP-互联网控制消息协议" class="headerlink" title="ICMP 互联网控制消息协议"></a>ICMP 互联网控制消息协议</h1><h1 id="UDP-协议"><a href="#UDP-协议" class="headerlink" title="UDP 协议"></a>UDP 协议</h1><ul>
 <li>UDP是一个简单的面向数据报的运输层协议</li>
 </ul>
-<h1 id="TCP-协议"><a href="#TCP-协议" class="headerlink" title="TCP 协议"></a>TCP 协议</h1><h1 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h1><h1 id="HTTPS-协议"><a href="#HTTPS-协议" class="headerlink" title="HTTPS 协议"></a>HTTPS 协议</h1><h1 id="TCP与UDP的区别"><a href="#TCP与UDP的区别" class="headerlink" title="TCP与UDP的区别"></a>TCP与UDP的区别</h1><h1 id="HTTP与HTTPS的区别"><a href="#HTTP与HTTPS的区别" class="headerlink" title="HTTP与HTTPS的区别"></a>HTTP与HTTPS的区别</h1>
+<h1 id="TCP-协议"><a href="#TCP-协议" class="headerlink" title="TCP 协议"></a>TCP 协议</h1><h1 id="TCP与UDP的区别"><a href="#TCP与UDP的区别" class="headerlink" title="TCP与UDP的区别"></a>TCP与UDP的区别</h1><h1 id="DNS-协议"><a href="#DNS-协议" class="headerlink" title="DNS 协议"></a>DNS 协议</h1><h1 id="DHCP-协议"><a href="#DHCP-协议" class="headerlink" title="DHCP 协议"></a>DHCP 协议</h1><h1 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h1><h1 id="HTTPS-协议"><a href="#HTTPS-协议" class="headerlink" title="HTTPS 协议"></a>HTTPS 协议</h1><h1 id="HTTP与HTTPS的区别"><a href="#HTTP与HTTPS的区别" class="headerlink" title="HTTP与HTTPS的区别"></a>HTTP与HTTPS的区别</h1>
       
     </div>
     
@@ -587,7 +614,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络基础知识"><span class="nav-number">1.</span> <span class="nav-text">网络基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI参考模型"><span class="nav-number">1.1.</span> <span class="nav-text">OSI参考模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI参考模型各分层介绍"><span class="nav-number">1.2.</span> <span class="nav-text">OSI参考模型各分层介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向有连接与面向无连接"><span class="nav-number">1.3.</span> <span class="nav-text">面向有连接与面向无连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分组交换技术"><span class="nav-number">1.4.</span> <span class="nav-text">分组交换技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单播、广播、组播、任播"><span class="nav-number">1.5.</span> <span class="nav-text">单播、广播、组播、任播</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-IP-基础知识"><span class="nav-number">2.</span> <span class="nav-text">TCP/IP 基础知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据链路"><span class="nav-number">3.</span> <span class="nav-text">数据链路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IP-协议"><span class="nav-number">4.</span> <span class="nav-text">IP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ARP-地址解析协议"><span class="nav-number">5.</span> <span class="nav-text">ARP 地址解析协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ICMP-互联网控制消息协议"><span class="nav-number">6.</span> <span class="nav-text">ICMP 互联网控制消息协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UDP-协议"><span class="nav-number">7.</span> <span class="nav-text">UDP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-协议"><span class="nav-number">8.</span> <span class="nav-text">TCP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-协议"><span class="nav-number">9.</span> <span class="nav-text">HTTP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTPS-协议"><span class="nav-number">10.</span> <span class="nav-text">HTTPS 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP与UDP的区别"><span class="nav-number">11.</span> <span class="nav-text">TCP与UDP的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP与HTTPS的区别"><span class="nav-number">12.</span> <span class="nav-text">HTTP与HTTPS的区别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络基础知识"><span class="nav-number">1.</span> <span class="nav-text">网络基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI参考模型"><span class="nav-number">1.1.</span> <span class="nav-text">OSI参考模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI参考模型各分层介绍"><span class="nav-number">1.2.</span> <span class="nav-text">OSI参考模型各分层介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向有连接与面向无连接"><span class="nav-number">1.3.</span> <span class="nav-text">面向有连接与面向无连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分组交换技术"><span class="nav-number">1.4.</span> <span class="nav-text">分组交换技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单播、广播、多播-组播-、任播"><span class="nav-number">1.5.</span> <span class="nav-text">单播、广播、多播(组播)、任播</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-IP-基础知识"><span class="nav-number">2.</span> <span class="nav-text">TCP/IP 基础知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据链路"><span class="nav-number">3.</span> <span class="nav-text">数据链路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IP-协议"><span class="nav-number">4.</span> <span class="nav-text">IP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ARP-地址解析协议"><span class="nav-number">5.</span> <span class="nav-text">ARP 地址解析协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ICMP-互联网控制消息协议"><span class="nav-number">6.</span> <span class="nav-text">ICMP 互联网控制消息协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UDP-协议"><span class="nav-number">7.</span> <span class="nav-text">UDP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-协议"><span class="nav-number">8.</span> <span class="nav-text">TCP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP与UDP的区别"><span class="nav-number">9.</span> <span class="nav-text">TCP与UDP的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DNS-协议"><span class="nav-number">10.</span> <span class="nav-text">DNS 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DHCP-协议"><span class="nav-number">11.</span> <span class="nav-text">DHCP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-协议"><span class="nav-number">12.</span> <span class="nav-text">HTTP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTPS-协议"><span class="nav-number">13.</span> <span class="nav-text">HTTPS 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP与HTTPS的区别"><span class="nav-number">14.</span> <span class="nav-text">HTTP与HTTPS的区别</span></a></li></ol></div>
             
 
           </div>
