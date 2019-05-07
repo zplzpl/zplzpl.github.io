@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="TCP/IP,网络通讯,OSI,TCP,UDP,IP,ARP,ICMP,HTTP,HTTPS,">
 
 
 
@@ -94,13 +94,21 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="过去几年中，一直沉溺在业务的开发，当遇到一些疑难杂症网络问题，虽即时可以解决（通过谷歌），但是没有系统性学习网络，现在处于深入做技术的需求，把这个以前遗留的网络知识好好恶补。 在学习资料的选择中，有视频、图书、文章等  视频资料  https://www.bilibili.com/video/av10610680 （在B站学习） 感觉先看完一遍书再看视频会更好些     图书资料  https:/">
+<meta name="keywords" content="TCP&#x2F;IP,网络通讯,OSI,TCP,UDP,IP,ARP,ICMP,HTTP,HTTPS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP&#x2F;IP 学习笔记">
+<meta property="og:url" content="http://yoursite.com/2019/04/07/tcp-ip/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="过去几年中，一直沉溺在业务的开发，当遇到一些疑难杂症网络问题，虽即时可以解决（通过谷歌），但是没有系统性学习网络，现在处于深入做技术的需求，把这个以前遗留的网络知识好好恶补。 在学习资料的选择中，有视频、图书、文章等  视频资料  https://www.bilibili.com/video/av10610680 （在B站学习） 感觉先看完一遍书再看视频会更好些     图书资料  https:/">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/04/07/tcp-ip/tcp-ip/osi.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/07/tcp-ip/tcp-ip/osi-func.png">
+<meta property="og:updated_time" content="2019-05-07T08:21:43.517Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="TCP&#x2F;IP 学习笔记">
+<meta name="twitter:description" content="过去几年中，一直沉溺在业务的开发，当遇到一些疑难杂症网络问题，虽即时可以解决（通过谷歌），但是没有系统性学习网络，现在处于深入做技术的需求，把这个以前遗留的网络知识好好恶补。 在学习资料的选择中，有视频、图书、文章等  视频资料  https://www.bilibili.com/video/av10610680 （在B站学习） 感觉先看完一遍书再看视频会更好些     图书资料  https:/">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/07/tcp-ip/tcp-ip/osi.png">
 
 
 
@@ -129,13 +137,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/07/tcp-ip/">
 
 
 
 
 
-  <title>Hexo</title>
+  <title>TCP/IP 学习笔记 | Hexo</title>
   
 
 
@@ -160,9 +168,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -245,9 +251,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -277,9 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/07/tcp-ip/" itemprop="url">TCP/IP 学习笔记</a></h1>
+          <h1 class="post-title" itemprop="name headline">TCP/IP 学习笔记</h1>
         
 
         <div class="post-meta">
@@ -329,9 +333,7 @@
       
 
       
-        
-          
-            <p>过去几年中，一直沉溺在业务的开发，当遇到一些疑难杂症网络问题，虽即时可以解决（通过谷歌），但是没有系统性学习网络，现在处于深入做技术的需求，把这个以前遗留的网络知识好好恶补。</p>
+        <p>过去几年中，一直沉溺在业务的开发，当遇到一些疑难杂症网络问题，虽即时可以解决（通过谷歌），但是没有系统性学习网络，现在处于深入做技术的需求，把这个以前遗留的网络知识好好恶补。</p>
 <p>在学习资料的选择中，有视频、图书、文章等</p>
 <ul>
 <li><p>视频资料</p>
@@ -374,8 +376,6 @@
 <li>UDP是一个简单的面向数据报的运输层协议</li>
 </ul>
 <h1 id="TCP-协议"><a href="#TCP-协议" class="headerlink" title="TCP 协议"></a>TCP 协议</h1><h1 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h1><h1 id="HTTPS-协议"><a href="#HTTPS-协议" class="headerlink" title="HTTPS 协议"></a>HTTPS 协议</h1><h1 id="TCP与UDP的区别"><a href="#TCP与UDP的区别" class="headerlink" title="TCP与UDP的区别"></a>TCP与UDP的区别</h1><h1 id="HTTP与HTTPS的区别"><a href="#HTTP与HTTPS的区别" class="headerlink" title="HTTP与HTTPS的区别"></a>HTTP与HTTPS的区别</h1>
-          
-        
       
     </div>
     
@@ -390,14 +390,20 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/TCP-IP-网络通讯-OSI-TCP-UDP-IP-ARP-ICMP-HTTP-HTTPS/" rel="tag"># TCP/IP,网络通讯,OSI,TCP,UDP,IP,ARP,ICMP,HTTP,HTTPS</a>
+          
+        </div>
+      
+
+      
+      
+      
 
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -407,10 +413,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -418,6 +425,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -438,8 +449,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="John Doe">
           <p class="site-author-name" itemprop="name">John Doe</p>
@@ -490,6 +510,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OSI参考模型"><span class="nav-number">1.</span> <span class="nav-text">OSI参考模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IP-协议"><span class="nav-number">2.</span> <span class="nav-text">IP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ARP-地址解析协议"><span class="nav-number">3.</span> <span class="nav-text">ARP 地址解析协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ICMP-互联网控制消息协议"><span class="nav-number">4.</span> <span class="nav-text">ICMP 互联网控制消息协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UDP-协议"><span class="nav-number">5.</span> <span class="nav-text">UDP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-协议"><span class="nav-number">6.</span> <span class="nav-text">TCP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-协议"><span class="nav-number">7.</span> <span class="nav-text">HTTP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTPS-协议"><span class="nav-number">8.</span> <span class="nav-text">HTTPS 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP与UDP的区别"><span class="nav-number">9.</span> <span class="nav-text">TCP与UDP的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP与HTTPS的区别"><span class="nav-number">10.</span> <span class="nav-text">HTTP与HTTPS的区别</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -603,10 +639,10 @@
   
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 
