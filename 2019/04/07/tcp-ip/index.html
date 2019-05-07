@@ -105,7 +105,10 @@
 <meta property="og:image" content="http://yoursite.com/uploads/osi.png">
 <meta property="og:image" content="http://yoursite.com/uploads/osi-func.png">
 <meta property="og:image" content="http://yoursite.com/uploads/osi-tcp-ip.jpg">
-<meta property="og:updated_time" content="2019-05-07T10:07:51.070Z">
+<meta property="og:image" content="http://yoursite.com/uploads/transport-type.png">
+<meta property="og:image" content="http://yoursite.com/uploads/packet-switching.png">
+<meta property="og:image" content="http://yoursite.com/uploads/packet-switching2.png">
+<meta property="og:updated_time" content="2019-05-07T11:19:15.104Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP&#x2F;IP 学习笔记">
 <meta name="twitter:description" content="过去几年中，一直沉溺在业务的开发，当遇到一些疑难杂症网络问题，虽即时可以解决（通过谷歌），但是没有系统性学习网络，现在处于深入做技术的需求，把这个以前遗留的网络知识好好恶补。 在学习资料的选择中，有视频、图书、文章等  视频资料  https://www.bilibili.com/video/av10610680 （在B站学习） 感觉先看完一遍书再看视频会更好些     图书资料  https:/">
@@ -371,7 +374,7 @@
 <li>实际的TCP/IP 分层模型与OSI参考模型还有若干区别</li>
 </ul>
 </blockquote>
-<h2 id="OSI参考模型各个分层的作用"><a href="#OSI参考模型各个分层的作用" class="headerlink" title="OSI参考模型各个分层的作用"></a>OSI参考模型各个分层的作用</h2><p>OSI参考模型每层作用</p>
+<h2 id="OSI参考模型各分层介绍"><a href="#OSI参考模型各分层介绍" class="headerlink" title="OSI参考模型各分层介绍"></a>OSI参考模型各分层介绍</h2><p>OSI参考模型每层作用</p>
 <p><img src="/uploads/osi-func.png" alt="OSI参考模型每层作用"></p>
 <p>OSI分层定义与TCP/IP之间的参照关系图</p>
 <p><img src="/uploads/osi-tcp-ip.jpg" alt="OSI TCP/IP"></p>
@@ -409,7 +412,34 @@
 <li>物理层</li>
 </ul>
 <p>负责0、1比特流（0，1序列)与电压高低、光的闪灭之间的互换</p>
-<h2 id="分组交换技术"><a href="#分组交换技术" class="headerlink" title="分组交换技术"></a>分组交换技术</h2><h2 id="单播、广播、组播、任播"><a href="#单播、广播、组播、任播" class="headerlink" title="单播、广播、组播、任播"></a>单播、广播、组播、任播</h2><h1 id="TCP-IP-基础知识"><a href="#TCP-IP-基础知识" class="headerlink" title="TCP/IP 基础知识"></a>TCP/IP 基础知识</h1><h1 id="数据链路"><a href="#数据链路" class="headerlink" title="数据链路"></a>数据链路</h1><h1 id="IP-协议"><a href="#IP-协议" class="headerlink" title="IP 协议"></a>IP 协议</h1><h1 id="ARP-地址解析协议"><a href="#ARP-地址解析协议" class="headerlink" title="ARP 地址解析协议"></a>ARP 地址解析协议</h1><h1 id="ICMP-互联网控制消息协议"><a href="#ICMP-互联网控制消息协议" class="headerlink" title="ICMP 互联网控制消息协议"></a>ICMP 互联网控制消息协议</h1><h1 id="UDP-协议"><a href="#UDP-协议" class="headerlink" title="UDP 协议"></a>UDP 协议</h1><ul>
+<p>传输与网络层的关系</p>
+<p>在TCP/IP中网络层的IP协议中，不保证数据一定会发送到对端地址，传输过程中会发生数据丢失、顺序混乱等问题。<br>为了解决这个问题，可以由传输层负责提供“正确传输数据的处理”（可靠传输，通过序列号机制、确认应答、超时重传、重复控制等方式）。</p>
+<h2 id="面向有连接与面向无连接"><a href="#面向有连接与面向无连接" class="headerlink" title="面向有连接与面向无连接"></a>面向有连接与面向无连接</h2><p><img src="/uploads/transport-type.png" alt="有连接与无连接"></p>
+<p>通过网络发送数据，大致可以分为面向有连接型与面向无连接型</p>
+<blockquote>
+<p>关于连接的含义</p>
+<p>在不同分层协议中，连接的具体含义可能有所不同。在链路层中的连接，就是指物理的、通信线路的连接。<br>而在传输层则负责创建和管理逻辑上的连接</p>
+</blockquote>
+<p>面向有连接:：在发送数据之前，需要收发主机之间有一条连接，在该方式下，需要专门进行建立和断开连接的处理。如果与对端无法通信，可以避免发送数据造成浪费</p>
+<blockquote>
+<p>协议代表：TCP、帧中继、ATM协议</p>
+</blockquote>
+<p>面向无连接型：不要求建立和断开连接，接收端需要时常确认是否收到数据，因为接收端永远也不知道什么时候有人发数据给自己，发送端不需要确认对端存在，即使不在或者无法接收数据，发送端都会把数据发出去</p>
+<blockquote>
+<p>协议代表：IP、UDP、以太网协议</p>
+</blockquote>
+<h2 id="分组交换技术"><a href="#分组交换技术" class="headerlink" title="分组交换技术"></a>分组交换技术</h2><blockquote>
+<p>数据交换技术主要是电路交换、报文交换、分组交换，<strong>TCP/IP采用分组交换技术</strong>，因此主要记录分组交换技术，分组交换技术较前面两种交换要新</p>
+</blockquote>
+<p>分组交换技术（Packet switching technology）也称包交换技术，是将用户传送的数据划分成一定的长度，每个部分叫做一个分组，通过传输分组的方式传输信息的一种技术</p>
+<p><img src="/uploads/packet-switching.png" alt="分组交换"></p>
+<p>在分组交换中，由分组交换机（路由器）连接通信线路。路由器收到分组数据会按照顺序缓存在自己的缓冲区（队列），然后再先进先出逐一转发出去。</p>
+<p>在分组交换中，计算机与路由器之间以及路由器与路由器之间通常只有一条通信线路。因此这条线路是共享线路。</p>
+<blockquote>
+<p>路由器的缓存饱和或者溢出时，甚至可能发生分组数据丢失、无法发送到对端的情况</p>
+</blockquote>
+<p><img src="/uploads/packet-switching2.png" alt="分组交换2"></p>
+<h2 id="单播、广播、组播、任播"><a href="#单播、广播、组播、任播" class="headerlink" title="单播、广播、组播、任播"></a>单播、广播、组播、任播</h2><h1 id="TCP-IP-基础知识"><a href="#TCP-IP-基础知识" class="headerlink" title="TCP/IP 基础知识"></a>TCP/IP 基础知识</h1><h1 id="数据链路"><a href="#数据链路" class="headerlink" title="数据链路"></a>数据链路</h1><h1 id="IP-协议"><a href="#IP-协议" class="headerlink" title="IP 协议"></a>IP 协议</h1><h1 id="ARP-地址解析协议"><a href="#ARP-地址解析协议" class="headerlink" title="ARP 地址解析协议"></a>ARP 地址解析协议</h1><h1 id="ICMP-互联网控制消息协议"><a href="#ICMP-互联网控制消息协议" class="headerlink" title="ICMP 互联网控制消息协议"></a>ICMP 互联网控制消息协议</h1><h1 id="UDP-协议"><a href="#UDP-协议" class="headerlink" title="UDP 协议"></a>UDP 协议</h1><ul>
 <li>UDP是一个简单的面向数据报的运输层协议</li>
 </ul>
 <h1 id="TCP-协议"><a href="#TCP-协议" class="headerlink" title="TCP 协议"></a>TCP 协议</h1><h1 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h1><h1 id="HTTPS-协议"><a href="#HTTPS-协议" class="headerlink" title="HTTPS 协议"></a>HTTPS 协议</h1><h1 id="TCP与UDP的区别"><a href="#TCP与UDP的区别" class="headerlink" title="TCP与UDP的区别"></a>TCP与UDP的区别</h1><h1 id="HTTP与HTTPS的区别"><a href="#HTTP与HTTPS的区别" class="headerlink" title="HTTP与HTTPS的区别"></a>HTTP与HTTPS的区别</h1>
@@ -557,7 +587,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络基础知识"><span class="nav-number">1.</span> <span class="nav-text">网络基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI参考模型"><span class="nav-number">1.1.</span> <span class="nav-text">OSI参考模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI参考模型各个分层的作用"><span class="nav-number">1.2.</span> <span class="nav-text">OSI参考模型各个分层的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分组交换技术"><span class="nav-number">1.3.</span> <span class="nav-text">分组交换技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单播、广播、组播、任播"><span class="nav-number">1.4.</span> <span class="nav-text">单播、广播、组播、任播</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-IP-基础知识"><span class="nav-number">2.</span> <span class="nav-text">TCP/IP 基础知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据链路"><span class="nav-number">3.</span> <span class="nav-text">数据链路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IP-协议"><span class="nav-number">4.</span> <span class="nav-text">IP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ARP-地址解析协议"><span class="nav-number">5.</span> <span class="nav-text">ARP 地址解析协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ICMP-互联网控制消息协议"><span class="nav-number">6.</span> <span class="nav-text">ICMP 互联网控制消息协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UDP-协议"><span class="nav-number">7.</span> <span class="nav-text">UDP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-协议"><span class="nav-number">8.</span> <span class="nav-text">TCP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-协议"><span class="nav-number">9.</span> <span class="nav-text">HTTP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTPS-协议"><span class="nav-number">10.</span> <span class="nav-text">HTTPS 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP与UDP的区别"><span class="nav-number">11.</span> <span class="nav-text">TCP与UDP的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP与HTTPS的区别"><span class="nav-number">12.</span> <span class="nav-text">HTTP与HTTPS的区别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络基础知识"><span class="nav-number">1.</span> <span class="nav-text">网络基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI参考模型"><span class="nav-number">1.1.</span> <span class="nav-text">OSI参考模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI参考模型各分层介绍"><span class="nav-number">1.2.</span> <span class="nav-text">OSI参考模型各分层介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向有连接与面向无连接"><span class="nav-number">1.3.</span> <span class="nav-text">面向有连接与面向无连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分组交换技术"><span class="nav-number">1.4.</span> <span class="nav-text">分组交换技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单播、广播、组播、任播"><span class="nav-number">1.5.</span> <span class="nav-text">单播、广播、组播、任播</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-IP-基础知识"><span class="nav-number">2.</span> <span class="nav-text">TCP/IP 基础知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据链路"><span class="nav-number">3.</span> <span class="nav-text">数据链路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IP-协议"><span class="nav-number">4.</span> <span class="nav-text">IP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ARP-地址解析协议"><span class="nav-number">5.</span> <span class="nav-text">ARP 地址解析协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ICMP-互联网控制消息协议"><span class="nav-number">6.</span> <span class="nav-text">ICMP 互联网控制消息协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UDP-协议"><span class="nav-number">7.</span> <span class="nav-text">UDP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-协议"><span class="nav-number">8.</span> <span class="nav-text">TCP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-协议"><span class="nav-number">9.</span> <span class="nav-text">HTTP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTPS-协议"><span class="nav-number">10.</span> <span class="nav-text">HTTPS 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP与UDP的区别"><span class="nav-number">11.</span> <span class="nav-text">TCP与UDP的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP与HTTPS的区别"><span class="nav-number">12.</span> <span class="nav-text">HTTP与HTTPS的区别</span></a></li></ol></div>
             
 
           </div>
