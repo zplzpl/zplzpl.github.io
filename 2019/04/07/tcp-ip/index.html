@@ -112,7 +112,10 @@
 <meta property="og:image" content="http://yoursite.com/uploads/broadcast.png">
 <meta property="og:image" content="http://yoursite.com/uploads/multicast.png">
 <meta property="og:image" content="http://yoursite.com/uploads/anycast.png">
-<meta property="og:updated_time" content="2019-05-07T15:33:25.435Z">
+<meta property="og:image" content="http://yoursite.com/uploads/addr.png">
+<meta property="og:image" content="http://yoursite.com/uploads/network.png">
+<meta property="og:image" content="http://yoursite.com/uploads/network2.png">
+<meta property="og:updated_time" content="2019-05-08T08:38:44.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP&#x2F;IP 学习笔记">
 <meta name="twitter:description" content="过去几年中，一直沉溺在业务的开发，当遇到一些疑难杂症网络问题，虽即时可以解决（通过谷歌），但是没有系统性学习网络，现在处于深入做技术的需求，把这个以前遗留的网络知识好好恶补。 在学习资料的选择中，有视频、图书、文章等  视频资料  https://www.bilibili.com/video/av10610680 （在B站学习） 感觉先看完一遍书再看视频会更好些     图书资料  《图解TCP/">
@@ -384,39 +387,17 @@
 <blockquote>
 <p>下面每层的定义摘自书中，但其实无论百科还是很多学习资料，对每层的描述，都会有点不同</p>
 </blockquote>
-<ul>
-<li>应用层</li>
-</ul>
-<p>为应用程序提供服务并规定应用程序中通信相关的细节，在应用层实现的协议基本都是解决了某一类应用场景的通信需求。比如电子邮件，文件传输，远程登陆</p>
-<ul>
-<li>表示层</li>
-</ul>
-<p>将上层应用处理的信息转换为合适的网络传输格式或者将下层的数据转换为上层能够处理的格式，因此这层主要是负责数据格式的转换</p>
-<ul>
-<li>会话层</li>
-</ul>
-<p>负责建立与管理会话</p>
+<h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><p>为应用程序提供服务并规定应用程序中通信相关的细节，在应用层实现的协议基本都是解决了某一类应用场景的通信需求。比如电子邮件，文件传输，远程登陆</p>
+<h3 id="表示层"><a href="#表示层" class="headerlink" title="表示层"></a>表示层</h3><p>将上层应用处理的信息转换为合适的网络传输格式或者将下层的数据转换为上层能够处理的格式，因此这层主要是负责数据格式的转换</p>
+<h3 id="会话层"><a href="#会话层" class="headerlink" title="会话层"></a>会话层</h3><p>负责建立与管理会话</p>
 <blockquote>
 <p>实际的建立连接与断开连接是由传输层进行，会话层主要是负责建立与断开的判断（时机）</p>
 </blockquote>
-<ul>
-<li>传输层</li>
-</ul>
-<p>主要是提供不同主机上的进程之间的逻辑通信（端到端的通信），传输层可以提供可靠传输是该层非常重要的一个作用</p>
-<ul>
-<li>网络层</li>
-</ul>
-<p>将数据传输到目的地址，这层主要负责寻址和路由选择</p>
-<ul>
-<li>数据链路层</li>
-</ul>
-<p>负责物理层面上互连的、节点之间的传输</p>
-<ul>
-<li>物理层</li>
-</ul>
-<p>负责0、1比特流（0，1序列)与电压高低、光的闪灭之间的互换</p>
-<p>传输与网络层的关系</p>
-<p>在TCP/IP中网络层的IP协议中，不保证数据一定会发送到对端地址，传输过程中会发生数据丢失、顺序混乱等问题。<br>为了解决这个问题，可以由传输层负责提供“正确传输数据的处理”（可靠传输，通过序列号机制、确认应答、超时重传、重复控制等方式）。</p>
+<h3 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h3><p>主要是提供不同主机上的进程之间的逻辑通信（端到端的通信），传输层可以提供可靠传输是该层非常重要的一个作用</p>
+<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p>将数据传输到目的地址，这层主要负责寻址和路由选择</p>
+<h3 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h3><p>负责物理层面上互连的、节点之间的传输</p>
+<h3 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h3><p>负责0、1比特流（0，1序列)与电压高低、光的闪灭之间的互换</p>
+<h3 id="传输层与网络层的关系"><a href="#传输层与网络层的关系" class="headerlink" title="传输层与网络层的关系"></a>传输层与网络层的关系</h3><p>在TCP/IP中网络层的IP协议中，不保证数据一定会发送到对端地址，传输过程中会发生数据丢失、顺序混乱等问题。<br>为了解决这个问题，可以由传输层负责提供“正确传输数据的处理”（可靠传输，通过序列号机制、确认应答、超时重传、重复控制等方式）。</p>
 <h2 id="面向有连接与面向无连接"><a href="#面向有连接与面向无连接" class="headerlink" title="面向有连接与面向无连接"></a>面向有连接与面向无连接</h2><p><img src="/uploads/transport-type.png" alt="有连接与无连接"></p>
 <p>通过网络发送数据，大致可以分为面向有连接型与面向无连接型</p>
 <blockquote>
@@ -456,6 +437,25 @@
 <h3 id="任播-anycast"><a href="#任播-anycast" class="headerlink" title="任播 anycast"></a>任播 anycast</h3><p><img src="/uploads/anycast.png" alt></p>
 <p>是指在特定的多台主机选择一台作为接收端的一种通信方式，虽然与多播有相似之处，<br>都是面向特定的一群主机，但行为却与多播不同，任播通信是从目标主机群里选择一台最符合网络条件的主机作为目标主机发送消息。<br>通常被选中的主机将返回一个单播信号，虽然发送端主机会只跟这台主机进行通信</p>
 <p>典型的例子就是DNS根域名解析服务器</p>
+<h2 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h2><p>在通信传输中，发送端与接收端可以被视为通信主体。它们都能由一个所谓“地址”信息标识出来。</p>
+<p>在电话通讯中，电话号码就是“地址”</p>
+<p>但在网络通讯中稍微复杂点，每一层的协议使用的地址都不同，比如链路层是MAC地址，网络层是IP地址，传输层是端口号(程序地址)</p>
+<p>MAC地址与IP地址区别：</p>
+<ol>
+<li>MAC地址专注于数据链路层，将一个数据帧从一个节点传送到相同链路的另一个节点，IP地址专注于网络层，将数据包从一个网络转发到另外一个网络</li>
+<li>长度不同。IP地址为32位，MAC地址为48位。</li>
+<li>分配依据不同。IP地址的分配是基于网络拓扑（容易改变），MAC地址的分配是基于制造商（烧录好一般不改动)。</li>
+<li>MAC寻址参考的表叫地址转发表，IP寻址参考的表叫路由控制表</li>
+</ol>
+<h3 id="地址唯一性"><a href="#地址唯一性" class="headerlink" title="地址唯一性"></a>地址唯一性</h3><p>如果要想地址在通信中发挥作用，需要确定通信的主体。<br>一个地址必须明确表示一个主体对象（主体对象并不代表只有一台设备，也许是N个设备，比如多播、任播接收端设备通常多个）。<br>在同个通信网络中（互联网）不允许出现两个相同地址的通信主体存在。<br>也就是地址必须具备唯一性</p>
+<h3 id="地址层次性"><a href="#地址层次性" class="headerlink" title="地址层次性"></a>地址层次性</h3><p>当地址总数不多的情况下，有了唯一的地址，就能定位到通信主体，但是现在地址总数越来越多，如何高效的寻找通信的主体就成为了一个很重要的问题，因此地址还需要有层次性</p>
+<p>就像电话号码有国家号、有区号，居住地址有国家、省份、城市、街道</p>
+<blockquote>
+<p>注意这里的层次性必须满足一个条件，能加快定位通信地址，这才是有效的层次性，MAC地址其实也有层次性，但为什么不是有效的层次性，因为它不能加快定位通信主体</p>
+</blockquote>
+<p>后面总结IP网际协议的时候，会介绍IP地址的构成</p>
+<p><img src="/uploads/addr.png" alt></p>
+<h2 id="连接计算机与计算机的设备"><a href="#连接计算机与计算机的设备" class="headerlink" title="连接计算机与计算机的设备"></a>连接计算机与计算机的设备</h2><p><img src="/uploads/network.png" alt><br><img src="/uploads/network2.png" alt></p>
 <h1 id="TCP-IP-基础知识"><a href="#TCP-IP-基础知识" class="headerlink" title="TCP/IP 基础知识"></a>TCP/IP 基础知识</h1><h1 id="数据链路"><a href="#数据链路" class="headerlink" title="数据链路"></a>数据链路</h1><h1 id="IP-协议"><a href="#IP-协议" class="headerlink" title="IP 协议"></a>IP 协议</h1><h1 id="ARP-地址解析协议"><a href="#ARP-地址解析协议" class="headerlink" title="ARP 地址解析协议"></a>ARP 地址解析协议</h1><h1 id="ICMP-互联网控制消息协议"><a href="#ICMP-互联网控制消息协议" class="headerlink" title="ICMP 互联网控制消息协议"></a>ICMP 互联网控制消息协议</h1><h1 id="UDP-协议"><a href="#UDP-协议" class="headerlink" title="UDP 协议"></a>UDP 协议</h1><ul>
 <li>UDP是一个简单的面向数据报的运输层协议</li>
 </ul>
@@ -604,7 +604,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络基础知识"><span class="nav-number">1.</span> <span class="nav-text">网络基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI参考模型"><span class="nav-number">1.1.</span> <span class="nav-text">OSI参考模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI参考模型各分层介绍"><span class="nav-number">1.2.</span> <span class="nav-text">OSI参考模型各分层介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向有连接与面向无连接"><span class="nav-number">1.3.</span> <span class="nav-text">面向有连接与面向无连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分组交换技术"><span class="nav-number">1.4.</span> <span class="nav-text">分组交换技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单播、广播、多播-组播-、任播"><span class="nav-number">1.5.</span> <span class="nav-text">单播、广播、多播(组播)、任播</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单播-unicast"><span class="nav-number">1.5.1.</span> <span class="nav-text">单播 unicast</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#广播-broadcast"><span class="nav-number">1.5.2.</span> <span class="nav-text">广播 broadcast</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多播-multicast"><span class="nav-number">1.5.3.</span> <span class="nav-text">多播 multicast</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#任播-anycast"><span class="nav-number">1.5.4.</span> <span class="nav-text">任播 anycast</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-IP-基础知识"><span class="nav-number">2.</span> <span class="nav-text">TCP/IP 基础知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据链路"><span class="nav-number">3.</span> <span class="nav-text">数据链路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IP-协议"><span class="nav-number">4.</span> <span class="nav-text">IP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ARP-地址解析协议"><span class="nav-number">5.</span> <span class="nav-text">ARP 地址解析协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ICMP-互联网控制消息协议"><span class="nav-number">6.</span> <span class="nav-text">ICMP 互联网控制消息协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UDP-协议"><span class="nav-number">7.</span> <span class="nav-text">UDP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-协议"><span class="nav-number">8.</span> <span class="nav-text">TCP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP与UDP的区别"><span class="nav-number">9.</span> <span class="nav-text">TCP与UDP的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DNS-协议"><span class="nav-number">10.</span> <span class="nav-text">DNS 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DHCP-协议"><span class="nav-number">11.</span> <span class="nav-text">DHCP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-协议"><span class="nav-number">12.</span> <span class="nav-text">HTTP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTPS-协议"><span class="nav-number">13.</span> <span class="nav-text">HTTPS 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP与HTTPS的区别"><span class="nav-number">14.</span> <span class="nav-text">HTTP与HTTPS的区别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络基础知识"><span class="nav-number">1.</span> <span class="nav-text">网络基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI参考模型"><span class="nav-number">1.1.</span> <span class="nav-text">OSI参考模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI参考模型各分层介绍"><span class="nav-number">1.2.</span> <span class="nav-text">OSI参考模型各分层介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用层"><span class="nav-number">1.2.1.</span> <span class="nav-text">应用层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表示层"><span class="nav-number">1.2.2.</span> <span class="nav-text">表示层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话层"><span class="nav-number">1.2.3.</span> <span class="nav-text">会话层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传输层"><span class="nav-number">1.2.4.</span> <span class="nav-text">传输层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络层"><span class="nav-number">1.2.5.</span> <span class="nav-text">网络层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据链路层"><span class="nav-number">1.2.6.</span> <span class="nav-text">数据链路层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#物理层"><span class="nav-number">1.2.7.</span> <span class="nav-text">物理层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传输层与网络层的关系"><span class="nav-number">1.2.8.</span> <span class="nav-text">传输层与网络层的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向有连接与面向无连接"><span class="nav-number">1.3.</span> <span class="nav-text">面向有连接与面向无连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分组交换技术"><span class="nav-number">1.4.</span> <span class="nav-text">分组交换技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单播、广播、多播-组播-、任播"><span class="nav-number">1.5.</span> <span class="nav-text">单播、广播、多播(组播)、任播</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单播-unicast"><span class="nav-number">1.5.1.</span> <span class="nav-text">单播 unicast</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#广播-broadcast"><span class="nav-number">1.5.2.</span> <span class="nav-text">广播 broadcast</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多播-multicast"><span class="nav-number">1.5.3.</span> <span class="nav-text">多播 multicast</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#任播-anycast"><span class="nav-number">1.5.4.</span> <span class="nav-text">任播 anycast</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地址"><span class="nav-number">1.6.</span> <span class="nav-text">地址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#地址唯一性"><span class="nav-number">1.6.1.</span> <span class="nav-text">地址唯一性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地址层次性"><span class="nav-number">1.6.2.</span> <span class="nav-text">地址层次性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接计算机与计算机的设备"><span class="nav-number">1.7.</span> <span class="nav-text">连接计算机与计算机的设备</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-IP-基础知识"><span class="nav-number">2.</span> <span class="nav-text">TCP/IP 基础知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据链路"><span class="nav-number">3.</span> <span class="nav-text">数据链路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IP-协议"><span class="nav-number">4.</span> <span class="nav-text">IP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ARP-地址解析协议"><span class="nav-number">5.</span> <span class="nav-text">ARP 地址解析协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ICMP-互联网控制消息协议"><span class="nav-number">6.</span> <span class="nav-text">ICMP 互联网控制消息协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UDP-协议"><span class="nav-number">7.</span> <span class="nav-text">UDP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-协议"><span class="nav-number">8.</span> <span class="nav-text">TCP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP与UDP的区别"><span class="nav-number">9.</span> <span class="nav-text">TCP与UDP的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DNS-协议"><span class="nav-number">10.</span> <span class="nav-text">DNS 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DHCP-协议"><span class="nav-number">11.</span> <span class="nav-text">DHCP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-协议"><span class="nav-number">12.</span> <span class="nav-text">HTTP 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTPS-协议"><span class="nav-number">13.</span> <span class="nav-text">HTTPS 协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP与HTTPS的区别"><span class="nav-number">14.</span> <span class="nav-text">HTTP与HTTPS的区别</span></a></li></ol></div>
             
 
           </div>
