@@ -467,7 +467,25 @@
 <li>IP模块处理</li>
 <li>网络接口（以太网驱动）的处理</li>
 </ol>
-<h1 id="数据链路"><a href="#数据链路" class="headerlink" title="数据链路"></a>数据链路</h1><h1 id="IP-协议"><a href="#IP-协议" class="headerlink" title="IP 协议"></a>IP 协议</h1><h1 id="ARP-地址解析协议"><a href="#ARP-地址解析协议" class="headerlink" title="ARP 地址解析协议"></a>ARP 地址解析协议</h1><h1 id="ICMP-互联网控制消息协议"><a href="#ICMP-互联网控制消息协议" class="headerlink" title="ICMP 互联网控制消息协议"></a>ICMP 互联网控制消息协议</h1><h1 id="UDP-协议"><a href="#UDP-协议" class="headerlink" title="UDP 协议"></a>UDP 协议</h1><ul>
+<h1 id="数据链路"><a href="#数据链路" class="headerlink" title="数据链路"></a>数据链路</h1><p>TCP/IP中对于OSI参考模型的数据链路层及以下部分（物理层）未作定义。<br>因为TCP/IP以这两层的功能是透明的为前提，然后数据链路的知识对于深入理解TCP/IP与网络起着至关重要的作用。</p>
+<h2 id="数据链路的作用"><a href="#数据链路的作用" class="headerlink" title="数据链路的作用"></a>数据链路的作用</h2><p>数据链路，指OSI参考模型中的数据链路层，有时也指以太网、无线局域网等通信手段。</p>
+<p>数据链路层的协议定义了通过通信媒介互连的设备之间传输规范。通信媒介包括双绞线电缆、同轴电缆、光纤、电波以及红外线等媒介。<br>此外各个设备之间有时也会通过交换机（2层，3层，4-7层）、网桥、中继器等中转数据。</p>
+<p>计算机是以0、1来表示信息，然而实际的通信媒介之间处理的却是电压的高低、光的闪灭以及电波的强弱。<br>把这信号与二进制的0、1进行转换的正是物理层的责任。<br>数据链路层处理的数据并不是单纯的0、1序列，该层把它们集合为一个叫做“帧”的块，然后进行传输。</p>
+<p>数据链路也可以被视为网络传输中的最小单位。</p>
+<p>连通全世界的互联网，不外乎是众多的数据链路组成的，因此互联网也被称为“数据链路的集合”。</p>
+<h2 id="数据链路相关技术"><a href="#数据链路相关技术" class="headerlink" title="数据链路相关技术"></a>数据链路相关技术</h2><h3 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h3><p>MAC地址用于识别数据链路层中互连的点。以太网或FDDI中，根据IEEE802.3的规范使用MAC地址。<br>其他诸如无线LAN（IEEE802.11a/b/g/n等）、蓝牙设备中也是用相同规格的MAC地址。</p>
+<p>MAC地址长48bit,在使用网卡（NIC）的情况下，MAC地址一般会被烧录入到ROM中。</p>
+<p><img src="/uploads/mac.png" alt></p>
+<p>在全世界，MAC地址也并不是总是唯一的。这里与上面的“地址”有点冲突，但实际上，即使MAC地址相同，只要不是同属一个数据链路就不会出现问题（也就是一个数据链路内还是保持了唯一性）。</p>
+<h3 id="根据MAC地址转发"><a href="#根据MAC地址转发" class="headerlink" title="根据MAC地址转发"></a>根据MAC地址转发</h3><h2 id="以太网"><a href="#以太网" class="headerlink" title="以太网"></a>以太网</h2><h3 id="以太网分类"><a href="#以太网分类" class="headerlink" title="以太网分类"></a>以太网分类</h3><p>以太网因通信电缆的不同及通信速度的差异，衍生出了众多不同的以太网类型。</p>
+<p><img src="/uploads/enetwork.png" alt></p>
+<h2 id="以太网帧格式"><a href="#以太网帧格式" class="headerlink" title="以太网帧格式"></a>以太网帧格式</h2><p>以太网帧前端有一个叫做前导码的部分，它是由0、1数字交替组合而成，表示一个以太网帧的开始<br>也是对端网卡能够确保与其同步的标识。</p>
+<p><img src="/uploads/preamble.png" alt></p>
+<p>以太网帧的本体前端是以太网的首部，它总共14个字节，分别是6个字节的目标MAC地址、6个字节的源MAC地址以及2个字节的上层协议类型。</p>
+<p><img src="/uploads/enetwork-zhen.png" alt></p>
+<p>紧随帧头后面的是数据。一个数据帧所能容纳的最大数据范围是46-1500个字节，<br>帧尾是一个叫做FCS（帧校验序列）的4个字节。如图，以太网帧与IEEE802.3帧头稍有区别。这里主要记录以太网的帧。</p>
+<p>关于主要协议类型参考如下：<br><img src="/uploads/enetwork-type.png" alt></p>
+<h1 id="IP-协议"><a href="#IP-协议" class="headerlink" title="IP 协议"></a>IP 协议</h1><h1 id="ARP-地址解析协议"><a href="#ARP-地址解析协议" class="headerlink" title="ARP 地址解析协议"></a>ARP 地址解析协议</h1><h1 id="ICMP-互联网控制消息协议"><a href="#ICMP-互联网控制消息协议" class="headerlink" title="ICMP 互联网控制消息协议"></a>ICMP 互联网控制消息协议</h1><h1 id="UDP-协议"><a href="#UDP-协议" class="headerlink" title="UDP 协议"></a>UDP 协议</h1><ul>
 <li>UDP是一个简单的面向数据报的运输层协议</li>
 </ul>
 <h1 id="TCP-协议"><a href="#TCP-协议" class="headerlink" title="TCP 协议"></a>TCP 协议</h1><h1 id="TCP与UDP的区别"><a href="#TCP与UDP的区别" class="headerlink" title="TCP与UDP的区别"></a>TCP与UDP的区别</h1><h1 id="DNS-协议"><a href="#DNS-协议" class="headerlink" title="DNS 协议"></a>DNS 协议</h1><h1 id="DHCP-协议"><a href="#DHCP-协议" class="headerlink" title="DHCP 协议"></a>DHCP 协议</h1><h1 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h1><h1 id="HTTPS-协议"><a href="#HTTPS-协议" class="headerlink" title="HTTPS 协议"></a>HTTPS 协议</h1><h1 id="HTTP与HTTPS的区别"><a href="#HTTP与HTTPS的区别" class="headerlink" title="HTTP与HTTPS的区别"></a>HTTP与HTTPS的区别</h1>
