@@ -125,7 +125,7 @@
 <meta property="og:image" content="http://yoursite.com/uploads/enetwork-type.png">
 <meta property="og:image" content="http://yoursite.com/uploads/mock-tel-link.png">
 <meta property="og:image" content="http://yoursite.com/uploads/adsl.png">
-<meta property="og:updated_time" content="2019-05-09T16:06:36.488Z">
+<meta property="og:updated_time" content="2019-05-09T16:10:39.595Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP&#x2F;IP 学习笔记">
 <meta name="twitter:description" content="过去几年中，一直沉溺在业务的开发，当遇到一些疑难杂症网络问题，虽即时可以解决（通过谷歌），但是没有系统性学习网络，现在处于深入做技术的需求，把这个以前遗留的网络知识好好恶补。 在学习资料的选择中，有视频、图书、文章等  视频资料  https://www.bilibili.com/video/av10610680 （在B站学习） 感觉先看完一遍书再看视频会更好些     图书资料  《图解TCP/">
@@ -510,8 +510,12 @@
 <p>紧随帧头后面的是数据。一个数据帧所能容纳的最大数据范围是46-1500个字节，帧尾是一个叫做FCS（帧校验序列）的4个字节。如图，以太网帧与IEEE802.3帧头稍有区别。这里主要记录以太网的帧。</p>
 <p>关于主要协议类型参考如下：<br><img src="/uploads/enetwork-type.png" alt></p>
 <h2 id="公共网络"><a href="#公共网络" class="headerlink" title="公共网络"></a>公共网络</h2><p>这里主要记录连接公共通信服务相关的细节。所谓的公共服务通信服务类似于电信运营商（如中国电信）提供的电话网络。人们通过与运营商签约、付费实现联网。</p>
-<p>主要记录的两种种模拟电话线路（淘汰），ADSL。其实还有其它的移动通信、有线电视，FTTH，专线、VPN。</p>
-<h3 id="模拟电话线路"><a href="#模拟电话线路" class="headerlink" title="模拟电话线路"></a>模拟电话线路</h3><p>模拟电话线路其实是利用固定电话线路进行通信。电话线中的音频带宽用于拨号上网。该方法不需要特殊的通信线路，完全使用已经普及的电话网。</p>
+<p>主要记录的两种种模拟电话线路（淘汰），ADSL。其实还有其它的移动通信、有线电视，FTTH，FTTB、专线、VPN。</p>
+<p>FTTH 光纤到户 与 FTTB 光线到楼，现在也开始在逐渐覆盖。光纤具有寿命长,无干扰, 带宽几乎无限的优点,是铜线技术所无法比拟的。 </p>
+<h3 id="模拟电话线路"><a href="#模拟电话线路" class="headerlink" title="模拟电话线路"></a>模拟电话线路</h3><blockquote>
+<p>虽然淘汰了，但还是经历过这个时代，因此还是要讲讲</p>
+</blockquote>
+<p>模拟电话线路其实是利用固定电话线路进行通信。电话线中的音频带宽用于拨号上网。该方法不需要特殊的通信线路，完全使用已经普及的电话网。</p>
 <p>让计算机与电话线相连需要有一个将数字信号转为模拟信号的调制解调器（俗称“猫”）。“猫”的传输速率一般只有56kbps左右，现在基本淘汰了。但是很怀旧所以再记录一下。</p>
 <p><img src="/uploads/mock-tel-link.png" alt></p>
 <h3 id="ADSL"><a href="#ADSL" class="headerlink" title="ADSL"></a>ADSL</h3><p>ADSL是对已有的模拟电话线路进行扩展的一种服务，模拟电话线路虽然也能传输高频数字通信，但是它与电信局的交换机之间只有发送音频信号时才能显示极好的传输效率，并会对其他多余频率的信号进行丢弃。现在的电话网逐渐数字化，通过电话线路的信号再经过电信的交换机时会变成64kbps左右的数字信号。因此理论上无法传输比64kbps更块的数字信号。然后，每个话机到电信局交换机之前这段线路，是可以实现高速传输的。</p>
