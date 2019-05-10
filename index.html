@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang>
+<html class="theme-next mist use-motion" lang>
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Zpl,Golang,TCP/IP,ElasticSearch,Redis,Mysql,OS,Life">
 
 
 
@@ -108,7 +108,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
@@ -889,6 +889,30 @@
 <p><img src="/uploads/tcp-ip/tos.png" alt></p>
 <p>tosz整个互联网几乎就没有投入使用。不过已有人提出将TOS字段分为DSCP和ECN两个字段的建议</p>
 <p><img src="/uploads/tcp-ip/dscp-ecn.png" alt></p>
+<p>DSCP(Different Service Codepoint,差分服务代码点)是TOS的一部分。现在统称为DiffServ，用来进行质量控制。</p>
+<p>ECN（Explicit Congestion Notification，显式拥塞通告）用来报告网络拥堵情况，由两个比特构成。</p>
+<p><img src="/uploads/tcp-ip/ecn.png" alt></p>
+<p>第6位的ECT用以通告上层TCP协议是否处理ECN。当路由器在转发ECN为1的包的过程中，如果出现网络拥堵的情况，就将CE位设置为1.</p>
+<ul>
+<li>总长度</li>
+</ul>
+<p>表示IP首部与数据部分合起来的总字节数。该字段长 比特。因此IP包的最大长度为65535字节。目前还不存在能传输65535字节的数据链路。不过，由于有IP分片处理，从IP上一层的角度看，都可以认为能够以IP的最大包长度传输数据。</p>
+<ul>
+<li>标识（ID）</li>
+</ul>
+<p>由16比特构成，用于分片重组。同一个分片的标识值相同，不同分片的标识不同。通常每发一个IP包它的值逐渐递增。此外ID相同，如果目标地址、源地址或者协议不同的话，也会被认为是不同的分片。</p>
+<ul>
+<li>标志（Flag）</li>
+</ul>
+<p>由3个比特构成，表示包被分片的相关信息。每一位的具体含义如下</p>
+<p><img src="/uploads/tcp-ip/ip-flag.png" alt></p>
+<ul>
+<li>片偏移（FO）</li>
+</ul>
+<p>由13位比特构成，用来标识被分片的每一个分段相对于原始数据的位置。</p>
+<ul>
+<li>生存时间（TTL)</li>
+</ul>
 <h1 id="ARP-地址解析协议"><a href="#ARP-地址解析协议" class="headerlink" title="ARP 地址解析协议"></a>ARP 地址解析协议</h1><h1 id="ICMP-互联网控制消息协议"><a href="#ICMP-互联网控制消息协议" class="headerlink" title="ICMP 互联网控制消息协议"></a>ICMP 互联网控制消息协议</h1><h1 id="UDP-协议"><a href="#UDP-协议" class="headerlink" title="UDP 协议"></a>UDP 协议</h1><ul>
 <li>UDP是一个简单的面向数据报的运输层协议</li>
 </ul>
@@ -1041,7 +1065,7 @@
 <div class="theme-info">
   Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Mist
   </a>
 </div>
 
