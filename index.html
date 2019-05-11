@@ -1233,10 +1233,25 @@
 </ol>
 <h1 id="ICMP-互联网控制消息协议"><a href="#ICMP-互联网控制消息协议" class="headerlink" title="ICMP 互联网控制消息协议"></a>ICMP 互联网控制消息协议</h1><p>ICMP的主要功能包括，确认IP包是否成功送达目标地址，通知在发送过程当中IP包被废弃的具体原因，改善网络设置等。有了这些功能，就可以获得网络是否正常，设置是否正确以及设备有何异常的信息，从而方便网络上定位问题。</p>
 <p>ICMP的消息大致分为两种类型：一类是通知出错原因的错误消息，一类是用于诊断的查询消息。</p>
+<p><img src="/uploads/tcp-ip/icmp.png" alt></p>
+<p>ICMP消息类型与对应消息内容<br><img src="/uploads/tcp-ip/icmp-type.png" alt></p>
+<p>ICMP分组格式<br><img src="/uploads/tcp-ip/icmp-packet.jpg" alt></p>
+<h2 id="ICMP实现之MTU探索"><a href="#ICMP实现之MTU探索" class="headerlink" title="ICMP实现之MTU探索"></a>ICMP实现之MTU探索</h2><p>所谓路径MTU 探索，是探索与通信对方之间不用分片IP 数据包，就能交流的MTU 大小的功能。MTU大小是指计算机一次能够送出去的数据的最大长度，基本上由网路的种类来决定。例如，以太网的话通常是1500 字节，使用PPPoE 的ADSL 通常是1492 字节。为了实现这个路径MTU 探索，ICMP 被使用着。沿着流程，具体看一下Windows 的MTU 探索的样子吧。</p>
+<p><img src="/uploads/tcp-ip/icmp-mtu.jpg" alt></p>
+<h1 id="DHCP-协议"><a href="#DHCP-协议" class="headerlink" title="DHCP 协议"></a>DHCP 协议</h1><p>如果逐一为每一台计算设置IP地址会是件非常繁琐的事情。特别是笔记本、智能终端、平板，每移动到一个地方，都要重新设置IP地址。于是，为了实现自动设置IP地址、统一管理IP地址分配，就产生了DHCP。</p>
+<p>DHCP，动态主机配置协议，前身是BOOTP协议，是一个局域网的网络协议，使用UDP协议工作，常用的2个端口：67(DHCP server),68(DHCP client)。DHCP通常被用于局域网环境，主要作用是集中的管理、分配IP地址，使client动态的获得IP地址、Gateway地址、DNS服务器地址等信息，并能够提升地址的使用率。简单来说，DHCP就是一个不需要账号密码登录的、自动给内网机器分配IP地址等信息的协议。</p>
+<p><img src="/uploads/tcp-ip/dhcp.png" alt></p>
+<h2 id="DHCP的工作机制"><a href="#DHCP的工作机制" class="headerlink" title="DHCP的工作机制"></a>DHCP的工作机制</h2><p>使用DHCP之前，首先要架设一台DHCP服务器。然后将DHCP所要分配的IP地址设置到服务器上。此外，还需要将相应的子网掩码、路由控制信息以及DNS服务器的地址等设置到服务器上。</p>
+<p><img src="/uploads/tcp-ip/dhcp-flow.png" alt></p>
+<p>为了检查所要分配的IP地址以及已经分配了的IP地址可用，DHCP服务器或DHCP客户端必须具备下面功能：</p>
+<ol>
+<li>DHCP服务器：在分配IP地址前发送ICMP回送请求包，确认没有返回应答。</li>
+<li>DHCP客户端：针对从DHCP服务端获得的IP地址发送ARP请求包，确认没有返回应答。</li>
+</ol>
 <h1 id="UDP-协议"><a href="#UDP-协议" class="headerlink" title="UDP 协议"></a>UDP 协议</h1><ul>
 <li>UDP是一个简单的面向数据报的运输层协议</li>
 </ul>
-<h1 id="TCP-协议"><a href="#TCP-协议" class="headerlink" title="TCP 协议"></a>TCP 协议</h1><h1 id="TCP与UDP的区别"><a href="#TCP与UDP的区别" class="headerlink" title="TCP与UDP的区别"></a>TCP与UDP的区别</h1><h1 id="DHCP-协议"><a href="#DHCP-协议" class="headerlink" title="DHCP 协议"></a>DHCP 协议</h1><h1 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h1><h1 id="HTTPS-协议"><a href="#HTTPS-协议" class="headerlink" title="HTTPS 协议"></a>HTTPS 协议</h1><h1 id="HTTP与HTTPS的区别"><a href="#HTTP与HTTPS的区别" class="headerlink" title="HTTP与HTTPS的区别"></a>HTTP与HTTPS的区别</h1>
+<h1 id="TCP-协议"><a href="#TCP-协议" class="headerlink" title="TCP 协议"></a>TCP 协议</h1><h1 id="TCP与UDP的区别"><a href="#TCP与UDP的区别" class="headerlink" title="TCP与UDP的区别"></a>TCP与UDP的区别</h1><h1 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h1><h1 id="HTTPS-协议"><a href="#HTTPS-协议" class="headerlink" title="HTTPS 协议"></a>HTTPS 协议</h1><h1 id="HTTP与HTTPS的区别"><a href="#HTTP与HTTPS的区别" class="headerlink" title="HTTP与HTTPS的区别"></a>HTTP与HTTPS的区别</h1>
           
         
       
