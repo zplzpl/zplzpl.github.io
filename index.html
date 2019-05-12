@@ -1285,10 +1285,56 @@
 <p><img src="/uploads/tcp-ip/napt.png" alt></p>
 <p>留意上图，同端口映射的端口+1。</p>
 <p>在TCP的情况下，建立TCP连接首次握手时，SYN包一经发出，就会生成表。又随着收到的关闭连接时发出的FIN包的确认应答从表中删除。</p>
-<h1 id="UDP-协议"><a href="#UDP-协议" class="headerlink" title="UDP 协议"></a>UDP 协议</h1><ul>
-<li>UDP是一个简单的面向数据报的运输层协议</li>
-</ul>
-<h1 id="TCP-协议"><a href="#TCP-协议" class="headerlink" title="TCP 协议"></a>TCP 协议</h1><h1 id="TCP与UDP的区别"><a href="#TCP与UDP的区别" class="headerlink" title="TCP与UDP的区别"></a>TCP与UDP的区别</h1><h1 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h1><h1 id="HTTPS-协议"><a href="#HTTPS-协议" class="headerlink" title="HTTPS 协议"></a>HTTPS 协议</h1><h1 id="HTTP与HTTPS的区别"><a href="#HTTP与HTTPS的区别" class="headerlink" title="HTTP与HTTPS的区别"></a>HTTP与HTTPS的区别</h1>
+<h1 id="UDP-协议"><a href="#UDP-协议" class="headerlink" title="UDP 协议"></a>UDP 协议</h1><p>UDP是User Datagram Protocol的缩写。</p>
+<p>UDP不提供复杂的控制机制，利用IP提供面向无连接的通信服务。</p>
+<p>即使出现网络拥堵的情况下，UDPy也无法进行流量控制等避免网络拥塞的行为。此外，传输途中即使丢包，UDP也不负责重发。甚至当出现包的到达顺序乱掉也没有纠正功能，如果需要这些细节控制，不得不交由应用程序上去处理。</p>
+<p>UDP处理简单又高效，因此也经常用于下面几个方面</p>
+<ol>
+<li>包总量较少的通信（DNS、SNMP）</li>
+<li>视频、音频等多媒体资源（即时通信）</li>
+<li>限定于LAN等特定网络的应用通信</li>
+<li>广播通信（广播、多播）</li>
+</ol>
+<h2 id="UDP分组格式"><a href="#UDP分组格式" class="headerlink" title="UDP分组格式"></a>UDP分组格式</h2><h1 id="TCP-协议"><a href="#TCP-协议" class="headerlink" title="TCP 协议"></a>TCP 协议</h1><p>与UDP区别较大，TCP作为一种面向有连接型的协议，只有在确认通信对端存在时候才会发送数据，从而可以控制通信流量的浪费。它充分实现了数据传输时各种控制，可以进行丢包重发，乱序控制。</p>
+<p>我们知道IP协议是不可靠的，为了通过IP数据报实现可靠性传输，需要考虑很多事情，例如数据的破坏、丢包、重复以及分片顺序混乱等问题，如果不解决这些，也无从谈起可靠传输。</p>
+<p>TCP通过校验和、序列号、确认应答、重发控制、连接管理以及窗口控制等机制实现可靠性传输。</p>
+<h2 id="通过序列号与确认应答提高可靠性"><a href="#通过序列号与确认应答提高可靠性" class="headerlink" title="通过序列号与确认应答提高可靠性"></a>通过序列号与确认应答提高可靠性</h2><p>在TCP中，当发送端的数据到达接收端的时候，接收端主机会返回一个已收到的消息通知，这个消息叫做确认应答。</p>
+<p><img src="/uploads/tcp-ip/tcp-ack1.png" alt></p>
+<p>TCP通过肯定的确认应答（ACK）实现可靠的数据传输，当发送端将数据发出之后会等待对端的确认应答。如果有确认应答，说明数据已经成功到达对端。反之，则数据丢失的可能性很大。</p>
+<p><img src="/uploads/tcp-ip/tcp-ack2.png" alt></p>
+<p>在一定时间内没有等到确认应答，发送端可以认为数据已经丢失，并进行重发，由此，即使产生了丢包，仍然能够保证数据达到对端。实现可靠传输。</p>
+<p>当然，未收到确认应答并不意味着数据一定丢失，也有可能数据对方已经收到，只是返回的确认应答在途中丢失。这种情况也是会导致发送端没有收到确认应答，从而进行重新发送。</p>
+<p><img src="/uploads/tcp-ip/tcp-ack3.png" alt></p>
+<p>此外，也有可能因为一些其它的原因导致，确认应答延迟到达，在源主机重发数据以后才能到达的情况也屡见不鲜，此时，源发送主机只要按照机制重发数据即可。但对于目标主机来说，简直一种“灾难”，会反复收到相同的数据，因此就必须引入一种机制（重复控制），能够识别是否已经接收数据，又能判断是否需要接收。</p>
+<p>上述这些确认应答处理、重发控制以及重复控制等功能可以通过序列号实现。序列号是按顺序给发送数据的每个一个字节标上号码的编号。这个编号的初始值并不是为0，而是在建立连接以后由随机数生成。接收端查询接收数据TCP首部中序列号和数据的长度，将自己下一步应该接收的序号作为确认应答返回送回去。就这样通过序列号和确认应答，TCP可以实现可靠的传输。</p>
+<p><img src="/uploads/tcp-ip/tcp-offset.png" alt></p>
+<p>TCP的数据长度并未写入TCP首部，实际是通过IP首部中的数据包长度间接求得。</p>
+<h2 id="重发超时如何确定"><a href="#重发超时如何确定" class="headerlink" title="重发超时如何确定"></a>重发超时如何确定</h2><p>重发超时是指在重发数据之前，等待确认应答到来的这个特定时间间隔。如果超过了这个时间仍未收到确认应答，则进行重发数据。</p>
+<p>TCP要求不论在何种网络环境下都要提高高性能通信，并且无论网络拥堵情况发生何种变化，都要保持这个特性。为此，它在每次发包的时候都会计算往返时间及其偏差，将这个往返时间和偏差值相加重发超时的时间，就是比这个总和要稍微大一点。</p>
+<p><img src="/uploads/tcp-ip/tcp-timeout.png" alt></p>
+<p>在BSD的Unix以及Windows系统中，超时都以0.5秒为单位进行控制，因此重发超时都是0.5秒的整数倍。不过由于最初的数据包还不知道往返时间所以其重发超时一般设置为6秒。</p>
+<p>数据被重发之后若是还是收不到应答，则进行再次重发，等待确认的应答时间将会2、4倍的指数函数延长。</p>
+<p>此外，数据也不会被无限、反复地重发。达到一定的重发次数之后，如果仍没有确认应答返回，就判断为网络或对端主机发生了异常，强制关闭连接，并且通知应用通信异常强行中止。</p>
+<h2 id="连接管理"><a href="#连接管理" class="headerlink" title="连接管理"></a>连接管理</h2><p>TCP是面向连接型的通信传输，面向连接是指在数据通信之前先好通信两端之间的准备工作。</p>
+<p>TCP在数据通信之前，通过TCP首部发送一个SYN包作为建立连接的请求等待确认应答，如果对端发来确认应答，则认为可以进行数据通信，如果对端的确认应答未能到达，就不会进行数据通信。此外在通信结束时会进行断开连接的处理（FIN包）</p>
+<p><img src="/uploads/tcp-ip/tcp-conn.png" alt></p>
+<p>可以使用TCP首部用于控制的字段管理连接，一个连接与断开，正常过程至少需要来回发7个包才能完成。</p>
+<h3 id="理解TCP三次握手-四次断开的必要性"><a href="#理解TCP三次握手-四次断开的必要性" class="headerlink" title="理解TCP三次握手/四次断开的必要性"></a>理解TCP三次握手/四次断开的必要性</h3><p><a href="https://www.cnblogs.com/qiaoconglovelife/p/5733056.html" target="_blank" rel="noopener">附文章出处</a></p>
+<h4 id="三次握手的必要性"><a href="#三次握手的必要性" class="headerlink" title="三次握手的必要性"></a>三次握手的必要性</h4><p><img src="/uploads/tcp-ip/tcp-conn-3.png" alt></p>
+<p>必要性：TCP通过三次握手建立可靠的（确保收到）的全双工通信</p>
+<ol>
+<li>第一次握手和第二次握手（ACK部分）建立了从客户端到服务器传送数据的可靠连接</li>
+<li>第二次握手（SYN部分）和第三次握手建立了从服务器到客户端传送数据的可靠连接</li>
+<li>由于我们期望建立全双工连接，所以两个方向的通信都是需要的，于是合并了服务器发送的ACK和SYN</li>
+<li>第三次握手的必要性：防止已失效的请求报文段突然又传送到了服务端而造成连接的误判。假如客户端发出连接请求A，由于网络原因，服务端并没有收到A，于是客户端又发送了连接请求B，并建立了连接，完成通信，断开连接。这时候，服务端突然又收到了A，于是看作是一次新的连接请求，进行第二次握手，由于不存在第三次握手，所以这时已经建立了TCP连接。但实际上客户端并没有发起连接，所以不会传递数据，那么这条连接就会变成一条死连接</li>
+</ol>
+<h4 id="四次握手的必要性"><a href="#四次握手的必要性" class="headerlink" title="四次握手的必要性"></a>四次握手的必要性</h4><p><img src="/uploads/tcp-ip/tcp-conn-4.png" alt><br>必要性：为保证单向通信的可行性，所以多一次握手</p>
+<ol>
+<li>主动断开方发送FIN时，被动断开方要回复ACK，意思是“我收到你的FIN了”</li>
+<li>主动断开方发送FIN并不意味着立即关闭TCP连接，而是告诉对方自己没有更多的数据要发送了，只有当对方发完自己的数据再发送FIN后，才意味着关闭TCP连接</li>
+<li>被动断开方收到FIN并回复ACK后，此时TCP处于“半关闭”状态，为保证被动断开方可以继续发送数据，所以第二个FIN并不会伴随ACK发送，所以比连接时多一个报文段</li>
+</ol>
+<h1 id="TCP与UDP的区别"><a href="#TCP与UDP的区别" class="headerlink" title="TCP与UDP的区别"></a>TCP与UDP的区别</h1><h1 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h1><h1 id="HTTPS-协议"><a href="#HTTPS-协议" class="headerlink" title="HTTPS 协议"></a>HTTPS 协议</h1><h1 id="HTTP与HTTPS的区别"><a href="#HTTP与HTTPS的区别" class="headerlink" title="HTTP与HTTPS的区别"></a>HTTP与HTTPS的区别</h1>
           
         
       
