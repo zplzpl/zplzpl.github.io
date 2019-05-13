@@ -154,7 +154,15 @@
 <meta property="og:image" content="http://yoursite.com/uploads/tcp-ip/tcp-conn-3.png">
 <meta property="og:image" content="http://yoursite.com/uploads/tcp-ip/tcp-conn-4.png">
 <meta property="og:image" content="http://yoursite.com/uploads/tcp-ip/tcp-mss.png">
-<meta property="og:updated_time" content="2019-05-12T13:19:13.009Z">
+<meta property="og:image" content="http://yoursite.com/uploads/tcp-ip/tcp-window.png">
+<meta property="og:image" content="http://yoursite.com/uploads/tcp-ip/tcp-window2.png">
+<meta property="og:image" content="http://yoursite.com/uploads/tcp-ip/tcp-window-retry.png">
+<meta property="og:image" content="http://yoursite.com/uploads/tcp-ip/tcp-window-retry2.png">
+<meta property="og:image" content="http://yoursite.com/uploads/tcp-ip/tcp-stream-ctrl.png">
+<meta property="og:image" content="http://yoursite.com/uploads/tcp-ip/tcp-yongsai.png">
+<meta property="og:image" content="http://yoursite.com/uploads/tcp-ip/tcp-yongsai-gongshi.png">
+<meta property="og:image" content="http://yoursite.com/uploads/tcp-ip/tcp-yongsai2.png">
+<meta property="og:updated_time" content="2019-05-13T14:18:35.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP&#x2F;IP 学习笔记">
 <meta name="twitter:description" content="过去几年中，一直沉溺在业务的开发，当遇到一些疑难杂症网络问题，虽即时可以解决（通过谷歌），但是没有系统性学习网络，现在处于深入做技术的需求，把这个以前遗留的网络知识好好恶补。 在学习资料的选择中，有视频、图书、文章等  视频资料  https://www.bilibili.com/video/av10610680 （在B站学习） 感觉先看完一遍书再看视频会更好些     图书资料  《图解TCP/">
@@ -234,7 +242,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">code and gym，开心就好</p>
+        <p class="site-subtitle">code and gym<br>做最强壮的程序员</p>
       
   </div>
 
@@ -792,7 +800,39 @@
 <p>MSS是在三次握手的时候，在两端主机之间被计算得出。两端的主机在发建立连接的请求时，会在TCP首部中写入MSS选项，告诉对方自己的接口能够适应的MSS大小。</p>
 <p>为附加MSS选项，TCP首部将不再是20字节，而是4字节的整数倍。在建立连接时，如果某一方忽略MSS选项，可以选为IP包的长度不超过576字节（MSS=576-IP20-TCP20=536）</p>
 <p><img src="/uploads/tcp-ip/tcp-mss.png" alt></p>
-<h2 id="利用窗口控制提高速度"><a href="#利用窗口控制提高速度" class="headerlink" title="利用窗口控制提高速度"></a>利用窗口控制提高速度</h2><h2 id="窗口控制与重发控制"><a href="#窗口控制与重发控制" class="headerlink" title="窗口控制与重发控制"></a>窗口控制与重发控制</h2><h2 id="流控制"><a href="#流控制" class="headerlink" title="流控制"></a>流控制</h2><h2 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h2><h2 id="提高网络利用率的规范"><a href="#提高网络利用率的规范" class="headerlink" title="提高网络利用率的规范"></a>提高网络利用率的规范</h2><h1 id="TCP与UDP的区别"><a href="#TCP与UDP的区别" class="headerlink" title="TCP与UDP的区别"></a>TCP与UDP的区别</h1><h1 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h1><h1 id="HTTPS-协议"><a href="#HTTPS-协议" class="headerlink" title="HTTPS 协议"></a>HTTPS 协议</h1><h1 id="HTTP与HTTPS的区别"><a href="#HTTP与HTTPS的区别" class="headerlink" title="HTTP与HTTPS的区别"></a>HTTP与HTTPS的区别</h1>
+<h2 id="利用窗口控制提高速度"><a href="#利用窗口控制提高速度" class="headerlink" title="利用窗口控制提高速度"></a>利用窗口控制提高速度</h2><p>TCP以1个段为单位，每发一个段进行一次确认应答处理，这样的传输方式有一个缺点，那么就是包的往返时间越长通信性能越低。</p>
+<p>为了解决这个问题，TCP引入了窗口的概念，即使在往返时间较长的情况下，它也能控制网络性能的下降。确认应答不再是以每个段进行确认，而是更大的单位进行确认，转发时间将会被大幅度的缩短。</p>
+<p><img src="/uploads/tcp-ip/tcp-window.png" alt></p>
+<p>窗口大小就是指无需等待确认应答而可以继续发送数据的最大值。<br>这个机制实现了使用大量的缓冲区，通过对多个段同时进行确认应答的功能。</p>
+<p><img src="/uploads/tcp-ip/tcp-window2.png" alt></p>
+<p>发送数据中高亮圈起来的部分正式前面提到的窗口，这个窗口内的数据即便没有收到确认应答也可以发送出去。此外，从该窗口中能看到的数据因其某种数据已在传输中丢失，所以发送端才能收到确认应答，这种情况也需要进行重发。为此发送端主机在等到确认应答返回之前，必须在缓冲区中保留这部分数据。</p>
+<p>在滑动窗口以外的部分包括尚未发送的数据以及已经确认对端收到的数据。当数据发出后若如期收到确认应答就可以不用进行重发，此时数据就可以从缓冲区清除。</p>
+<p>收到确认应答的情况下，将窗口滑动到确认应答中的序列号的位置。这样可以顺序地将多个段同时发送提高通信性能。这种机制也称滑动窗口控制。</p>
+<h2 id="窗口控制与重发控制"><a href="#窗口控制与重发控制" class="headerlink" title="窗口控制与重发控制"></a>窗口控制与重发控制</h2><p>在使用窗口控制中，如果出现段丢失怎么办？</p>
+<p>首先，我们先考虑确认应答未能返回的情况，这种情况下，数据已经达到了对端，是已经不需要进行重发的，然而，在没有使用窗口控制的时候，没有收到确认应答的数据都会被重发，而使用了窗口控制，某些确认应答即使丢失了也不需要重发数据。</p>
+<p><img src="/uploads/tcp-ip/tcp-window-retry.png" alt></p>
+<p>其次，我们来考虑一下某个报文段丢失的情况，接收主机如果收到一个自己应该接收的序号以外的数据时，会针对当前为止收到数据返回确认应答。不过即使接收端主机收到的包序号不连续，也不会将数据丢弃，而是暂存到缓冲区。</p>
+<p><img src="/uploads/tcp-ip/tcp-window-retry2.png" alt></p>
+<p>当某一个报文段丢失后，发送端会一直收到序号为1001的确认应答，这个确认应答好像在提醒发送端“我想接收的是从1001开始的数据”，因此在窗口比较大，又出现报文段丢失的情况下，同一个序列号的确认应答将会被重复不断的地返回，而发送端主机如果连续3次收到同一个确认应答，就会将其所丢应的数据进行重发，这种机制比之前的提高的超时管理更加高效，因此也被作高速重发控制。</p>
+<p>之所以连续收到3次而不是两次的理由是因为，即使数据段序列号被替换两次也不会触发重发机制。</p>
+<h2 id="流控制"><a href="#流控制" class="headerlink" title="流控制"></a>流控制</h2><p>TCP提供了一种机制可以让发送端根据接收端的实际接收能力发送数据量。这就是所谓的流控制。它的具体操作是，接收端主机向发送端主机通知自己可以接收的数据大小，于是发送端会发送不超过这个限度的数据，该大小限度就被称作为窗口大小，是由接收端主机决定的。</p>
+<p>TCP首部中，专门有一个字段用来通知窗口大小。接收主机可以将自己可以接收的缓存区大小放入这个字段中通知发送端。这个字段的值越大，说明网络的吞吐量越高。</p>
+<p>不过，接收端的这个缓冲区一旦面临数据溢出时，窗口大小的值也会随之被设置为一个更小的值通知给发送端，从而控制数据发送量。也就是说，发送端主机会根据接收端主机的指示，对发送数据的量进行控制。</p>
+<p><img src="/uploads/tcp-ip/tcp-stream-ctrl.png" alt></p>
+<p>像上面这副图所示，当接收端收到从3001号开始的数据端后其缓冲区满了，不得不暂停停止接收数据，之后，在收到发送窗口更新通知后通信才得以继续，如果这个窗口更新通知中途丢失了，也不要紧，发送端定时会发送一个叫做窗口探测的数据段，此数据段仅含一个字节以获取最新的窗口大小信息。</p>
+<h2 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h2><p>有了TCP的窗口控制，收发主机之间即使不再以一个数据段为单位发送确认应答，也能够连续发送大量数据包，然而，如果在通信刚开始时就发送大量数据，也可能引发其他问题。</p>
+<p>一般来说，计算网络都处于一个共享的环境，因此也有可能会因为其他主机之间的通信使得网络拥堵。在网络出现拥堵时，如果突然发送一个叫大量的数据，极有可能会导致网络瘫痪。</p>
+<p>TCP为了防止该问题的出现，在通信一开始时就会通过一个叫做慢启动的算法得出的数值，对发送数据量进行控制。</p>
+<p><img src="/uploads/tcp-ip/tcp-yongsai.png" alt></p>
+<p>首先，为了在发送端调节所要发送数据的量，定义了一个叫做“拥塞窗口”的概念，于是在慢启动的时候，将这个拥塞窗口的大小设置为1MSS发送数据，之后没收到一个确认应答拥塞窗口增加1，在发送数据包时，将拥塞窗口的大小与接收端通知的窗口大小做比较，然后按照它们当中较小的那个值，发送比其还要小的数据量。</p>
+<p>随着包的每次往返，拥塞窗口也会以1、2、4等指数函数的增长，拥堵状况激增甚至导致网络拥塞的发生，为了防止这些，引入了慢启动阈值的概念，只要拥塞窗口的值超过这个阈值，在每收到一次确认应答时，只允许以下面这种比例放大拥塞窗口：</p>
+<p><img src="/uploads/tcp-ip/tcp-yongsai-gongshi.png" alt></p>
+<p><img src="/uploads/tcp-ip/tcp-yongsai2.png" alt></p>
+<p>拥塞窗口越大，确认应答的数目也会增加。不过随着每收到一个确认应答，其涨幅也会逐渐减少，甚至小过比一个数据段还要小的字节数。因此，拥塞窗口的大小会呈直线上升的趋势。</p>
+<p>TCP刚开始通信的时候，并没有设定相应的慢启动阈值，而是在超时重发时，才会设置为当时拥塞窗口大小的一半。</p>
+<p>由重复确认应答进行高速重发控制时，慢启动阈值的大小被设置为当时窗口大小的一半。然后将窗口的大小设置为该慢启动阈值+3个数据段的大小。</p>
+<p>由于窗口的大小会直接影响数据被转发时的吞吐量，所以一般情况下，窗口越大，越会形成高吞吐量的通信。</p>
+<h2 id="提高网络利用率的规范"><a href="#提高网络利用率的规范" class="headerlink" title="提高网络利用率的规范"></a>提高网络利用率的规范</h2><h1 id="TCP与UDP的区别"><a href="#TCP与UDP的区别" class="headerlink" title="TCP与UDP的区别"></a>TCP与UDP的区别</h1><h1 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h1><h1 id="HTTPS-协议"><a href="#HTTPS-协议" class="headerlink" title="HTTPS 协议"></a>HTTPS 协议</h1><h1 id="HTTP与HTTPS的区别"><a href="#HTTP与HTTPS的区别" class="headerlink" title="HTTP与HTTPS的区别"></a>HTTP与HTTPS的区别</h1>
       
     </div>
     
@@ -915,7 +955,7 @@
           <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Zpl">
           <p class="site-author-name" itemprop="name">Zpl</p>
            
-              <p class="site-description motion-element" itemprop="description">随便记一下，随便骚一下</p>
+              <p class="site-description motion-element" itemprop="description">随便记一下，顺便骚一下</p>
           
         </div>
         <nav class="site-state motion-element">
