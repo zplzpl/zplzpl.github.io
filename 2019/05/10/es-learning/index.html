@@ -94,18 +94,20 @@
 
 
 
-<meta name="description" content="随便记一下，顺便骚一下">
+<meta name="description" content="参考资料知乎阿里ES专栏-Elasticsearch内核解析 - 写入篇 ElasticSearch架构原理  介绍索引文档的过程（写）关键点 可靠性：或者是持久性，数据写入系统成功后，数据不会被回滚或丢失。 一致性：数据写入成功后，再次查询时必须能保证读取到最新版本的数据，不能读取到旧数据。 原子性：一个写入或者更新操作，要么完全成功，要么完全失败，不允许出现中间状态。 隔离性：多个写入操作相互">
 <meta name="keywords" content="技术、生活、健身">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ElasticSearch 学习笔记">
 <meta property="og:url" content="http://yoursite.com/2019/05/10/es-learning/index.html">
 <meta property="og:site_name" content="程序员Zpl">
-<meta property="og:description" content="随便记一下，顺便骚一下">
+<meta property="og:description" content="参考资料知乎阿里ES专栏-Elasticsearch内核解析 - 写入篇 ElasticSearch架构原理  介绍索引文档的过程（写）关键点 可靠性：或者是持久性，数据写入系统成功后，数据不会被回滚或丢失。 一致性：数据写入成功后，再次查询时必须能保证读取到最新版本的数据，不能读取到旧数据。 原子性：一个写入或者更新操作，要么完全成功，要么完全失败，不允许出现中间状态。 隔离性：多个写入操作相互">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-10T09:20:32.013Z">
+<meta property="og:image" content="http://yoursite.com/uploads/es/shard-write.jpg">
+<meta property="og:updated_time" content="2019-05-17T09:54:36.193Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ElasticSearch 学习笔记">
-<meta name="twitter:description" content="随便记一下，顺便骚一下">
+<meta name="twitter:description" content="参考资料知乎阿里ES专栏-Elasticsearch内核解析 - 写入篇 ElasticSearch架构原理  介绍索引文档的过程（写）关键点 可靠性：或者是持久性，数据写入系统成功后，数据不会被回滚或丢失。 一致性：数据写入成功后，再次查询时必须能保证读取到最新版本的数据，不能读取到旧数据。 原子性：一个写入或者更新操作，要么完全成功，要么完全失败，不允许出现中间状态。 隔离性：多个写入操作相互">
+<meta name="twitter:image" content="http://yoursite.com/uploads/es/shard-write.jpg">
 
 
 
@@ -330,7 +332,45 @@
       
 
       
-        
+        <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://zhuanlan.zhihu.com/p/34669354" target="_blank" rel="noopener">知乎阿里ES专栏-Elasticsearch内核解析 - 写入篇</a></p>
+<p><a href="https://www.ctolib.com/docs/sfile/ELKstack-guide-cn/elasticsearch/principle/index.html" target="_blank" rel="noopener">ElasticSearch架构原理</a></p>
+<p><a href="http://www.cnblogs.com/richaaaard/p/5227477.html" target="_blank" rel="noopener"></a></p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h1 id="索引文档的过程（写）"><a href="#索引文档的过程（写）" class="headerlink" title="索引文档的过程（写）"></a>索引文档的过程（写）</h1><h2 id="关键点"><a href="#关键点" class="headerlink" title="关键点"></a>关键点</h2><ul>
+<li>可靠性：或者是持久性，数据写入系统成功后，数据不会被回滚或丢失。</li>
+<li>一致性：数据写入成功后，再次查询时必须能保证读取到最新版本的数据，不能读取到旧数据。</li>
+<li>原子性：一个写入或者更新操作，要么完全成功，要么完全失败，不允许出现中间状态。</li>
+<li>隔离性：多个写入操作相互不影响。</li>
+<li>实时性：写入后是否可以立即被查询到。</li>
+<li>性能：写入性能，吞吐量到底怎么样。</li>
+</ul>
+<h2 id="Lucene的写"><a href="#Lucene的写" class="headerlink" title="Lucene的写"></a>Lucene的写</h2><p>Elasticsearch内部使用了Lucene完成索引创建和搜索功能，Lucene中写操作主要是通过IndexWriter类实现，IndexWriter提供三个接口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public long addDocument();</span><br><span class="line">public long updateDocuments();</span><br><span class="line">public long deleteDocuments();</span><br></pre></td></tr></table></figure>
+<p>通过这三个接口可以完成单个文档的写入，更新和删除功能，包括了分词，倒排创建，正排创建等等所有搜索相关的流程。<br>只要Doc通过IndesWriter写入后，后面就可以通过IndexSearcher搜索了，看起来功能已经完善了，但是仍然有一些问题没有解：</p>
+<ul>
+<li>上述操作是单机的，而不是我们需要的分布式。</li>
+<li>文档写入Lucene后并不是立即可查询的，需要生成完整的Segment后才可被搜索，如何保证实时性？</li>
+<li>Lucene生成的Segment是在内存中，如果机器宕机或掉电后，内存中的Segment会丢失，如何保证数据可靠性 ？</li>
+<li>Lucene不支持部分文档更新，但是这又是一个强需求，如何支持部分更新？</li>
+</ul>
+<p>上述问题，在Lucene中是没有解决的，那么就需要Elasticsearch中解决上述问题。<br>Elasticsearch在解决上述问题时，除了我们在上一篇《Elasticsearch数据模型简介》中介绍的几种系统字段外，在引擎架构上也引入了多重机制来解决问题。我们再来看Elasticsearch中的写机制。</p>
+<h2 id="Elasticsearch的写"><a href="#Elasticsearch的写" class="headerlink" title="Elasticsearch的写"></a>Elasticsearch的写</h2><ol>
+<li>每个Index由多个Shard组成，每个Shard有一个主节点和多个副本节点，副本个数可配。但每次写入的时候，写入请求会先根据_routing规则选择发给哪个Shard，Index Request中可以设置使用哪个Filed的值作为路由参数，如果没有设置，则使用Mapping中的配置，如果mapping中也没有配置，则使用_id作为路由参数，然后通过_routing的Hash值选择出Shard（在OperationRouting类中），最后从集群的Meta中找出出该Shard的Primary节点</li>
+<li>请求接着会发送给Primary Shard，在Primary Shard上执行成功后，再从Primary Shard上将请求同时发送给多个Replica Shard，请求在多个Replica Shard上执行成功并返回给Primary Shard后，写入请求执行成功，返回结果给客户端</li>
+</ol>
+<blockquote>
+<p>这种模式下，写入操作的延时就等于latency = Latency(Primary Write) + Max(Replicas Write)。只要有副本在，写入延时最小也是两次单Shard的写入时延总和，写入效率会较低，但是这样的好处也很明显，避免写入后，单机或磁盘故障导致数据丢失，在数据重要性和性能方面，一般都是优先选择数据，除非一些允许丢数据的特殊场景。</p>
+</blockquote>
+<p>在每一个Shard中，写入流程分为两部分，先写入Lucene，再写入TransLog。</p>
+<p><img src="/uploads/es/shard-write.jpg" alt></p>
+<ol>
+<li>写入请求到达Shard后，先写Lucene文件，创建好索引，此时索引还在内存里面，接着去写TransLog，写完TransLog后，刷新TransLog数据到磁盘上，写磁盘成功后，请求返回给用户。</li>
+<li>写Lucene内存后，并不是可被搜索的，需要通过Refresh把内存的对象转成完整的Segment后，然后再次reopen后才能被搜索，一般这个时间设置为1秒钟，导致写入Elasticsearch的文档，最快要1秒钟才可被从搜索到，所以Elasticsearch在搜索方面是NRT（Near Real Time）近实时的系统</li>
+<li>每隔一段比较长的时间，比如30分钟后，Lucene会把内存中生成的新Segment刷新到磁盘上，刷新后索引文件已经持久化了，历史的TransLog就没用了，会清空掉旧的TransLog</li>
+</ol>
+<h3 id="Segment-Merge"><a href="#Segment-Merge" class="headerlink" title="Segment Merge"></a>Segment Merge</h3><p>其中用一句话概括了 Lucene 的设计思路就是”开新文件”。从另一个方面看，开新文件也会给服务器带来负载压力。因为默认每 1 秒，都会有一个新文件产生，每个文件都需要有文件句柄，内存，CPU 使用等各种资源。一天有 86400 秒，设想一下，每次请求要扫描一遍 86400 个文件，这个响应性能绝对好不了！</p>
+<p>为了解决这个问题，ES 会不断在后台运行任务，主动将这些零散的 segment 做数据归并，尽量让索引内只保有少量的，每个都比较大的，segment 文件。这个过程是有独立的线程来进行的，并不影响新 segment 的产生。</p>
+<p>当归并完成，较大的这个 segment 刷到磁盘后，commit 文件做出相应变更，删除之前几个小 segment，改成新的大 segment。等检索请求都从小 segment 转到大 segment 上以后，删除没用的小 segment。这时候，索引里 segment 数量就下降了。</p>
+<h1 id="索引文档的过程（读）"><a href="#索引文档的过程（读）" class="headerlink" title="索引文档的过程（读）"></a>索引文档的过程（读）</h1>
       
     </div>
     
@@ -418,8 +458,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Zpl">
           <p class="site-author-name" itemprop="name">Zpl</p>
@@ -432,7 +481,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -479,6 +528,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">1.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">2.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引文档的过程（写）"><span class="nav-number">3.</span> <span class="nav-text">索引文档的过程（写）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关键点"><span class="nav-number">3.1.</span> <span class="nav-text">关键点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lucene的写"><span class="nav-number">3.2.</span> <span class="nav-text">Lucene的写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Elasticsearch的写"><span class="nav-number">3.3.</span> <span class="nav-text">Elasticsearch的写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Segment-Merge"><span class="nav-number">3.3.1.</span> <span class="nav-text">Segment Merge</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引文档的过程（读）"><span class="nav-number">4.</span> <span class="nav-text">索引文档的过程（读）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

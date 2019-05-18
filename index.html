@@ -264,6 +264,184 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/18/algorithm-structure-learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zpl">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序员Zpl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/18/algorithm-structure-learning/" itemprop="url">算法与数据结构基础学习笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-18T14:33:38+08:00">
+                2019-05-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><h2 id="重要的问题类型"><a href="#重要的问题类型" class="headerlink" title="重要的问题类型"></a>重要的问题类型</h2><p>计算中能遇到无数问题，只有少数领域的问题引起了研究人员的特殊关注。<br>最重要的问题类型如下：</p>
+<ul>
+<li>排序</li>
+<li>查找</li>
+<li>字符串处理</li>
+<li>图问题</li>
+<li>组合问题</li>
+<li>几何问题</li>
+<li>数值问题</li>
+</ul>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>排序问题要求我们按照升序重新排列给定列表中的数据项。</p>
+<p>我们可以按照学生姓名的字母顺序，也可以按照学号或者学生个人的平均成绩来对学生记录进行排序，这段特别选定的信息成为键（key）</p>
+<p>计算机科学家通常只关心如何对键进行排序，哪怕表中的元素不是记录，也许仅仅是整数。</p>
+<p>到目前为止科学家已经开发出了几十种不同的排序算法。但没有一种算法再任何情况下都是最优的。<br>有些算法比较适合随机排列的输入，而另一些则更适合基本有序的列表。有些算法仅适合排列驻留再快速存储器中的列表。而另一些可以用来对存储再磁盘上的大型文件排序，如此等等。</p>
+<p>排序算法有两个特性值得一提：</p>
+<ul>
+<li>如果一个排序算法保留了等值元素的输入中的相对位置，就可以说它是稳定的。</li>
+<li>如果一个算法不需要额外的存储空间（除了个别存储单元以外），我们就说它是在位（in-place）</li>
+</ul>
+<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p>查找问题就是在给定的集合（或者是多重集，它允许多个元素具有相同的值）中找一个给定的值（我们称之为查找键）。</p>
+<p>对于查找来说，也没有一种算法在任何情况下都是最优的。有些算法比其他算法速度快，但需要更多的存储空间。有些算法速度非常快，但仅使用于有序的数组。</p>
+<p>和排序算法不同，查找算法没有稳定性问题。但会发生其他问题。查找问题就必须结合另外两种操作一起考虑，在数据集合中添加和删除元素的操作。</p>
+<p>在这种情况下必须仔细选择数据结构和算法。以便在各种操作的需求之间达到一个平衡。而且对于高效查找（以及添加和删除）的特大型数据集合来说，如何组织其结构是一个不同寻常的挑战，而这对实际应用具有非常重要的意义。</p>
+<h2 id="字符串处理"><a href="#字符串处理" class="headerlink" title="字符串处理"></a>字符串处理</h2><p>字符串是字符表中的符号所构成序列。我们尤其关心文本串，它是由字母、数字以及特殊符号构成的；位串是由“0”和“1”构成的；</p>
+<p>如何在文本查找一个给定的词，这一特殊问题引起了研究人员的特别关注，它们成为字符串匹配问题。类似这种查找的特性，人们发明了好几种算法。</p>
+<h2 id="图问题"><a href="#图问题" class="headerlink" title="图问题"></a>图问题</h2><p>TODO</p>
+<h2 id="组合问题"><a href="#组合问题" class="headerlink" title="组合问题"></a>组合问题</h2><p>TODO</p>
+<h2 id="几何问题"><a href="#几何问题" class="headerlink" title="几何问题"></a>几何问题</h2><p>TODO</p>
+<h2 id="数值问题"><a href="#数值问题" class="headerlink" title="数值问题"></a>数值问题</h2><p>TODO</p>
+<h2 id="基本数据结构"><a href="#基本数据结构" class="headerlink" title="基本数据结构"></a>基本数据结构</h2><p>数据结构定义：对相关的数据项进行组织的特殊架构。</p>
+<h3 id="线性数据结构"><a href="#线性数据结构" class="headerlink" title="线性数据结构"></a>线性数据结构</h3><h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>一维数组是n个相同数据类型的元素构成的序列，他们连续存储在计算机的存储器种，我们只要指定数组的下标就能够访问这些元素</p>
+<p>无论位于数组的什么为止，都能用相等的常量时间访问数组中的任何元素。这种特性不是链表所具有的。</p>
+<p>数组可以实现多种其他的数据结构，比较出名是<strong>字符串</strong>。字符串是来自于字母表的字符序列，并以一个特殊字符来标志字符串的结束。<br>字符串的常见操作不同于其他数组的典型操作。字符串的典型操作包括计算字符串的长度，按照字典序（即字母顺序）确定两个字符串在排序时的顺序。</p>
+<h4 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h4><p>链表是0个或多个成为节点的元素构成的序列，每个节点包含两类信息：一类是数据；另一类是一个或者多个成为指针的链接，指向链表中其他元素。</p>
+<p>如果指向链表其他元素位null的时候表明节点没有后继元素。</p>
+<p>单链表中，除了尾节点，每个节点都包含一个指向下一个元素的指针。</p>
+<p>为了访问链表中的某个特定元素，我们从链表的首节点开始，沿指针链向前遍历，直到访问到该特定元素为止。因此和数组不同，访问单链表元素所需要的时间依赖于该元素在的链表中的位置。</p>
+<p>优点：</p>
+<ul>
+<li>链表不需要实现分配任何存储空间</li>
+<li>插入和删除的效率也非常高，只要相关的节点重新连接就可以了。</li>
+</ul>
+<p>为了增加链表灵活性，链表通常从一个称为表头的特殊节点开始，这个节点包含链表的长度，包含一个指向头元素的指针，还有可以包含指向尾元素的指针。</p>
+<h5 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h5><p>这是单向链表的扩展结构，其中除了首尾两个节点，每个节点都同时包含指向前趋的指针和指向后继的指针。</p>
+<h4 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h4><p>队列也是一种列表，只是删除元素在列表的一头进行，这一头成为队头（出队），查入元素在表的另一头进行，这一头成为队尾（入队），因此，队列是按照“先进先出”(First-In-First-Out FIFO)的方式运转。</p>
+<p>队列也有许多重要的而英勇，其中包括一些图问题的算法。</p>
+<h5 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h5><p>从一个动态改变的候选集合中选择一个优先级最高的元素。有一种数据结构可以满足，称为优先队列。</p>
+<p>优先队列是数据项中的一个集合，这些数据项都来自于一些全序域。对优先队列的主要操作包括查找最大元素、删除最大元素和查入新的元素。</p>
+<p>我们可以基于数组或者有序数组来实现优先队列，但这两种都不是最高效率的方案，优先队列有更好的实现方法，我们称之为堆(heap)</p>
+<h4 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h4><p>栈是一种插入和删除操作都只能在端部进行的列表，这一端称为栈顶。</p>
+<p>当我们在栈中添加一个元素或者删除一个元素时，该结构都按照一种“后进先出”（Last-In-First-Out LIFO)的方式运转。</p>
+<p>栈的应用很广，对于实现递归算法来说时不可缺少的。</p>
+<h3 id="树"><a href="#树" class="headerlink" title="树"></a>树</h3><p>树，更精确地说，自由树就是连通无回路图。无回路但不一定连通的图成为森林。</p>
+<p>树的边数总是比它的顶点数少1</p>
+<h3 id="有根树"><a href="#有根树" class="headerlink" title="有根树"></a>有根树</h3><p>树的另外一个非常重要的特性就是：树的任意两个顶点之间总是恰好存在一条从一个顶点到另一个顶点的简单路径。这个性质使得以下做法成为可能：</p>
+<p>任选自由树种的一个顶点，将它作为所谓的有根树的根。对有根树的描述中，根通常放在最顶上（树的第0层），邻接根的顶点放在根的下面，再下面是跟根距离两条边的顶点，然后以此类推。</p>
+<p>有根树扮演很重要的角色，远比自由树重要，它们常常被简称为“树”。也就是说“树”通常是指有根树。</p>
+<h3 id="有序树"><a href="#有序树" class="headerlink" title="有序树"></a>有序树</h3><p>有序树是一颗有根树，树中每个顶点的所有子女都是有序的。</p>
+<h2 id="算法效率分析基础"><a href="#算法效率分析基础" class="headerlink" title="算法效率分析基础"></a>算法效率分析基础</h2><p>分析算法效率一般框架一般有两种：时间效率和空间效率</p>
+<h1 id="排序-1"><a href="#排序-1" class="headerlink" title="排序"></a>排序</h1><h1 id="树-1"><a href="#树-1" class="headerlink" title="树"></a>树</h1><h1 id="链表-1"><a href="#链表-1" class="headerlink" title="链表"></a>链表</h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/10/linux-learning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -573,7 +751,45 @@
       
         
           
-            
+            <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://zhuanlan.zhihu.com/p/34669354" target="_blank" rel="noopener">知乎阿里ES专栏-Elasticsearch内核解析 - 写入篇</a></p>
+<p><a href="https://www.ctolib.com/docs/sfile/ELKstack-guide-cn/elasticsearch/principle/index.html" target="_blank" rel="noopener">ElasticSearch架构原理</a></p>
+<p><a href="http://www.cnblogs.com/richaaaard/p/5227477.html" target="_blank" rel="noopener"></a></p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h1 id="索引文档的过程（写）"><a href="#索引文档的过程（写）" class="headerlink" title="索引文档的过程（写）"></a>索引文档的过程（写）</h1><h2 id="关键点"><a href="#关键点" class="headerlink" title="关键点"></a>关键点</h2><ul>
+<li>可靠性：或者是持久性，数据写入系统成功后，数据不会被回滚或丢失。</li>
+<li>一致性：数据写入成功后，再次查询时必须能保证读取到最新版本的数据，不能读取到旧数据。</li>
+<li>原子性：一个写入或者更新操作，要么完全成功，要么完全失败，不允许出现中间状态。</li>
+<li>隔离性：多个写入操作相互不影响。</li>
+<li>实时性：写入后是否可以立即被查询到。</li>
+<li>性能：写入性能，吞吐量到底怎么样。</li>
+</ul>
+<h2 id="Lucene的写"><a href="#Lucene的写" class="headerlink" title="Lucene的写"></a>Lucene的写</h2><p>Elasticsearch内部使用了Lucene完成索引创建和搜索功能，Lucene中写操作主要是通过IndexWriter类实现，IndexWriter提供三个接口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public long addDocument();</span><br><span class="line">public long updateDocuments();</span><br><span class="line">public long deleteDocuments();</span><br></pre></td></tr></table></figure>
+<p>通过这三个接口可以完成单个文档的写入，更新和删除功能，包括了分词，倒排创建，正排创建等等所有搜索相关的流程。<br>只要Doc通过IndesWriter写入后，后面就可以通过IndexSearcher搜索了，看起来功能已经完善了，但是仍然有一些问题没有解：</p>
+<ul>
+<li>上述操作是单机的，而不是我们需要的分布式。</li>
+<li>文档写入Lucene后并不是立即可查询的，需要生成完整的Segment后才可被搜索，如何保证实时性？</li>
+<li>Lucene生成的Segment是在内存中，如果机器宕机或掉电后，内存中的Segment会丢失，如何保证数据可靠性 ？</li>
+<li>Lucene不支持部分文档更新，但是这又是一个强需求，如何支持部分更新？</li>
+</ul>
+<p>上述问题，在Lucene中是没有解决的，那么就需要Elasticsearch中解决上述问题。<br>Elasticsearch在解决上述问题时，除了我们在上一篇《Elasticsearch数据模型简介》中介绍的几种系统字段外，在引擎架构上也引入了多重机制来解决问题。我们再来看Elasticsearch中的写机制。</p>
+<h2 id="Elasticsearch的写"><a href="#Elasticsearch的写" class="headerlink" title="Elasticsearch的写"></a>Elasticsearch的写</h2><ol>
+<li>每个Index由多个Shard组成，每个Shard有一个主节点和多个副本节点，副本个数可配。但每次写入的时候，写入请求会先根据_routing规则选择发给哪个Shard，Index Request中可以设置使用哪个Filed的值作为路由参数，如果没有设置，则使用Mapping中的配置，如果mapping中也没有配置，则使用_id作为路由参数，然后通过_routing的Hash值选择出Shard（在OperationRouting类中），最后从集群的Meta中找出出该Shard的Primary节点</li>
+<li>请求接着会发送给Primary Shard，在Primary Shard上执行成功后，再从Primary Shard上将请求同时发送给多个Replica Shard，请求在多个Replica Shard上执行成功并返回给Primary Shard后，写入请求执行成功，返回结果给客户端</li>
+</ol>
+<blockquote>
+<p>这种模式下，写入操作的延时就等于latency = Latency(Primary Write) + Max(Replicas Write)。只要有副本在，写入延时最小也是两次单Shard的写入时延总和，写入效率会较低，但是这样的好处也很明显，避免写入后，单机或磁盘故障导致数据丢失，在数据重要性和性能方面，一般都是优先选择数据，除非一些允许丢数据的特殊场景。</p>
+</blockquote>
+<p>在每一个Shard中，写入流程分为两部分，先写入Lucene，再写入TransLog。</p>
+<p><img src="/uploads/es/shard-write.jpg" alt></p>
+<ol>
+<li>写入请求到达Shard后，先写Lucene文件，创建好索引，此时索引还在内存里面，接着去写TransLog，写完TransLog后，刷新TransLog数据到磁盘上，写磁盘成功后，请求返回给用户。</li>
+<li>写Lucene内存后，并不是可被搜索的，需要通过Refresh把内存的对象转成完整的Segment后，然后再次reopen后才能被搜索，一般这个时间设置为1秒钟，导致写入Elasticsearch的文档，最快要1秒钟才可被从搜索到，所以Elasticsearch在搜索方面是NRT（Near Real Time）近实时的系统</li>
+<li>每隔一段比较长的时间，比如30分钟后，Lucene会把内存中生成的新Segment刷新到磁盘上，刷新后索引文件已经持久化了，历史的TransLog就没用了，会清空掉旧的TransLog</li>
+</ol>
+<h3 id="Segment-Merge"><a href="#Segment-Merge" class="headerlink" title="Segment Merge"></a>Segment Merge</h3><p>其中用一句话概括了 Lucene 的设计思路就是”开新文件”。从另一个方面看，开新文件也会给服务器带来负载压力。因为默认每 1 秒，都会有一个新文件产生，每个文件都需要有文件句柄，内存，CPU 使用等各种资源。一天有 86400 秒，设想一下，每次请求要扫描一遍 86400 个文件，这个响应性能绝对好不了！</p>
+<p>为了解决这个问题，ES 会不断在后台运行任务，主动将这些零散的 segment 做数据归并，尽量让索引内只保有少量的，每个都比较大的，segment 文件。这个过程是有独立的线程来进行的，并不影响新 segment 的产生。</p>
+<p>当归并完成，较大的这个 segment 刷到磁盘后，commit 文件做出相应变更，删除之前几个小 segment，改成新的大 segment。等检索请求都从小 segment 转到大 segment 上以后，删除没用的小 segment。这时候，索引里 segment 数量就下降了。</p>
+<h1 id="索引文档的过程（读）"><a href="#索引文档的过程（读）" class="headerlink" title="索引文档的过程（读）"></a>索引文档的过程（读）</h1>
           
         
       
@@ -811,7 +1027,61 @@
       
         
           
-            
+            <h1 id="goroutine"><a href="#goroutine" class="headerlink" title="goroutine"></a>goroutine</h1><p>Golang 简称 Go，Go 的协程(goroutine) 和我们常见的线程(Thread)一样，拥有其调度器。</p>
+<h2 id="调度器的三个基本对象"><a href="#调度器的三个基本对象" class="headerlink" title="调度器的三个基本对象"></a>调度器的三个基本对象</h2><ul>
+<li>G (Goroutine)，代表协程，也就是每次代码中使用 go 关键词时候会创建的一个对象</li>
+<li>M (Work Thread)，工作线程</li>
+<li>P (Processor)，代表一个处理器，又称上下文</li>
+</ul>
+<h2 id="G-M-P三者的关系与特点"><a href="#G-M-P三者的关系与特点" class="headerlink" title="G-M-P三者的关系与特点"></a>G-M-P三者的关系与特点</h2><ul>
+<li>每一个运行的 M 都必须绑定一个 P，线程M 创建后会去检查并执行G (goroutine)对象</li>
+<li>每一个 P 保存着一个协程G 的队列</li>
+<li>除了每个 P 自身保存的 G 的队列外，调度器还拥有一个全局的 G 队列</li>
+<li>M 从队列中提取 G，并执行</li>
+<li>P 的个数就是GOMAXPROCS（最大256），启动时固定的，一般不修改</li>
+<li>M 的个数和 P 的个数不一定一样多（会有休眠的M 或 P不绑定M ）（最大10000）</li>
+<li>P 是用一个全局数组（255）来保存的，并且维护着一个全局的 P 空闲链表</li>
+</ul>
+<p><img src="/uploads/golang/gmp.png" alt></p>
+<h2 id="局部G队列与全局G队列的关系"><a href="#局部G队列与全局G队列的关系" class="headerlink" title="局部G队列与全局G队列的关系"></a>局部G队列与全局G队列的关系</h2><ul>
+<li>全局G任务队列会和各个本地G任务队列按照一定的策略互相交换。没错，就是协程任务交换。</li>
+<li>G任务的执行顺序是，先从本地队列找，本地没有则从全局队列找</li>
+<li>转移<ul>
+<li>局部与全局，全局G个数 / P个数</li>
+<li>局部与局部，一次性转移一半</li>
+</ul>
+</li>
+</ul>
+<h2 id="Gorutine从入队到执行"><a href="#Gorutine从入队到执行" class="headerlink" title="Gorutine从入队到执行"></a>Gorutine从入队到执行</h2><ol>
+<li>当我们创建一个G对象，就是 gorutine，它会加入到本地队列或者全局队列</li>
+<li>如果还有空闲的P，则创建一个M 绑定该 P ，注意！这里，P 此前必须还没绑定过M 的，否则不满足空闲的条件。细节点如下：<ol>
+<li>先找到一个空闲的P，如果没有则直接返回</li>
+<li>P 个数不会占用超过自己设定的cpu个数</li>
+<li>P 在被 M 绑定后，就会初始化自己的 G 队列，此时是一个空队列</li>
+<li>注意这里有一个点：<ul>
+<li>无论在哪个 M 中创建了一个 G，只要 P 有空闲的，就会引起新 M 的创建</li>
+<li>不需考虑当前所在 M 中所绑的 P 的 G 队列是否已满</li>
+<li>新创建的 M 所绑的 P 的初始化队列会从其他 G 队列中取任务过来</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>M 会启动一个底层线程，循环执行能找到的 G 任务。这里的寻找的 G 从下面几方面找：<ol>
+<li>当前 M 所绑的 P 队列中找</li>
+<li>去别的 P 的队列中找</li>
+<li>去全局 G 队列中找</li>
+</ol>
+</li>
+<li>G任务的执行顺序是，先从本地队列找，本地没有则从全局队列找</li>
+<li>程序启动的时候，首先跑的是主线程，然后这个主线程会绑定第一个 P</li>
+<li>入口 main 函数，其实是作为一个 goroutine 来执行</li>
+</ol>
+<h2 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h2><ol>
+<li>协程的切换时间片是10ms，也就是说 goroutine 最多执行10ms就会被 M 切换到下一个 G。这个过程，又被称为 中断，挂起</li>
+</ol>
+<h1 id="slice"><a href="#slice" class="headerlink" title="slice"></a>slice</h1><h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><h1 id="gc"><a href="#gc" class="headerlink" title="gc"></a>gc</h1><h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><h1 id="go命令"><a href="#go命令" class="headerlink" title="go命令"></a>go命令</h1><p>#go 实现数值排序</p>
+<p>#go 实现字符串查找</p>
+
           
         
       
@@ -1295,7 +1565,21 @@
 <li>限定于LAN等特定网络的应用通信</li>
 <li>广播通信（广播、多播）</li>
 </ol>
-<h2 id="UDP分组格式"><a href="#UDP分组格式" class="headerlink" title="UDP分组格式"></a>UDP分组格式</h2><h1 id="TCP-协议"><a href="#TCP-协议" class="headerlink" title="TCP 协议"></a>TCP 协议</h1><p>与UDP区别较大，TCP作为一种面向有连接型的协议，只有在确认通信对端存在时候才会发送数据，从而可以控制通信流量的浪费。它充分实现了数据传输时各种控制，可以进行丢包重发，乱序控制。</p>
+<h2 id="UDP首部的格式"><a href="#UDP首部的格式" class="headerlink" title="UDP首部的格式"></a>UDP首部的格式</h2><p><img src="/uploads/tcp-ip/udp-header.png" alt></p>
+<ul>
+<li><p>源端口号<br>表示发送端端口号，字段长16位，该字段是可选项，有时可能不会设置源端口，没有源端口号的时候该字段设置为0，可用于不需要返回的通信中。</p>
+</li>
+<li><p>目标端口号<br>表示接收端端口，字段长16位</p>
+</li>
+<li><p>包长度<br>该字段保存了UDP首部的长度和数据的长度之和，单位为字节。</p>
+</li>
+<li><p>校验和<br>校验和是为了提供可靠的UDP首部和数据而设计，在计算校验和时，附加了UDP伪首部与UDP数据报之前。通过在最后一位增加一个“0”将全长增加16倍。此时将UDP首部的校验和字段设置为“0”。然后以16比特为单位进行1的补码和，并将所得到的1的补码和写入校验和字段。</p>
+</li>
+</ul>
+<p><img src="/uploads/tcp-ip/udp-checksum.png" alt></p>
+<p>接收主机在收到UDP数据报以后，从IP首部获知IP地址信息构造UDP伪首部，再进行校验和计算。校验和字段的指是校验和字段以外剩下部分的1的补码和。因此，包括校验和字段在内的所有数据之和结果为“16位全部为1”时，才会被认为所收到的数据是正确的。</p>
+<p>UDP中也有可能不用校验和，校验和字段中填入0，这种情况不进行校验和校验，会降低处理的开销。</p>
+<h1 id="TCP-协议"><a href="#TCP-协议" class="headerlink" title="TCP 协议"></a>TCP 协议</h1><p>与UDP区别较大，TCP作为一种面向有连接型的协议，只有在确认通信对端存在时候才会发送数据，从而可以控制通信流量的浪费。它充分实现了数据传输时各种控制，可以进行丢包重发，乱序控制。</p>
 <p>我们知道IP协议是不可靠的，为了通过IP数据报实现可靠性传输，需要考虑很多事情，例如数据的破坏、丢包、重复以及分片顺序混乱等问题，如果不解决这些，也无从谈起可靠传输。</p>
 <p>TCP通过校验和、序列号、确认应答、重发控制、连接管理以及窗口控制等机制实现可靠性传输。</p>
 <h2 id="通过序列号与确认应答提高可靠性"><a href="#通过序列号与确认应答提高可靠性" class="headerlink" title="通过序列号与确认应答提高可靠性"></a>通过序列号与确认应答提高可靠性</h2><p>在TCP中，当发送端的数据到达接收端的时候，接收端主机会返回一个已收到的消息通知，这个消息叫做确认应答。</p>
@@ -1371,7 +1655,167 @@
 <p>TCP刚开始通信的时候，并没有设定相应的慢启动阈值，而是在超时重发时，才会设置为当时拥塞窗口大小的一半。</p>
 <p>由重复确认应答进行高速重发控制时，慢启动阈值的大小被设置为当时窗口大小的一半。然后将窗口的大小设置为该慢启动阈值+3个数据段的大小。</p>
 <p>由于窗口的大小会直接影响数据被转发时的吞吐量，所以一般情况下，窗口越大，越会形成高吞吐量的通信。</p>
-<h2 id="提高网络利用率的规范"><a href="#提高网络利用率的规范" class="headerlink" title="提高网络利用率的规范"></a>提高网络利用率的规范</h2><h1 id="TCP与UDP的区别"><a href="#TCP与UDP的区别" class="headerlink" title="TCP与UDP的区别"></a>TCP与UDP的区别</h1><h1 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h1><h1 id="HTTPS-协议"><a href="#HTTPS-协议" class="headerlink" title="HTTPS 协议"></a>HTTPS 协议</h1><h1 id="HTTP与HTTPS的区别"><a href="#HTTP与HTTPS的区别" class="headerlink" title="HTTP与HTTPS的区别"></a>HTTP与HTTPS的区别</h1>
+<h2 id="提高网络利用率的规范"><a href="#提高网络利用率的规范" class="headerlink" title="提高网络利用率的规范"></a>提高网络利用率的规范</h2><h3 id="Nagle算法"><a href="#Nagle算法" class="headerlink" title="Nagle算法"></a>Nagle算法</h3><p>TCP中为了提高网络的利用率，经常使用一个叫做Nagle的算法。</p>
+<p>该算法是指发送端即使还有应该发送的数据，但是如果这部分数据很少的话，则进行延迟发送的一种机制。仅在下面任意一种情况才能发送数据，如果两个条件都不满足，那么暂时等待一段时间以后再进行发送数据。</p>
+<ol>
+<li>已发送的数据都已经收到确认应答</li>
+<li>可以发送的最大段长度已经达到MSS</li>
+</ol>
+<p>根据这个算法，可以提高网络利用率，但也会发生某种延迟，为此在窗口系统以及机械控制等领域中使用TCP往往会关闭对该算法的使用。</p>
+<h3 id="延迟确认应答"><a href="#延迟确认应答" class="headerlink" title="延迟确认应答"></a>延迟确认应答</h3><p>接收数据的主机如果每次都立刻回复确认应答的话，可能会返回一个较小的窗口。那是因为刚接收完数据，缓冲区已满。</p>
+<p>当接收端收到这个小窗口的通知以后，会以它为上限发送数据，从而又降低了网络的利用率（其实这是窗口控制特有的问题，叫糊涂窗口综合证），为此引入了一个方法，那就是收到数据以后并不立即确认响应，而是延迟一段时间的机制。</p>
+<ol>
+<li>在没有收到2MSS长度的数据为止不做确认应答（有得操作系统，只要收到两个包即刻返回确认应答）</li>
+<li>其他情况下，最大延迟0.5秒发送确认应答。（很多操作系统设置为0.2秒左右）</li>
+</ol>
+<p>事实上，大可不必为每一个数据段都进行一次确认应答。TCP采用滑动窗口控制机制，因此通常确认应答少一些也无妨。TCP文件传输中，绝大多数是每两个数据段返回一次确认应答。</p>
+<p><img src="/uploads/tcp-ip/tcp-delay-reply.png" alt></p>
+<h3 id="捎带应答"><a href="#捎带应答" class="headerlink" title="捎带应答"></a>捎带应答</h3><p>根据应用层协议，发送出去的消息到达对端，对端进行处理以后，会返回一个回执。例如，电子邮件协议的SMTP或POP、文件传输FTP中的连接控制部分等。这些应用协议使用同一个连接进行数据的交互。即使是使用WWW的HTTP，从1.1版本开始以后也是如此。</p>
+<p>在此类通信中，TCP的确认应答和回执数据可以通过一个包发送，这种方式叫做捎带应答，通过这种机制，可以使收发处理减少一些。</p>
+<p>另外，接收数据以后如果立刻确认应答，就无法实现捎带应答，而是将所接收的数据传给应用处理生成返回数据以后在进行发送请求为止，必须一直等待确认应答的发送。也就是说，没有启用延迟确认应答就无法实现捎带应答，延迟确认应答是能够提高网络利用率从而降低计算机处理负荷的一种优的处理机制。</p>
+<p><img src="/uploads/tcp-ip/tcp-shaodai-ack.png" alt></p>
+<h2 id="TCP-首部格式"><a href="#TCP-首部格式" class="headerlink" title="TCP 首部格式"></a>TCP 首部格式</h2><p><img src="/uploads/tcp-ip/tcp-header.png" alt></p>
+<p>TCP中没有表示包长度和数据长度的字段，可由IP层获知TCP的包长度，由TCP包长获取可知数据的长度。</p>
+<ul>
+<li><p>源端口号<br>表示发送端的端口号，长度16bit</p>
+</li>
+<li><p>目标端口号<br>表示接收端端口号，长度16bit</p>
+</li>
+<li><p>序列号<br>字段长32位。序列号（有时也叫序号）是指发送数据的位置。序列号不会从0或1开始，而是再建立连接时由计算机生成的随机数作为其初始值，通过SYN包传给接收端主机，然后每转发过去的字节数累加到初始值上表示数据的位置。此外，在建立和断开连接时发送的SYN包和FIN包虽然并不携带数据，但是也会作为一个字节增加对应的序列号。</p>
+</li>
+<li><p>确认应答号<br>确认应答号字段长度为32为，是指下一次应该收到的数据的序列号。实际上，它是指已收到确认应答号减一为止的数据。发送端收到这个确认应答以后可以认为这个序号以前的数据都已经被正常接收。</p>
+</li>
+<li><p>数据偏移<br>该字段表示TCP所传输的数据部分应该从TCP包哪个位开始算，当然也可以看作TCP首部的长度。该字段长4位，单位为4字节，不包括首选项字段的话，那么TCP首部为20字节长，因此数据偏移字段可以设置为5.</p>
+</li>
+<li><p>保留<br>该字段主要为了以后扩展使用，其长度为4位。一般设置为0。</p>
+</li>
+<li><p>控制位<br>字段长为8位。每一位从左至右分别为CWR、ECE、URG、ACK、PSH、RST、SYN、FIN。这些控制标识也叫做控制位。</p>
+</li>
+</ul>
+<p><img src="/uploads/tcp-ip/tcp-control-flag.png" alt></p>
+<ol>
+<li>CWR<br> CWR标志与后面的ECE标志都用于IP首部的ECN字段。ECE标志为1时，则通知对方已将拥塞窗口缩小。</li>
+<li>ECE<br> ECE标志表示ECN-Echo。置为1会通知通信对方，从对方到这边的网络有拥塞。在收到数据包的IP首部ECN为1时，将TCP首部中的ECE设置为1.</li>
+<li>URG<br> 该位为1时，表示包中有需要紧急处理的数据。对于需要紧急处理的数据，会在后面的紧急指针中在进行解释。</li>
+<li>ACK<br> 该位为1时，确认应答的字段变为有效。TCP规定除了最初建立连接时的SYN包之外该位必须设置为1。</li>
+<li>PSH<br> 该位为1时，表示需要将受到的数据立刻传给上层应用协议。PSH为0时，则不需要立即传而是先进行缓存。</li>
+<li>RST<br> 该位为1时表示TCP连接中出现异常必须强制断开连接。例如，一个没有被使用的端口即使发送连接请求，也无法进行通信，此时就可以返回一个RST设置为1的包。此外，程序宕掉或切断电源等原因，导致主机重启的情况，由于所有的连接信息将被全部初始化，所以原有的TCP通信将不能继续进行，这种情况下，如果通信对方发送一个RST设置为1的包，将会使通信强制断开连接。</li>
+<li>SYN<br> 用于建立连接，SYN为1表示希望建立连接，并在其序列号的字段进行序列号初始值的决定。</li>
+<li>FIN<br> 该位为1时，表示今后不会再有数据发送，希望断开连接。当通信结束希望断开连接时，通信双方之间就可以相互交换FIN位置为1的包TCP段。不过，主机收到FIN设置为1的TCP段以后不必马上回复一个FIN包，而是，主机可以等到缓冲区中的所有数据都因已成功发送而被自动删除之后再发。</li>
+</ol>
+<ul>
+<li><p>窗口大小<br>该字段为16位，用于通知从相同TCP首部的确认应答号所指位置开始能够接收的字节大小。TCP不允许发送超过此处所示大小的数据。不过，如果窗口为0，则表示可以发送窗口探测，以了解最新的窗口大小。但这个数据必须是1个字节。</p>
+</li>
+<li><p>校验和<br>TCP的校验和与UDP校验和相似，区别在于TCP的校验和无法关闭。</p>
+</li>
+</ul>
+<p><strong>使用校验和的目的是什么？</strong></p>
+<p>有噪声干扰的通信途中如果出现位错误，可以由数据链路的FCS检查出来。那么为什么TCP或UDP也需要进行校验和？</p>
+<p>其实相比检查噪声影响导致的错误，TCP与UDP的校验和更是一种进行路由器内存故障或者程序漏洞导致的数据是否被破坏的校验。</p>
+<p>路由器的程序中也有可能存在漏洞，或程序异常宕掉的可能性。在互联网中发送数据包要经由好多个路由器，一旦在发送途中某一个路由器发生故障，经过此路由器的包、协议首部或者数据就极有可能被破坏。即使在这种情况下，TCP或UDP如果能够提供校验和计算，也可以判断协议首部和数据是否被破坏。</p>
+<ul>
+<li>紧急指针<br>该字段长为16位，只有在URG控制位为1时有效。该字段的数值表示本报文段中的紧急数据的指针。正确地讲，从数据部分的首位到紧急指针所指示的位置为止为紧急数据。因此也可以说紧急指针指出了紧急数据的末尾在报文段中的为止。</li>
+</ul>
+<p>如何处理紧急数据属于应用的问题，一般暂时中断通信，或中断通信的情况下使用。例如在Web浏览器中点击停止按钮，或者TELNET输入Ctrl+C时都会有URG为1的包。此外，紧急指针也用作表示数据流分段的标志。</p>
+<ul>
+<li>选项<br>选项字段用于提高TCP的传输性能。因为根据数据偏移（首部长度）进行控制，所以其长度最大为40字节。<br>另外选项字段尽量调整32位的整数倍。</li>
+</ul>
+<h1 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h1><p>当用户在浏览器的地址里输入所要访问Web页的URI以后，HTTP的处理即会开始。HTTP中默认使用80端口。它的工作机制，首先是客户端向服务端的80端口建立一个TCP连接，然后在这个TCP连接上进行请求和应答以及数据报文的发送。</p>
+<p><img src="/uploads/tcp-ip/http1.png" alt><br><img src="/uploads/tcp-ip/http2.png" alt></p>
+<h2 id="HTTP报文"><a href="#HTTP报文" class="headerlink" title="HTTP报文"></a>HTTP报文</h2><p>用于HTTP协议交互的信息被成为HTTP报文。请求端（客户端）的HTTP报文叫做请求报文，响应端叫做响应报文。HTTP报文本身是由多行(CR+LF作换行符)的数据构成的字符串文本。</p>
+<p>HTTP报文大致可分为报文首部和报文主体两块。两者由最初出现的空行(CR+LF)来划分。通常，并不一定要有报文主体。</p>
+<p><img src="/uploads/tcp-ip/http-packet.png" alt></p>
+<h2 id="请求报文及响应报文的结构"><a href="#请求报文及响应报文的结构" class="headerlink" title="请求报文及响应报文的结构"></a>请求报文及响应报文的结构</h2><p>我们来看一下请求报文和响应报文的结构<br><img src="/uploads/tcp-ip/http-packet2.png" alt></p>
+<p><img src="/uploads/tcp-ip/http-packet3.png" alt></p>
+<p>请求行<br>包含用于请求的方法，请求URI和HTTP版本</p>
+<p>状态行<br>包含表明响应结果的状态码，原因短语和HTTP版本</p>
+<p>首部字段<br>包含表示请求和响应的各种条件和属性的各类首部。一般有4种首部：分别是：通用首部、请求首部、响应首部和实体首部</p>
+<p>其他<br>可能包含HTTP的RFC里面未定义的首部（Cookie）</p>
+<h2 id="编码提升传输速率"><a href="#编码提升传输速率" class="headerlink" title="编码提升传输速率"></a>编码提升传输速率</h2><p>HTTP在传输数据时候可以按照数据原貌直接传输，但也可以在传输过程中通过编码提升传输速率。通过在传输时编码，能有效地处理大量的访问请求，但是，编码的操作需要计算机来完成，因此会消耗更多的CPU。</p>
+<h3 id="报文主体和实体主体的差异"><a href="#报文主体和实体主体的差异" class="headerlink" title="报文主体和实体主体的差异"></a>报文主体和实体主体的差异</h3><ul>
+<li>报文（message)</li>
+</ul>
+<p>是HTTP通信中的基本单位，由8位组字节流组成，通过HTTP通信传输</p>
+<ul>
+<li>实体（entry）</li>
+</ul>
+<p>作为请求或响应的有效载荷数据（补充项）被传输，其内容由实体首部和实体主体组成。</p>
+<p>HTTP报文的主体用于传输请求或响应的实体主体。</p>
+<p>通常，报文主体等于实体主体，只有当传输中进行编码操作时，实体主体的内容发生变化，才导致它和报文主体产生差异。</p>
+<h3 id="压缩传输的内容编码"><a href="#压缩传输的内容编码" class="headerlink" title="压缩传输的内容编码"></a>压缩传输的内容编码</h3><p>下面压缩与复原的流程<br><img src="/uploads/tcp-ip/http-encoder.png" alt></p>
+<p>常用的内容编码：</p>
+<ul>
+<li>gzip (GNU zip）</li>
+<li>compress （Unix系统的标准压缩）</li>
+<li>deflate （zlib)</li>
+<li>identity （不进行编码）</li>
+</ul>
+<h3 id="分割发送的分块传输编码"><a href="#分割发送的分块传输编码" class="headerlink" title="分割发送的分块传输编码"></a>分割发送的分块传输编码</h3><p>在HTTP通信过程中，请求的编码实体资源尚未全部传输完成之前，浏览器无法显示请求页面。在传输大容量数据时，通过把数据分割成多块，能够浏览器逐步显示页面。</p>
+<p>这种把实体主体分块的功能成为分块传输(chunked transfer coding)</p>
+<p><img src="/uploads/tcp-ip/http-chunked-transfer.png" alt></p>
+<p>分块传输编码会将实体主体分成多个部分（块）。每一块都会用十六进制来标记块的大小，而实体主体的最后一块会使用“0(CR+LF)”来标记。</p>
+<p>使用分块传输编码的实体主体会由接收的客户端负责解码，恢复到编码前的实体。</p>
+<p>HTTP/1.1中存在一种成为传输编码(transfer coding)的机制，它可以在通信技术按某种编码方式传输，但只定义作用于分块传输编码中。</p>
+<h2 id="发送多种数据的多部分对象集合"><a href="#发送多种数据的多部分对象集合" class="headerlink" title="发送多种数据的多部分对象集合"></a>发送多种数据的多部分对象集合</h2><p>HTTP 协议中采纳了多部分对象集合，发送的一份报文主，体内可含有多类型实体。通常是在图片或文本文件等上传时使用。</p>
+<p>多部分对象集合包含的对象如下</p>
+<ul>
+<li>multipart/form-data：在 Web 表单文件上传时使用</li>
+<li>multipart/byteranges：状态码 206（Partial Content，部分内容）响应报文包含了多个范围的内容时使用</li>
+</ul>
+<p>在 HTTP 报文中使用多部分对象集合时，需要在首部字段里加上Content-type。</p>
+<h2 id="获取部分内容的范围请求"><a href="#获取部分内容的范围请求" class="headerlink" title="获取部分内容的范围请求"></a>获取部分内容的范围请求</h2><p>以前，用户不能使用现在这种高速的带宽访问互联网，当时，下载一个尺寸稍大的图片或文件就已经很吃力了。如果下载过程中遇到网络中断的情况，那就必须重头开始。为了解决上述问题，需要一种可恢复的机制。所谓恢复是指能从之前下载中断处恢复下载。要实现该功能需要指定下载的实体范围。像这样，指定范围发送的请求叫做范围请求（Range Request）。</p>
+<p><img src="/uploads/tcp-ip/http-range-request.png" alt></p>
+<h2 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h2><p>状态码的职责是当客户端向服务器端发送请求时，描述返回的请求结果。借助状态码，用户可以知道服务器端是正常处理了请求，还是出现了错误。</p>
+<p><img src="/uploads/tcp-ip/http-code-type.png" alt></p>
+<h1 id="HTTPS-协议"><a href="#HTTPS-协议" class="headerlink" title="HTTPS 协议"></a>HTTPS 协议</h1><p>在 HTTP 协议中有可能存在信息窃听或身份伪装等安全问题。使用HTTPS 通信机制可以有效地防止这些问题。</p>
+<h2 id="HTTP-的缺点"><a href="#HTTP-的缺点" class="headerlink" title="HTTP 的缺点"></a>HTTP 的缺点</h2><ul>
+<li>通信使用明文（不加密），内容可能会被窃听</li>
+<li>不验证通信方的身份，因此有可能遭遇伪装</li>
+<li>无法证明报文的完整性，所以有可能已遭篡改</li>
+</ul>
+<h2 id="加密处理防止被窃听"><a href="#加密处理防止被窃听" class="headerlink" title="加密处理防止被窃听"></a>加密处理防止被窃听</h2><p>在目前大家正在研究的如何防止窃听保护信息的几种对策中，最为普及的就是加密技术。加密的对象可以有这么几个。</p>
+<ul>
+<li>通信的加密</li>
+</ul>
+<p>一种方式就是将通信加密。HTTP 协议中没有加密机制，但可以通过和 SSL（Secure Socket Layer，安全套接层）或TLS（Transport Layer Security，安全层传输协议）的组合使用，加密 HTTP 的通信内容。</p>
+<p>用 SSL 建立安全通信线路之后，就可以在这条线路上进行 HTTP通信了。与 SSL 组合使用的 HTTP 被称为 HTTPS（HTTPSecure，超文本传输安全协议）或 HTTP over SSL。</p>
+<p><img src="/uploads/tcp-ip/http-tongxin-s.png" alt></p>
+<ul>
+<li>内容的加密</li>
+</ul>
+<p>还有一种将参与通信的内容本身加密的方式。由于 HTTP 协议中没有加密机制，那么就对 HTTP 协议传输的内容本身加密。即把HTTP 报文里所含的内容进行加密处理。</p>
+<p>在这种情况下，客户端需要对 HTTP 报文进行加密处理后再发送请求。</p>
+<p><img src="/uploads/tcp-ip/http-content-s.png" alt></p>
+<p>诚然，为了做到有效的内容加密，前提是要求客户端和服务器同时具备加密和解密机制。主要应用在 Web 服务中。有一点必须引起注意，由于该方式不同于 SSL 或 TLS 将整个通信线路加密处理，所以内容仍有被篡改的风险。</p>
+<h2 id="HTTP-加上加密处理和认证以及完整性保护后即是HTTPS"><a href="#HTTP-加上加密处理和认证以及完整性保护后即是HTTPS" class="headerlink" title="HTTP 加上加密处理和认证以及完整性保护后即是HTTPS"></a>HTTP 加上加密处理和认证以及完整性保护后即是HTTPS</h2><p>HTTPS 并非是应用层的一种新协议。只是 HTTP 通信接口部分用SSL（Secure Socket Layer）和 TLS（Transport Layer Security）协议代替而已。</p>
+<p>通常，HTTP 直接和 TCP 通信。当使用 SSL 时，则演变成先和 SSL 通信，再由 SSL 和 TCP 通信了。简言之，所谓 HTTPS，其实就是身披SSL 协议这层外壳的 HTTP。</p>
+<p><img src="/uploads/tcp-ip/https-ssl.png" alt></p>
+<p>在采用 SSL 后，HTTP 就拥有了 HTTPS 的加密、证书和完整性保护这些功能。</p>
+<p>SSL 是独立于 HTTP 的协议，所以不光是 HTTP 协议，其他运行在应用层的 SMTP 和 Telnet 等协议均可配合 SSL 协议使用。可以说 SSL 是当今世界上应用最为广泛的网络安全技术。</p>
+<h2 id="相互交换密钥的公开密钥加密技术"><a href="#相互交换密钥的公开密钥加密技术" class="headerlink" title="相互交换密钥的公开密钥加密技术"></a>相互交换密钥的公开密钥加密技术</h2><p>在对 SSL 进行讲解之前，我们先来了解一下加密方法。SSL 采用一种叫做公开密钥加密（Public-key cryptography）的加密处理方式。</p>
+<p>近代的加密方法中加密算法是公开的，而密钥却是保密的。通过这种方式得以保持加密方法的安全性。</p>
+<p>加密和解密都会用到密钥。没有密钥就无法对密码解密，反过来说，任何人只要持有密钥就能解密了。如果密钥被攻击者获得，那加密也就失去了意义。</p>
+<ul>
+<li>共享密钥加密的困境</li>
+</ul>
+<p>加密和解密同用一个密钥的方式称为共享密钥加密（Common keycrypto system），也被叫做对称密钥加密。 (前面有提到)</p>
+<p><img src="/uploads/tcp-ip/share-key.png" alt></p>
+<p>以共享密钥方式加密时必须将密钥也发给对方。可究竟怎样才能安全地转交？在互联网上转发密钥时，如果通信被监听那么密钥就可会落入攻击者之手，同时也就失去了加密的意义。另外还得设法安全地保管接收到的密钥。</p>
+<ul>
+<li>使用两把密钥的公开密钥加密</li>
+</ul>
+<p>公开密钥加密方式很好地解决了共享密钥加密的困难。</p>
+<p>公开密钥加密使用一对非对称的密钥。一把叫做私有密钥（private key），另一把叫做公开密钥（public key）。顾名思义，私有密钥不能让其他任何人知道，而公开密钥则可以随意发布，任何人都可以获得。</p>
+<p>使用公开密钥加密方式，发送密文的一方使用对方的公开密钥进行加密处理，对方收到被加密的信息后，再使用自己的私有密钥进行解密。利用这种方式，不需要发送用来解密的私有密钥，也不必担心密钥被攻击者窃听而盗走。</p>
+<p>另外，要想根据密文和公开密钥，恢复到信息原文是异常困难的，因为解密过程就是在对离散对数进行求值，这并非轻而易举就能办到。退一步讲，如果能对一个非常大的整数做到快速地因式分解，那么密码破解还是存在希望的。但就目前的技术来看是不太现实的。</p>
+<p><img src="/uploads/tcp-ip/private-public-key.png" alt></p>
+<ul>
+<li>HTTPS采用混合加密机制</li>
+</ul>
+<p>HTTPS 采用共享密钥加密和公开密钥加密两者并用的混合加密机制。若密钥能够实现安全交换，那么有可能会考虑仅使用公开密钥加密来通信。但是公开密钥加密与共享密钥加密相比，其处理速度要慢。</p>
+<p>所以应充分利用两者各自的优势，将多种方法组合起来用于通信。在交换密钥环节使用公开密钥加密方式，之后的建立通信交换报文阶段则使用共享密钥加密方式。</p>
+<p><img src="/uploads/tcp-ip/hunhe-jiami.png" alt></p>
+
           
         
       
@@ -1450,7 +1894,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

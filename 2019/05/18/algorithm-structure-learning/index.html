@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Zpl,Golang,TCP/IP,ElasticSearch,Redis,Mysql,OS,Life">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="基础知识重要的问题类型计算中能遇到无数问题，只有少数领域的问题引起了研究人员的特殊关注。最重要的问题类型如下：  排序 查找 字符串处理 图问题 组合问题 几何问题 数值问题  排序排序问题要求我们按照升序重新排列给定列表中的数据项。 我们可以按照学生姓名的字母顺序，也可以按照学号或者学生个人的平均成绩来对学生记录进行排序，这段特别选定的信息成为键（key） 计算机科学家通常只关心如何对键进行排序">
+<meta name="keywords" content="技术、生活、健身">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法与数据结构基础学习笔记">
+<meta property="og:url" content="http://yoursite.com/2019/05/18/algorithm-structure-learning/index.html">
+<meta property="og:site_name" content="程序员Zpl">
+<meta property="og:description" content="基础知识重要的问题类型计算中能遇到无数问题，只有少数领域的问题引起了研究人员的特殊关注。最重要的问题类型如下：  排序 查找 字符串处理 图问题 组合问题 几何问题 数值问题  排序排序问题要求我们按照升序重新排列给定列表中的数据项。 我们可以按照学生姓名的字母顺序，也可以按照学号或者学生个人的平均成绩来对学生记录进行排序，这段特别选定的信息成为键（key） 计算机科学家通常只关心如何对键进行排序">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-18T09:08:13.945Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法与数据结构基础学习笔记">
+<meta name="twitter:description" content="基础知识重要的问题类型计算中能遇到无数问题，只有少数领域的问题引起了研究人员的特殊关注。最重要的问题类型如下：  排序 查找 字符串处理 图问题 组合问题 几何问题 数值问题  排序排序问题要求我们按照升序重新排列给定列表中的数据项。 我们可以按照学生姓名的字母顺序，也可以按照学号或者学生个人的平均成绩来对学生记录进行排序，这段特别选定的信息成为键（key） 计算机科学家通常只关心如何对键进行排序">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/18/algorithm-structure-learning/">
+
+
+
+
+
+  <title>算法与数据结构基础学习笔记 | 程序员Zpl</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">程序员Zpl</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">code and gym<br>做最强壮的程序员</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/18/algorithm-structure-learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zpl">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序员Zpl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">算法与数据结构基础学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-18T14:33:38+08:00">
+                2019-05-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><h2 id="重要的问题类型"><a href="#重要的问题类型" class="headerlink" title="重要的问题类型"></a>重要的问题类型</h2><p>计算中能遇到无数问题，只有少数领域的问题引起了研究人员的特殊关注。<br>最重要的问题类型如下：</p>
+<ul>
+<li>排序</li>
+<li>查找</li>
+<li>字符串处理</li>
+<li>图问题</li>
+<li>组合问题</li>
+<li>几何问题</li>
+<li>数值问题</li>
+</ul>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>排序问题要求我们按照升序重新排列给定列表中的数据项。</p>
+<p>我们可以按照学生姓名的字母顺序，也可以按照学号或者学生个人的平均成绩来对学生记录进行排序，这段特别选定的信息成为键（key）</p>
+<p>计算机科学家通常只关心如何对键进行排序，哪怕表中的元素不是记录，也许仅仅是整数。</p>
+<p>到目前为止科学家已经开发出了几十种不同的排序算法。但没有一种算法再任何情况下都是最优的。<br>有些算法比较适合随机排列的输入，而另一些则更适合基本有序的列表。有些算法仅适合排列驻留再快速存储器中的列表。而另一些可以用来对存储再磁盘上的大型文件排序，如此等等。</p>
+<p>排序算法有两个特性值得一提：</p>
+<ul>
+<li>如果一个排序算法保留了等值元素的输入中的相对位置，就可以说它是稳定的。</li>
+<li>如果一个算法不需要额外的存储空间（除了个别存储单元以外），我们就说它是在位（in-place）</li>
+</ul>
+<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p>查找问题就是在给定的集合（或者是多重集，它允许多个元素具有相同的值）中找一个给定的值（我们称之为查找键）。</p>
+<p>对于查找来说，也没有一种算法在任何情况下都是最优的。有些算法比其他算法速度快，但需要更多的存储空间。有些算法速度非常快，但仅使用于有序的数组。</p>
+<p>和排序算法不同，查找算法没有稳定性问题。但会发生其他问题。查找问题就必须结合另外两种操作一起考虑，在数据集合中添加和删除元素的操作。</p>
+<p>在这种情况下必须仔细选择数据结构和算法。以便在各种操作的需求之间达到一个平衡。而且对于高效查找（以及添加和删除）的特大型数据集合来说，如何组织其结构是一个不同寻常的挑战，而这对实际应用具有非常重要的意义。</p>
+<h2 id="字符串处理"><a href="#字符串处理" class="headerlink" title="字符串处理"></a>字符串处理</h2><p>字符串是字符表中的符号所构成序列。我们尤其关心文本串，它是由字母、数字以及特殊符号构成的；位串是由“0”和“1”构成的；</p>
+<p>如何在文本查找一个给定的词，这一特殊问题引起了研究人员的特别关注，它们成为字符串匹配问题。类似这种查找的特性，人们发明了好几种算法。</p>
+<h2 id="图问题"><a href="#图问题" class="headerlink" title="图问题"></a>图问题</h2><p>TODO</p>
+<h2 id="组合问题"><a href="#组合问题" class="headerlink" title="组合问题"></a>组合问题</h2><p>TODO</p>
+<h2 id="几何问题"><a href="#几何问题" class="headerlink" title="几何问题"></a>几何问题</h2><p>TODO</p>
+<h2 id="数值问题"><a href="#数值问题" class="headerlink" title="数值问题"></a>数值问题</h2><p>TODO</p>
+<h2 id="基本数据结构"><a href="#基本数据结构" class="headerlink" title="基本数据结构"></a>基本数据结构</h2><p>数据结构定义：对相关的数据项进行组织的特殊架构。</p>
+<h3 id="线性数据结构"><a href="#线性数据结构" class="headerlink" title="线性数据结构"></a>线性数据结构</h3><h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>一维数组是n个相同数据类型的元素构成的序列，他们连续存储在计算机的存储器种，我们只要指定数组的下标就能够访问这些元素</p>
+<p>无论位于数组的什么为止，都能用相等的常量时间访问数组中的任何元素。这种特性不是链表所具有的。</p>
+<p>数组可以实现多种其他的数据结构，比较出名是<strong>字符串</strong>。字符串是来自于字母表的字符序列，并以一个特殊字符来标志字符串的结束。<br>字符串的常见操作不同于其他数组的典型操作。字符串的典型操作包括计算字符串的长度，按照字典序（即字母顺序）确定两个字符串在排序时的顺序。</p>
+<h4 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h4><p>链表是0个或多个成为节点的元素构成的序列，每个节点包含两类信息：一类是数据；另一类是一个或者多个成为指针的链接，指向链表中其他元素。</p>
+<p>如果指向链表其他元素位null的时候表明节点没有后继元素。</p>
+<p>单链表中，除了尾节点，每个节点都包含一个指向下一个元素的指针。</p>
+<p>为了访问链表中的某个特定元素，我们从链表的首节点开始，沿指针链向前遍历，直到访问到该特定元素为止。因此和数组不同，访问单链表元素所需要的时间依赖于该元素在的链表中的位置。</p>
+<p>优点：</p>
+<ul>
+<li>链表不需要实现分配任何存储空间</li>
+<li>插入和删除的效率也非常高，只要相关的节点重新连接就可以了。</li>
+</ul>
+<p>为了增加链表灵活性，链表通常从一个称为表头的特殊节点开始，这个节点包含链表的长度，包含一个指向头元素的指针，还有可以包含指向尾元素的指针。</p>
+<h5 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h5><p>这是单向链表的扩展结构，其中除了首尾两个节点，每个节点都同时包含指向前趋的指针和指向后继的指针。</p>
+<h4 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h4><p>队列也是一种列表，只是删除元素在列表的一头进行，这一头成为队头（出队），查入元素在表的另一头进行，这一头成为队尾（入队），因此，队列是按照“先进先出”(First-In-First-Out FIFO)的方式运转。</p>
+<p>队列也有许多重要的而英勇，其中包括一些图问题的算法。</p>
+<h5 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h5><p>从一个动态改变的候选集合中选择一个优先级最高的元素。有一种数据结构可以满足，称为优先队列。</p>
+<p>优先队列是数据项中的一个集合，这些数据项都来自于一些全序域。对优先队列的主要操作包括查找最大元素、删除最大元素和查入新的元素。</p>
+<p>我们可以基于数组或者有序数组来实现优先队列，但这两种都不是最高效率的方案，优先队列有更好的实现方法，我们称之为堆(heap)</p>
+<h4 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h4><p>栈是一种插入和删除操作都只能在端部进行的列表，这一端称为栈顶。</p>
+<p>当我们在栈中添加一个元素或者删除一个元素时，该结构都按照一种“后进先出”（Last-In-First-Out LIFO)的方式运转。</p>
+<p>栈的应用很广，对于实现递归算法来说时不可缺少的。</p>
+<h3 id="树"><a href="#树" class="headerlink" title="树"></a>树</h3><p>树，更精确地说，自由树就是连通无回路图。无回路但不一定连通的图成为森林。</p>
+<p>树的边数总是比它的顶点数少1</p>
+<h3 id="有根树"><a href="#有根树" class="headerlink" title="有根树"></a>有根树</h3><p>树的另外一个非常重要的特性就是：树的任意两个顶点之间总是恰好存在一条从一个顶点到另一个顶点的简单路径。这个性质使得以下做法成为可能：</p>
+<p>任选自由树种的一个顶点，将它作为所谓的有根树的根。对有根树的描述中，根通常放在最顶上（树的第0层），邻接根的顶点放在根的下面，再下面是跟根距离两条边的顶点，然后以此类推。</p>
+<p>有根树扮演很重要的角色，远比自由树重要，它们常常被简称为“树”。也就是说“树”通常是指有根树。</p>
+<h3 id="有序树"><a href="#有序树" class="headerlink" title="有序树"></a>有序树</h3><p>有序树是一颗有根树，树中每个顶点的所有子女都是有序的。</p>
+<h2 id="算法效率分析基础"><a href="#算法效率分析基础" class="headerlink" title="算法效率分析基础"></a>算法效率分析基础</h2><p>分析算法效率一般框架一般有两种：时间效率和空间效率</p>
+<h1 id="排序-1"><a href="#排序-1" class="headerlink" title="排序"></a>排序</h1><h1 id="树-1"><a href="#树-1" class="headerlink" title="树"></a>树</h1><h1 id="链表-1"><a href="#链表-1" class="headerlink" title="链表"></a>链表</h1>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/10/linux-learning/" rel="next" title="Linux学习笔记">
+                <i class="fa fa-chevron-left"></i> Linux学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Zpl">
+          <p class="site-author-name" itemprop="name">Zpl</p>
+           
+              <p class="site-description motion-element" itemprop="description">随便记一下，顺便骚一下</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#重要的问题类型"><span class="nav-number">1.1.</span> <span class="nav-text">重要的问题类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序"><span class="nav-number">1.2.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找"><span class="nav-number">1.3.</span> <span class="nav-text">查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串处理"><span class="nav-number">1.4.</span> <span class="nav-text">字符串处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图问题"><span class="nav-number">1.5.</span> <span class="nav-text">图问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组合问题"><span class="nav-number">1.6.</span> <span class="nav-text">组合问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几何问题"><span class="nav-number">1.7.</span> <span class="nav-text">几何问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数值问题"><span class="nav-number">1.8.</span> <span class="nav-text">数值问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本数据结构"><span class="nav-number">1.9.</span> <span class="nav-text">基本数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线性数据结构"><span class="nav-number">1.9.1.</span> <span class="nav-text">线性数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数组"><span class="nav-number">1.9.1.1.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#链表"><span class="nav-number">1.9.1.2.</span> <span class="nav-text">链表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#双向链表"><span class="nav-number">1.9.1.2.1.</span> <span class="nav-text">双向链表</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#队列"><span class="nav-number">1.9.1.3.</span> <span class="nav-text">队列</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#优先队列"><span class="nav-number">1.9.1.3.1.</span> <span class="nav-text">优先队列</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#栈"><span class="nav-number">1.9.1.4.</span> <span class="nav-text">栈</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树"><span class="nav-number">1.9.2.</span> <span class="nav-text">树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有根树"><span class="nav-number">1.9.3.</span> <span class="nav-text">有根树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有序树"><span class="nav-number">1.9.4.</span> <span class="nav-text">有序树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法效率分析基础"><span class="nav-number">1.10.</span> <span class="nav-text">算法效率分析基础</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#排序-1"><span class="nav-number">2.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#树-1"><span class="nav-number">3.</span> <span class="nav-text">树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#链表-1"><span class="nav-number">4.</span> <span class="nav-text">链表</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zpl</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
