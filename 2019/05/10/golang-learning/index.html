@@ -103,7 +103,7 @@
 <meta property="og:description" content="goroutineGolang 简称 Go，Go 的协程(goroutine) 和我们常见的线程(Thread)一样，拥有其调度器。 调度器的三个基本对象 G (Goroutine)，代表协程，也就是每次代码中使用 go 关键词时候会创建的一个对象 M (Work Thread)，工作线程 P (Processor)，代表一个处理器，又称上下文  G-M-P三者的关系与特点 每一个运行的 M 都必">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/uploads/golang/gmp.png">
-<meta property="og:updated_time" content="2019-05-15T05:13:35.318Z">
+<meta property="og:updated_time" content="2019-05-24T13:33:46.702Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Go学习笔记">
 <meta name="twitter:description" content="goroutineGolang 简称 Go，Go 的协程(goroutine) 和我们常见的线程(Thread)一样，拥有其调度器。 调度器的三个基本对象 G (Goroutine)，代表协程，也就是每次代码中使用 go 关键词时候会创建的一个对象 M (Work Thread)，工作线程 P (Processor)，代表一个处理器，又称上下文  G-M-P三者的关系与特点 每一个运行的 M 都必">
@@ -384,8 +384,17 @@
 <h2 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h2><ol>
 <li>协程的切换时间片是10ms，也就是说 goroutine 最多执行10ms就会被 M 切换到下一个 G。这个过程，又被称为 中断，挂起</li>
 </ol>
-<h1 id="slice"><a href="#slice" class="headerlink" title="slice"></a>slice</h1><h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><h1 id="gc"><a href="#gc" class="headerlink" title="gc"></a>gc</h1><h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><h1 id="go命令"><a href="#go命令" class="headerlink" title="go命令"></a>go命令</h1><p>#go 实现数值排序</p>
+<h1 id="slice"><a href="#slice" class="headerlink" title="slice"></a>slice</h1><h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><p><a href="https://blog.csdn.net/i6448038/article/details/82057424" target="_blank" rel="noopener">解剖Go语言map底层实现</a></p>
+<p>map是一个哈希表，数据被安排在一个桶数组里面，每个桶最多存储8个键值对，哈希函数计算出来的值低8位用于选择KEY存储在哪个bucket,高8位用于寻找bucket中的哪个key。</p>
+<p>并不是key0/value0/key1/value1的形式，而是key0/key1/value0/value1，这样做的好处是：在key和value的长度不同的时候，可以消除padding带来的空间浪费。</p>
+<h1 id="gc"><a href="#gc" class="headerlink" title="gc"></a>gc</h1><h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><h1 id="go命令"><a href="#go命令" class="headerlink" title="go命令"></a>go命令</h1><p>#go 实现数值排序</p>
 <p>#go 实现字符串查找</p>
+<h1 id="unsafe-Pointer"><a href="#unsafe-Pointer" class="headerlink" title="unsafe.Pointer"></a>unsafe.Pointer</h1><p>指针类型：</p>
+<p>*类型：普通指针，用于传递对象地址，不能进行指针运算。</p>
+<p>unsafe.Pointer：通用指针类型，用于转换不同类型的指针，不能进行指针运算。</p>
+<p>uintptr：用于指针运算，GC 不把 uintptr 当指针，uintptr 无法持有对象。uintptr 类型的目标会被回收。</p>
+<p>unsafe.Pointer 可以和 普通指针 进行相互转换。<br>unsafe.Pointer 可以和 uintptr 进行相互转换。</p>
+<p>也就是说 unsafe.Pointer 是桥梁，可以让任意类型的指针实现相互转换，也可以将任意类型的指针转换为 uintptr 进行指针运算。</p>
 
       
     </div>
@@ -554,7 +563,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#goroutine"><span class="nav-number">1.</span> <span class="nav-text">goroutine</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#调度器的三个基本对象"><span class="nav-number">1.1.</span> <span class="nav-text">调度器的三个基本对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#G-M-P三者的关系与特点"><span class="nav-number">1.2.</span> <span class="nav-text">G-M-P三者的关系与特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#局部G队列与全局G队列的关系"><span class="nav-number">1.3.</span> <span class="nav-text">局部G队列与全局G队列的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gorutine从入队到执行"><span class="nav-number">1.4.</span> <span class="nav-text">Gorutine从入队到执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#细节"><span class="nav-number">1.5.</span> <span class="nav-text">细节</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#slice"><span class="nav-number">2.</span> <span class="nav-text">slice</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#map"><span class="nav-number">3.</span> <span class="nav-text">map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gc"><span class="nav-number">4.</span> <span class="nav-text">gc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#反射"><span class="nav-number">5.</span> <span class="nav-text">反射</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#go命令"><span class="nav-number">6.</span> <span class="nav-text">go命令</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#goroutine"><span class="nav-number">1.</span> <span class="nav-text">goroutine</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#调度器的三个基本对象"><span class="nav-number">1.1.</span> <span class="nav-text">调度器的三个基本对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#G-M-P三者的关系与特点"><span class="nav-number">1.2.</span> <span class="nav-text">G-M-P三者的关系与特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#局部G队列与全局G队列的关系"><span class="nav-number">1.3.</span> <span class="nav-text">局部G队列与全局G队列的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gorutine从入队到执行"><span class="nav-number">1.4.</span> <span class="nav-text">Gorutine从入队到执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#细节"><span class="nav-number">1.5.</span> <span class="nav-text">细节</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#slice"><span class="nav-number">2.</span> <span class="nav-text">slice</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#map"><span class="nav-number">3.</span> <span class="nav-text">map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gc"><span class="nav-number">4.</span> <span class="nav-text">gc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#反射"><span class="nav-number">5.</span> <span class="nav-text">反射</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#go命令"><span class="nav-number">6.</span> <span class="nav-text">go命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#unsafe-Pointer"><span class="nav-number">7.</span> <span class="nav-text">unsafe.Pointer</span></a></li></ol></div>
             
 
           </div>

@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="倒排索引假设说有以下两条数据 doc1：I really liked my small dogs, and I think my mom also liked them. doc2：He never liked any dogs, so I hope that my mom will not expect me to liked him.  包含这个关键词的 document list 包含这个关">
+<meta name="description" content="倒排索引 包含这个关键词的 document list 包含这个关键词的所有 document 的数量：IDF（inverse document frequency） 这个关键词在每个 document 中出现的次数：TF（term frequency） 这个关键词在这个 document 中的POSITION 每个 document 的长度：length norm 包含这个关键词的所有 docu">
 <meta name="keywords" content="技术、生活、健身">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ElasticSearch 学习笔记">
 <meta property="og:url" content="http://yoursite.com/2019/05/10/es-learning/index.html">
 <meta property="og:site_name" content="程序员Zpl">
-<meta property="og:description" content="倒排索引假设说有以下两条数据 doc1：I really liked my small dogs, and I think my mom also liked them. doc2：He never liked any dogs, so I hope that my mom will not expect me to liked him.  包含这个关键词的 document list 包含这个关">
+<meta property="og:description" content="倒排索引 包含这个关键词的 document list 包含这个关键词的所有 document 的数量：IDF（inverse document frequency） 这个关键词在每个 document 中出现的次数：TF（term frequency） 这个关键词在这个 document 中的POSITION 每个 document 的长度：length norm 包含这个关键词的所有 docu">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-22T12:13:44.136Z">
+<meta property="og:updated_time" content="2019-05-23T02:31:41.844Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ElasticSearch 学习笔记">
-<meta name="twitter:description" content="倒排索引假设说有以下两条数据 doc1：I really liked my small dogs, and I think my mom also liked them. doc2：He never liked any dogs, so I hope that my mom will not expect me to liked him.  包含这个关键词的 document list 包含这个关">
+<meta name="twitter:description" content="倒排索引 包含这个关键词的 document list 包含这个关键词的所有 document 的数量：IDF（inverse document frequency） 这个关键词在每个 document 中出现的次数：TF（term frequency） 这个关键词在这个 document 中的POSITION 每个 document 的长度：length norm 包含这个关键词的所有 docu">
 
 
 
@@ -330,18 +330,15 @@
       
 
       
-        <h1 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h1><p>假设说有以下两条数据</p>
-<p>doc1：I really liked my small dogs, and I think my mom also liked them.</p>
-<p>doc2：He never liked any dogs, so I hope that my mom will not expect me to liked him.</p>
-<ul>
+        <h1 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h1><ul>
 <li>包含这个关键词的 document list</li>
 <li>包含这个关键词的所有 document 的数量：IDF（inverse document frequency）</li>
 <li>这个关键词在每个 document 中出现的次数：TF（term frequency）</li>
-<li>这个关键词在这个 document 中的次序</li>
+<li>这个关键词在这个 document 中的POSITION</li>
 <li>每个 document 的长度：length norm</li>
 <li>包含这个关键词的所有 document 的平均长度</li>
 </ul>
-<h1 id="相关分数"><a href="#相关分数" class="headerlink" title="相关分数"></a>相关分数</h1><p><a href="https://blog.csdn.net/wangmaohong0717/article/details/60141394" target="_blank" rel="noopener">ElasticSearch 的分数 (_score) 是怎么计算得出 (2.X &amp; 5.X)</a></p>
+<h1 id="相关分数"><a href="#相关分数" class="headerlink" title="相关分数"></a>相关分数</h1><p><a href="https://blog.csdn.net/wangmaohong0717/article/details/60141394" target="_blank" rel="noopener">ElasticSearch 的分数 (_score) 是怎么计算得出 (2.X &amp; 5.X)</a><br><a href="https://blog.csdn.net/weixin_36564655/article/details/82736269" target="_blank" rel="noopener">elasticsearch的TF/IDF打分公式总结</a><br><a href="https://www.elastic.co/cn/elasticon/conf/2016/sf/improved-text-scoring-with-bm25" target="_blank" rel="noopener">improved-text-scoring-with-bm25</a><br><a href="https://www.cnblogs.com/sheeva/p/6847309.html" target="_blank" rel="noopener">Elasticsearch中的相似度模型(原文：Similarity in Elasticsearch)</a><br><a href="https://www.elastic.co/guide/en/elasticsearch/guide/master/scoring-theory.html#idf" target="_blank" rel="noopener">官方文档</a></p>
 <h2 id="TF-IDF"><a href="#TF-IDF" class="headerlink" title="TF/IDF"></a>TF/IDF</h2><p>relevance score（相关度得分）算法：简单来说，就是计算出，一个索引中的文本，与搜索文本，他们之间的关联匹配程度</p>
 <p>Elasticsearch 使用的是 term frequency/inverse document frequency 算法，简称为 TF/IDF 算法</p>
 <pre><code>TF/IDF 有以下三个组成
@@ -349,11 +346,15 @@
 
 某单个关键词(term) 在某文档的某字段中出现的频率次数, 显然, 出现频率越高意味着该文档与搜索的相关度也越高
 
+具体计算公式是 tf(q in d) = sqrt(termFreq)
+
+另外, 索引的时候可以做一些设置, &quot;index_options&quot;: &quot;docs&quot; 的情况下, 只考虑 term 是否出现(命中), 不考虑出现的次数.
+
 * Inverse document frequency
 
 某个关键词(term) 在索引(单个分片)之中出现的频次. 出现频次越高, 这个词的相关度越低. 相对的, 当某个关键词(term)在一大票的文档下面都有出现, 那么这个词在计算得分时候所占的比重就要比那些只在少部分文档出现的词所占的得分比重要低. 说的那么长一句话, 用人话来描述就是 &quot;物以稀为贵&quot;, 比如, &apos;的&apos;, &apos;得&apos;, &apos;the&apos; 这些一般在一些文档中出现的频次都是非常高的, 因此, 这些词占的得分比重远比特殊一些的词(如&apos;Solr&apos;, &apos;Docker&apos;, &apos;哈苏&apos;)占比要低,
 
-具体计算公式是 idf = 1 + ln(maxDocs/(docFreq + 1))
+具体计算公式是 idf = 1 + ln(numDocs/(docFreq + 1))
 
 * Field-length norm
 
@@ -362,7 +363,25 @@
 具体计算公式是 norm = 1/sqrt(numFieldTerms)
 </code></pre><p>最后的得分是三者的乘积 tf <em> idf </em> norm</p>
 <p>以上描述的是最原始的针对单个关键字(term)的搜索. 如果是有多个搜索关键词(terms)的时候, 还要用到的 Vector Space Model</p>
+<p>Lucene中使用空间向量模型，其基于余弦定理，对于搜索中的每一个词term看做向量中的一维，每一维度的值由Lucene中的tf-idf打分公式给出，最后使用余弦定理获得搜索结果的最终得分。</p>
 <p>如果查询复杂些, 或者用到一些修改了分数的查询, 或者索引时候修改了字段的权重, 比如 function_score 之类的,计算方式也就又更复杂一些.</p>
+<h3 id="Elasticsearch-5-Lucene-6-的-BM25-算法"><a href="#Elasticsearch-5-Lucene-6-的-BM25-算法" class="headerlink" title="Elasticsearch 5 (Lucene 6) 的 BM25 算法"></a>Elasticsearch 5 (Lucene 6) 的 BM25 算法</h3><p>BM25 的 BM 是缩写自 Best Match, 25 貌似是经过 25 次迭代调整之后得出的算法. 它也是基于 TF/IDF 进化来的. Wikipedia 那个公式看起来很吓唬人, 尤其是那个求和符号, 不过分解开来也是比较好理解的.</p>
+<p>总体而言, 主要还是分三部分, TF - IDF - Document Length</p>
+<p>IDF 还是和之前的一样. 公式 IDF(q) = 1 + ln(maxDocs/(docFreq + 1))</p>
+<p>f(q, D) 是 tf(term frequency)</p>
+<p>|d| 是文档的长度, avgdl 是平均文档长度.</p>
+<p>先不看 IDF 和 Document Length 的部分, 变成 tf * (k + 1) / (tf + k),</p>
+<p>相比传统的 TF/IDF (tf(q in d) = sqrt(termFreq)) 而言, BM25 抑制了 tf 对整体评分的影响程度, 虽然同样都是增函数, 但是, BM25 中, tf 越大, 带来的影响无限趋近于 (k + 1), 这里 k 值通常取 [1.2, 2], 而传统的 TF/IDF 则会没有临界点的无限增长.</p>
+<p>而文档长度的影响, 同样的, 可以看到, 命中搜索词的情况下, 文档越短, 相关性越高, 具体影响程度又可以由公式中的 b 来调整, 当设值为 0 的时候, 就跟之前 ‘TF/IDF’ 那篇提到的 “norms”: { “enabled”: false } 一样, 忽略文档长度的影响.</p>
+<p>综合起来,k1，b为分数的调节因子</p>
+<p>k = 1.2</p>
+<p>b = 0.75</p>
+<p>idf <em> (tf </em> (k + 1)) / (tf + k <em> (1 - b + b </em> (dl/avgdl)))</p>
+<p>最后再对所有的 terms 求和. 就是 Elasticsearch 5 中一般查询的得分了.</p>
+<p>饱和度</p>
+<p>tf-idf和bm25都默认对于高频率的词项来说，该词项的频率继续升高对相关性的影响实际很小。区别在于BM25在这一点上做的更好一些。在BM25中高频词接近饱和之后会渐进一个边界值，而在tf-idf中则没有边界值。</p>
+<p>平均文档长度</p>
+<p>tf-idf和BM25之间第二点主要区别是BM25中对文档长度的使用。BM25使用文档长度来补偿长文档通常含有更多词从而在并不相关的情况下获取较高tf分数的情况。然后长文档并不一定是不好的，有些长文档覆盖了更广的范围因此是合理的。BM25通过因子B来做长度补偿,B通过一个调节参数b (0&lt;=b&lt;=1)、文档长度dl和平均文档长度avdl来计算</p>
 <h1 id="索引文档的过程（写）"><a href="#索引文档的过程（写）" class="headerlink" title="索引文档的过程（写）"></a>索引文档的过程（写）</h1><p><a href="https://zhuanlan.zhihu.com/p/34669354" target="_blank" rel="noopener">知乎阿里ES专栏-Elasticsearch内核解析 - 写入篇</a><br><a href="https://www.ctolib.com/docs/sfile/ELKstack-guide-cn/elasticsearch/principle/index.html" target="_blank" rel="noopener">ElasticSearch架构原理</a></p>
 <p><strong>关键点</strong></p>
 <ul>
@@ -566,7 +585,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#倒排索引"><span class="nav-number">1.</span> <span class="nav-text">倒排索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关分数"><span class="nav-number">2.</span> <span class="nav-text">相关分数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TF-IDF"><span class="nav-number">2.1.</span> <span class="nav-text">TF/IDF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引文档的过程（写）"><span class="nav-number">3.</span> <span class="nav-text">索引文档的过程（写）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lucene的写"><span class="nav-number">3.1.</span> <span class="nav-text">Lucene的写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Elasticsearch的写"><span class="nav-number">3.2.</span> <span class="nav-text">Elasticsearch的写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Segment-Merge"><span class="nav-number">3.3.</span> <span class="nav-text">Segment Merge</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#倒排索引"><span class="nav-number">1.</span> <span class="nav-text">倒排索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关分数"><span class="nav-number">2.</span> <span class="nav-text">相关分数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TF-IDF"><span class="nav-number">2.1.</span> <span class="nav-text">TF/IDF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Elasticsearch-5-Lucene-6-的-BM25-算法"><span class="nav-number">2.1.1.</span> <span class="nav-text">Elasticsearch 5 (Lucene 6) 的 BM25 算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引文档的过程（写）"><span class="nav-number">3.</span> <span class="nav-text">索引文档的过程（写）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lucene的写"><span class="nav-number">3.1.</span> <span class="nav-text">Lucene的写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Elasticsearch的写"><span class="nav-number">3.2.</span> <span class="nav-text">Elasticsearch的写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Segment-Merge"><span class="nav-number">3.3.</span> <span class="nav-text">Segment Merge</span></a></li></ol></li></ol></div>
             
 
           </div>
