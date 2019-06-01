@@ -94,18 +94,22 @@
 
 
 
-<meta name="description" content="随便记一下，顺便骚一下">
+<meta name="description" content="史上最全的大厂Mysql面试题在这里MySql 三大知识点，索引、锁、事务，原理分析 MYSQL 5.6 InnoDB 数据类型存储引擎MySQL 5.7版本：InnoDB、MyISAM、Memory、CSV、Archive、Blackhole、Merge、Federated、Example 常用：    类型 表锁 页锁 行锁 特性 应用场景 说明     InnoDB *  * 支持事务、支持">
 <meta name="keywords" content="技术、生活、健身">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mysql学习笔记">
 <meta property="og:url" content="http://yoursite.com/2019/05/10/mysql-learning/index.html">
 <meta property="og:site_name" content="程序员Zpl">
-<meta property="og:description" content="随便记一下，顺便骚一下">
+<meta property="og:description" content="史上最全的大厂Mysql面试题在这里MySql 三大知识点，索引、锁、事务，原理分析 MYSQL 5.6 InnoDB 数据类型存储引擎MySQL 5.7版本：InnoDB、MyISAM、Memory、CSV、Archive、Blackhole、Merge、Federated、Example 常用：    类型 表锁 页锁 行锁 特性 应用场景 说明     InnoDB *  * 支持事务、支持">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-10T09:21:16.097Z">
+<meta property="og:image" content="http://yoursite.com/uploads/mysql/mysql-5.6-innodb.jpg">
+<meta property="og:image" content="http://yoursite.com/uploads/mysql/btree.jpg">
+<meta property="og:image" content="http://yoursite.com/uploads/mysql/b+tree.jpg">
+<meta property="og:updated_time" content="2019-06-01T12:08:19.079Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql学习笔记">
-<meta name="twitter:description" content="随便记一下，顺便骚一下">
+<meta name="twitter:description" content="史上最全的大厂Mysql面试题在这里MySql 三大知识点，索引、锁、事务，原理分析 MYSQL 5.6 InnoDB 数据类型存储引擎MySQL 5.7版本：InnoDB、MyISAM、Memory、CSV、Archive、Blackhole、Merge、Federated、Example 常用：    类型 表锁 页锁 行锁 特性 应用场景 说明     InnoDB *  * 支持事务、支持">
+<meta name="twitter:image" content="http://yoursite.com/uploads/mysql/mysql-5.6-innodb.jpg">
 
 
 
@@ -330,7 +334,326 @@
       
 
       
-        
+        <p><a href="https://zhuanlan.zhihu.com/p/60348440" target="_blank" rel="noopener">史上最全的大厂Mysql面试题在这里</a><br><a href="https://zhuanlan.zhihu.com/p/60492217" target="_blank" rel="noopener">MySql 三大知识点，索引、锁、事务，原理分析</a></p>
+<h1 id="MYSQL-5-6-InnoDB"><a href="#MYSQL-5-6-InnoDB" class="headerlink" title="MYSQL 5.6 InnoDB"></a>MYSQL 5.6 InnoDB</h1><p><img src="/uploads/mysql/mysql-5.6-innodb.jpg" alt="innodb 架构图"></p>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><h1 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h1><p>MySQL 5.7版本：InnoDB、MyISAM、Memory、CSV、Archive、Blackhole、Merge、Federated、Example</p>
+<p>常用：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>表锁</th>
+<th>页锁</th>
+<th>行锁</th>
+<th>特性</th>
+<th>应用场景</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>InnoDB</td>
+<td>*</td>
+<td></td>
+<td>*</td>
+<td>支持事务、支持行级锁、支持外键约束、不支持全文索引、支持MVCC</td>
+<td>需要频繁更新、删除、需要事务</td>
+<td>5.5之后版本中默认的存储引擎</td>
+</tr>
+<tr>
+<td>MyISAM</td>
+<td>*</td>
+<td></td>
+<td></td>
+<td>不支持事务、不支持行锁、不支持外键约束、读写并发性能会低、占用资源比较少</td>
+<td>以读为主的业务</td>
+<td>是ISAM 的扩展格式，5.5.5版本之前的默认存储引擎，MyISAM的表存储成3个文件。文件的名字与表名相同。拓展名为frm、MYD、MYI</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>*</td>
+<td></td>
+<td></td>
+<td>不支持事务、默认使用哈希（HASH）索引，虽然排序范围过滤的应该使用B+树索引</td>
+<td>需要很快的读写速度，它对表的大小有要求，不能建立太大的表，用于查询的临时表</td>
+<td>数据均保存在内存中，之前还有个名字叫做 「Heap」</td>
+<td></td>
+</tr>
+<tr>
+<td>Archive</td>
+<td>*</td>
+<td></td>
+<td></td>
+<td>不支持事务、不支持索引、只支持select 和 insert、提供了压缩功能、高效的插入速度</td>
+<td>适合存储大量独立的、作为历史记录的数据</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>参考：</p>
+<p><a href="https://www.cnblogs.com/laowenBlog/p/8405614.html" target="_blank" rel="noopener">MyISAM 存储引擎的特点及优化方法</a></p>
+<h1 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h1><p>关于 Mysql 的锁，各种概念就会喷涌而出，事实上，锁有好几种维度，我们来解释一下</p>
+<h2 id="锁的粒度"><a href="#锁的粒度" class="headerlink" title="锁的粒度"></a>锁的粒度</h2><ul>
+<li>表级锁：开销小，加锁快；不会出现死锁；锁定粒度大，发生锁冲突的概率最高，并发度最低</li>
+<li>行级锁：开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低，并发度也最高</li>
+<li>页面锁：开销和加锁时间界于表锁和行锁之间；会出现死锁；锁定粒度界于表锁和行锁之间，并发度一般</li>
+</ul>
+<p>Mysiam锁模式<br>MyISAM在执行查询语句（SELECT）前，会自动给涉及的所有表加读锁，在执行更新操作（UPDATE、DELETE、INSERT等）前，会自动给涉及的表加写锁。</p>
+<ul>
+<li>对MyISAM表的读操作(加读锁),不会阻塞其他进程对同一表的读请求,但会阻塞对同一表的写请求.只有当读锁释放后才会执行其它进程的写操作。</li>
+<li>对MyISAM表的写操作(加写锁),会阻塞其他进程对同一表的读和写操作，只有当写锁释放后，才会执行其它进程的读写操作。</li>
+</ul>
+<p>innodb锁模式<br>意向锁是InnoDB自动加的，不需要用户干预。<br>对于insert、update、delete，InnoDB会自动给涉及的数据加排他锁（X）；对于一般的Select语句，InnoDB不会加任何锁，事务可以通过以下语句给显示加共享锁或排他锁。</p>
+<ul>
+<li>共享锁： SELECT … LOCK IN SHARE MODE;</li>
+<li>排他锁： SELECT … FOR UPDATE;</li>
+</ul>
+<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><ul>
+<li>共享锁（读锁 / S 锁）</li>
+<li>排它锁（写锁 / X 锁）</li>
+</ul>
+<p>悲观锁（使用锁，即 for update）</p>
+<p>乐观锁（使用版本号字段，类似 CAS 机制，即用户自己控制。缺点：并发很高的时候，多了很多无用的重试）</p>
+<h2 id="锁的算法"><a href="#锁的算法" class="headerlink" title="锁的算法"></a>锁的算法</h2><ul>
+<li>Record Lock（单行记录）</li>
+<li>Gap Lock（间隙锁，锁定一个范围，但不包含锁定记录）</li>
+<li>Next-Key Lock（Record Lock + Gap Lock，锁定一个范围，并且锁定记录本身， MySql 防止幻读，就是使用此锁实现）</li>
+</ul>
+<h2 id="默认的读操作，上锁吗"><a href="#默认的读操作，上锁吗" class="headerlink" title="默认的读操作，上锁吗"></a>默认的读操作，上锁吗</h2><p>默认是 MVCC 机制（“一致性非锁定读”）保证 RR 级别的隔离正确性，是不上锁的</p>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><p>参考：</p>
+<p><a href="https://blog.csdn.net/ty_hf/article/details/55338097" target="_blank" rel="noopener">Mysql-各种锁区分</a></p>
+<h2 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h2><ul>
+<li><p>MyISAM存储引擎只支持表锁</p>
+</li>
+<li><p>表记锁有哪些模式？<br>表共享锁(table read lock)、表独占写锁(table write lock)</p>
+</li>
+<li><p>锁的调度：读写请求同时进行<br>写的优先级大于读的优先级，大量写容易导致读阻塞<br>解决方法：通过更改low priority updates写的优先级；主从（读写）分离来实现负载均衡</p>
+</li>
+<li><p>查询表级锁争用情况</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">status</span> <span class="keyword">like</span> ‘<span class="keyword">table</span>%’</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Table_locks_waited值高说明表级锁争用情况严重</p>
+<ul>
+<li>如何控制查询和插入操作的并发进行<br>MyISAM存储引擎有一个系统变量concurrent_insert<br>concurrent_insert=0 不允许并发插入<br>concurrent_insert=1 表中间没有被删除的行，则允许读的同时，表尾插入记录（这是默认设置）<br>concurrent_insert=2 表中间无论有没有被删除的行，都允许表尾插入记录</li>
+</ul>
+<h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>普通索引</td>
+<td>最基本的索引，没有任何约束</td>
+</tr>
+<tr>
+<td>唯一索引</td>
+<td>与普通索引类似，但具有唯一约束</td>
+</tr>
+<tr>
+<td>主键索引</td>
+<td>特殊的唯一索引 不允许有空值</td>
+</tr>
+<tr>
+<td>复合索引</td>
+<td>将多个列组合在一起创建索引 可以覆盖多个列</td>
+</tr>
+<tr>
+<td>外键索引</td>
+<td>只有InnoDB类型的表才可以使用外键索引，保证数据的一致性、完整性和实现级联操作</td>
+</tr>
+<tr>
+<td>全文索引</td>
+<td>MYSQL自带的全文索引只能用于InnoDB、MyISAM，并且只能对英文进行检索</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>主键就是唯一索引，但是唯一索引不一定是主键，唯一索引可以为空，但是空值只能有一个，主键不能为空</p>
+</blockquote>
+<blockquote>
+<p>InnoDB 通过主键聚簇数据，如果没有定义主键且没有定义聚集索引， MySql 会选择一个唯一的非空索引代替，如果没有这样的索引，会隐式定义个 6 字节的主键作为聚簇索引，用户不能查看或访问</p>
+</blockquote>
+<blockquote>
+<p>MySql 将数据按照页来存储，默认一页为 16kb，当你在查询时，不会只加载某一条数据，而是将这个数据所在的页都加载到 pageCache 中，这个其实和 OS 的就近访问原理类似</p>
+</blockquote>
+<p><img src="/uploads/mysql/btree.jpg" alt="B树"><br><img src="/uploads/mysql/b+tree.jpg" alt="B+树"></p>
+<p>B树： 他会将数据也保存在非页子节点 ，叶子节点之间不存在关系<br>B+树： B+ Tree 将所有的 data 数据都保存到了叶子节点中，非也子节点只保存索引和指针。</p>
+<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><p>事务由单独单元的一个或多个SQL语句组成，整个单元的SQL要么成功，要么失败回滚</p>
+<h2 id="四大特性ACID"><a href="#四大特性ACID" class="headerlink" title="四大特性ACID"></a>四大特性ACID</h2><ul>
+<li>原子性：事务是一个原子操作单元，整个单元的SQL要么成功，要么失败回滚</li>
+<li>一致性：保证事务只能把数据库从一个有效（正确）的状态“转移”到另一个有效（正确）的状态（是我们应用层利用事务回滚保证了我们的约束不被破坏）<br><a href="https://www.zhihu.com/question/31346392" target="_blank" rel="noopener">如何理解数据库事务中的一致性的概念</a></li>
+<li>隔离性：操作同一张表时，数据库为每一个用户开启的事务，不能被其他事务的操作所干扰，多个并发事务之间要相互隔离</li>
+<li>持久性：持久性是指一个事务一旦被提交了，那么对数据库中的数据的改变就是永久性的，即便是在数据库系统遇到故障的情况下也不会丢失提交事务的操作</li>
+</ul>
+<p>参考：</p>
+<p><a href="https://zhuanlan.zhihu.com/p/65281198" target="_blank" rel="noopener">程序员，知道Mysql中ACID的原理吗</a></p>
+<h3 id="怎么保证一致性？"><a href="#怎么保证一致性？" class="headerlink" title="怎么保证一致性？"></a>怎么保证一致性？</h3><p>分两个层面：</p>
+<p>从数据库层面，数据库通过原子性、隔离性、持久性来保证一致性，（数据库必须实现了AID才能保证C，也就是C是目的，AID是手段）。</p>
+<p>如果事务里出了BUG，违反约束的代码，比如转账转出者没有扣余额，那么一致性就无法保证了。</p>
+<p>从应用层面，通过业务逻辑代码判断，判断是否操作符合约束，决定回滚还是提交。</p>
+<h3 id="怎么保证原子性？"><a href="#怎么保证原子性？" class="headerlink" title="怎么保证原子性？"></a>怎么保证原子性？</h3><p>利用innoDB的 <strong>undo log</strong>（回滚日志)，是实现原子性的关键，当事务需要回滚的时候能够撤销所有已经成功执行的SQL。</p>
+<pre><code>1. 当delete一条数据的时候，需要记录这条数据，回滚的时候，insert这条数据
+1. 当update一条数据时候，需要记录之前的旧值，回滚的时候，根据旧值回滚
+1. 当insert一条数据，需要记录这条记录的主键，回滚的时候，执行delete操作
+</code></pre><p>当调用rollback的时候，便利用undo log回滚到修改之前的样子</p>
+<h3 id="怎么保证持久性？"><a href="#怎么保证持久性？" class="headerlink" title="怎么保证持久性？"></a>怎么保证持久性？</h3><p>利用InnoDB的<strong>redo log</strong>，Mysql是先把磁盘上的数据加载到内存中，在内存中对数据进行修改，再刷回磁盘上。如果此时突然宕机，内存中的数据就会丢失。</p>
+<p>解决方法就是：事务提交前直接把数据写入磁盘</p>
+<p>当做数据修改的时候，不仅在内存中操作，还会在redo log中记录这次操作。当事务提交的时候，会将redo log日志进行刷盘(redo log一部分在内存中，一部分在磁盘上)。</p>
+<ul>
+<li>redo log体积小，只记录哪一页修改了什么，刷盘快</li>
+<li>redo log是一直往末尾追加，属于顺序IO</li>
+</ul>
+<p>当数据库宕机重启的时候，会将redo log中的内容恢复到数据库中，再根据undo log和binlog内容决定回滚数据还是提交数据。</p>
+<h3 id="怎么保证隔离性？"><a href="#怎么保证隔离性？" class="headerlink" title="怎么保证隔离性？"></a>怎么保证隔离性？</h3><p>利用锁机制,其中 MVCC（Multi Version Concurrency Control）机制</p>
+<p>MVCC : 一句话讲，就是用 同一份数据临时保留多版本的方式 的方式，实现并发控制。</p>
+<blockquote>
+<p>不再单纯的使用行锁来进行数据库的并发控制，取而代之的是把数据库的行锁与行的多个版本结合起来，只需要很小的开销,就可以实现非锁定读，从而大大提高数据库系统的并发性能</p>
+</blockquote>
+<p>参考：</p>
+<p><a href="https://liuzhengyang.github.io/2017/04/18/innodb-mvcc/" target="_blank" rel="noopener">InnoDB存储引擎MVCC实现原理</a><br><a href="https://juejin.im/post/5cdbfec051882515cc7e4afd" target="_blank" rel="noopener">谈谈你对Mysql的MVCC的理解</a><br><a href="https://www.cnblogs.com/FXqufei/p/9795435.html" target="_blank" rel="noopener">关于mysql行级锁中MVCC的一些理解</a></p>
+<h2 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h2><h1 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h1><h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><h2 id="使用规范"><a href="#使用规范" class="headerlink" title="使用规范"></a>使用规范</h2><p><a href="https://zhuanlan.zhihu.com/p/32586602" target="_blank" rel="noopener">MySQL数据库规范及解读</a></p>
+<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><ul>
+<li><p>使用InnoDB存储引擎<br>支持事务、行级锁、并发性能更好、CPU与内存缓存页优化使得资源使用率更高</p>
+</li>
+<li><p>必须使用utf8(utf8mb4)字符集<br>无需转码 无乱码风险 节省空间</p>
+</li>
+<li><p>数据表、数据字段必须加入中文注释</p>
+</li>
+<li><p>禁止使用存储过程、视图、触发器、Event</p>
+<p>  高并发大数据的互联网业务，架构设计思路是“解放数据库CPU，将计算转移到服务层”，并发量大的情况下，这些功能很可能将数据库拖死，业务逻辑放到服务层具备更好的扩展性，能够轻易实现“增机器就加性能”。数据库擅长存储与索引，CPU计算还是上移吧！</p>
+<p>  总结：<strong>不要让数据库的CPU处理太多逻辑，上浮到服务层，服务水平轻易做到扩展</strong></p>
+</li>
+<li><p>禁止存储大文件或者大照片</p>
+</li>
+</ul>
+<h3 id="表和字段设计规范"><a href="#表和字段设计规范" class="headerlink" title="表和字段设计规范"></a>表和字段设计规范</h3><ul>
+<li><p>禁止使用外键，如果有外键完整性约束，需要应用程序控制</p>
+<ol>
+<li><p>外键会导致表与表之间耦合，update与delete操作都会涉及相关联的表，十分影响sql 的性能，甚至会造成死锁</p>
+<p>总结：<strong>外键会增加表与表之间的耦合，update与delete这些操作会设计到相关联的表，十分影响SQL的性能，甚至可能造成死锁</strong></p>
+</li>
+</ol>
+</li>
+<li><p>必须把字段定义为NOT NULL并且提供默认值</p>
+<ol>
+<li>null的列使索引/索引统计/值比较都更加复杂，对MySQL来说更难优化</li>
+<li>null这种类型MySQL内部需要进行特殊处理，增加数据库处理记录的复杂性;同等条件下，表中有较多空字段的时候，数据库的处理性能会降低很多</li>
+<li>null值需要更多的存储空间，无论是表还是索引中每行中的null的列都需要额外的空间来标识</li>
+<li><p>对null 的处理时候，只能采用is null或is not null，而不能采用=、in、&lt;、&lt;&gt;、!=、not in这些操作符号。如：where name!=’shenjian’，如果存在name为null值的记录，查询结果就不会包含name为null值的记录</p>
+<p>总结：<strong>会索引、索引统计、值比较都更加复杂，需要更多的存储空间，null的列需要额外的空间来标识</strong></p>
+</li>
+</ol>
+</li>
+<li><p>禁止使用TEXT、BLOB类型</p>
+<ol>
+<li>会浪费更多的磁盘和内存空间，非必要的大量的大字段查询会淘汰掉热数据，导致内存命中率急剧降低，影响数据库性能</li>
+</ol>
+</li>
+<li><p>禁止使用ENUM，可使用TINYINT代替</p>
+<ol>
+<li>增加新的ENUM值要做DDL操作</li>
+<li>ENUM的内部实际存储就是整数，你以为自己定义的是字符串</li>
+</ol>
+</li>
+<li><p>表必须有主键，例如自增主键</p>
+<ol>
+<li>主键递增，数据行写入可以提高插入性能，可以避免page分裂，减少表碎片提升空间和内存的使用</li>
+<li>主键要选择较短的数据类型， Innodb引擎普通索引都会保存主键的值，较短的数据类型可以有效的减少索引的磁盘空间，提高索引的缓存效率</li>
+<li><p>无主键的表删除，在row模式的主从架构，会导致备库夯住</p>
+<p>总结：<strong>有助于提高插入性能，无主键row模式的主从会导致备库</strong></p>
+</li>
+</ol>
+</li>
+<li><p>必须使用varchar(20)存储手机号</p>
+<ol>
+<li>涉及到区号或者国家代号，可能出现+-()</li>
+<li>手机号会去做数学运算么?</li>
+<li>varchar可以支持模糊查询，例如：like“138%”</li>
+</ol>
+</li>
+<li><p>禁止使用小数存储货币</p>
+<ol>
+<li>使用整数吧，小数容易导致钱对不上，使用“分”作为单位，这样数据库里就是整数了</li>
+</ol>
+</li>
+</ul>
+<h3 id="索引-1"><a href="#索引-1" class="headerlink" title="索引"></a>索引</h3><ul>
+<li><p>单表索引建议控制在5个以内</p>
+<ol>
+<li>一个好的索引设计，可以让你的效率提高几十甚至几百倍，但过多反而适得其反</li>
+</ol>
+</li>
+<li><p>单索引字段数不允许超过5个</p>
+<ol>
+<li>段超过5个时，实际已经起不到有效过滤数据的作用了</li>
+</ol>
+</li>
+<li><p>禁止在更新十分频繁、区分度不高的属性上建立索引</p>
+<ol>
+<li>更新会变更B+树，更新频繁的字段建立索引会大大降低数据库性能</li>
+<li>“性别”这种区分度不大的属性，建立索引是没有什么意义的，不能有效过滤数据，性能与全表扫描类似</li>
+</ol>
+</li>
+<li><p>建立组合索引，必须把区分度高的字段放在前面</p>
+<ol>
+<li>能够更加有效的过滤数据</li>
+</ol>
+</li>
+</ul>
+<h3 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h3><ul>
+<li><p>禁止使用SELECT *，只获取必要的字段，需要显示说明列属性</p>
+<p>  <a href="https://www.cnblogs.com/huangsheng/p/6857503.html" target="_blank" rel="noopener">关于SQL中SELECT *（星号）</a></p>
+<ol>
+<li>读取不需要的列会增加CPU、IO、NET消耗</li>
+<li>不能有效的利用覆盖索引</li>
+<li>使用SELECT *容易在增加或者删除字段后出现程序BUG</li>
+<li>SELECT * 查询两张表的时候，列名一样的话，有可能数据绑定的问题</li>
+</ol>
+</li>
+<li><p>禁止使用INSERT INTO t_xxx VALUES(xxx)，必须显示指定插入的列属性</p>
+<ol>
+<li>容易在增加或者删除字段后出现程序BUG</li>
+</ol>
+</li>
+<li><p>禁止使用属性隐式转换</p>
+<ol>
+<li>解读：SELECT uid FROM t_user WHERE phone=13812345678 会导致全表扫描，而不能命中phone索引，猜猜为什么？</li>
+<li>因为int优先级高于varchar，查询会把phone转换为int，因此需要把表中所有数据改成int，所以必须全表扫描</li>
+</ol>
+</li>
+<li><p>禁止在WHERE条件的属性上使用函数或者表达式</p>
+<ol>
+<li>解读：SELECT uid FROM t_user WHERE from_unixtime(day)&gt;=’2017-02-15’ 会导致全表扫描</li>
+<li>正确的写法是：SELECT uid FROM t_user WHERE day&gt;= unix_timestamp(‘2017-02-15 00:00:00’)</li>
+</ol>
+</li>
+<li><p>禁止大表使用JOIN查询，禁止大表使用子查询</p>
+<ol>
+<li>会产生临时表，消耗较多内存与CPU，极大影响数据库性能，大表指的是数据量在1000万以上的表</li>
+</ol>
+</li>
+<li><p>禁止使用OR条件，必须改为IN查询</p>
+<ol>
+<li>旧版本Mysql的OR查询是不能命中索引的，即使能命中索引，为何要让数据库耗费更多的CPU帮助实施查询优化呢</li>
+</ol>
+</li>
+<li><p>禁止%开头的模糊查询，负向查询要求必须有携带其它过滤条件（数据范围必须可控）</p>
+<ol>
+<li>负向查询条件：NOT、!=、&lt;&gt;、!&lt;、!&gt;、NOT IN、NOT LIKE等，会导致全表扫描</li>
+<li>%开头的模糊查询，会导致全表扫描</li>
+</ol>
+</li>
+<li><p>应用程序必须捕获SQL异常，并有相应处理</p>
+<ol>
+<li>方便维护，及时“查漏补缺”</li>
+</ol>
+</li>
+</ul>
+
       
     </div>
     
@@ -418,8 +741,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Zpl">
           <p class="site-author-name" itemprop="name">Zpl</p>
@@ -479,6 +811,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MYSQL-5-6-InnoDB"><span class="nav-number">1.</span> <span class="nav-text">MYSQL 5.6 InnoDB</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据类型"><span class="nav-number">2.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储引擎"><span class="nav-number">3.</span> <span class="nav-text">存储引擎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#锁"><span class="nav-number">4.</span> <span class="nav-text">锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#锁的粒度"><span class="nav-number">4.1.</span> <span class="nav-text">锁的粒度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型"><span class="nav-number">4.2.</span> <span class="nav-text">类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁的算法"><span class="nav-number">4.3.</span> <span class="nav-text">锁的算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认的读操作，上锁吗"><span class="nav-number">4.4.</span> <span class="nav-text">默认的读操作，上锁吗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁"><span class="nav-number">4.5.</span> <span class="nav-text">死锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表级锁"><span class="nav-number">4.6.</span> <span class="nav-text">表级锁</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引"><span class="nav-number">5.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务"><span class="nav-number">6.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#四大特性ACID"><span class="nav-number">6.1.</span> <span class="nav-text">四大特性ACID</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么保证一致性？"><span class="nav-number">6.1.1.</span> <span class="nav-text">怎么保证一致性？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么保证原子性？"><span class="nav-number">6.1.2.</span> <span class="nav-text">怎么保证原子性？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么保证持久性？"><span class="nav-number">6.1.3.</span> <span class="nav-text">怎么保证持久性？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么保证隔离性？"><span class="nav-number">6.1.4.</span> <span class="nav-text">怎么保证隔离性？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隔离级别"><span class="nav-number">6.2.</span> <span class="nav-text">隔离级别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主从复制"><span class="nav-number">7.</span> <span class="nav-text">主从复制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优化"><span class="nav-number">8.</span> <span class="nav-text">优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用规范"><span class="nav-number">8.1.</span> <span class="nav-text">使用规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础"><span class="nav-number">8.1.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表和字段设计规范"><span class="nav-number">8.1.2.</span> <span class="nav-text">表和字段设计规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引-1"><span class="nav-number">8.1.3.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL"><span class="nav-number">8.1.4.</span> <span class="nav-text">SQL</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
