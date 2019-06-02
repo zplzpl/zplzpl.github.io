@@ -105,7 +105,8 @@
 <meta property="og:image" content="http://yoursite.com/uploads/mysql/mysql-5.6-innodb.jpg">
 <meta property="og:image" content="http://yoursite.com/uploads/mysql/btree.jpg">
 <meta property="og:image" content="http://yoursite.com/uploads/mysql/b+tree.jpg">
-<meta property="og:updated_time" content="2019-06-01T12:08:19.079Z">
+<meta property="og:image" content="http://yoursite.com/uploads/mysql/geli-level.jpg">
+<meta property="og:updated_time" content="2019-06-02T09:24:20.825Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql学习笔记">
 <meta name="twitter:description" content="史上最全的大厂Mysql面试题在这里MySql 三大知识点，索引、锁、事务，原理分析 MYSQL 5.6 InnoDB 数据类型存储引擎MySQL 5.7版本：InnoDB、MyISAM、Memory、CSV、Archive、Blackhole、Merge、Federated、Example 常用：    类型 表锁 页锁 行锁 特性 应用场景 说明     InnoDB *  * 支持事务、支持">
@@ -412,16 +413,29 @@
 <li>共享锁（读锁 / S 锁）</li>
 <li>排它锁（写锁 / X 锁）</li>
 </ul>
-<p>悲观锁（使用锁，即 for update）</p>
-<p>乐观锁（使用版本号字段，类似 CAS 机制，即用户自己控制。缺点：并发很高的时候，多了很多无用的重试）</p>
+<p>悲观锁（使用锁，即 for update）：总是假设最坏的情况，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会阻塞直到它拿到锁</p>
+<p>乐观锁（使用版本号字段，类似 CAS 机制，即用户自己控制。缺点：并发很高的时候，多了很多无用的重试）：每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别人有没有去更新这个数据，可以使用版本号等机制</p>
 <h2 id="锁的算法"><a href="#锁的算法" class="headerlink" title="锁的算法"></a>锁的算法</h2><ul>
 <li>Record Lock（单行记录）</li>
 <li>Gap Lock（间隙锁，锁定一个范围，但不包含锁定记录）</li>
 <li>Next-Key Lock（Record Lock + Gap Lock，锁定一个范围，并且锁定记录本身， MySql 防止幻读，就是使用此锁实现）</li>
 </ul>
 <h2 id="默认的读操作，上锁吗"><a href="#默认的读操作，上锁吗" class="headerlink" title="默认的读操作，上锁吗"></a>默认的读操作，上锁吗</h2><p>默认是 MVCC 机制（“一致性非锁定读”）保证 RR 级别的隔离正确性，是不上锁的</p>
-<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><p>参考：</p>
-<p><a href="https://blog.csdn.net/ty_hf/article/details/55338097" target="_blank" rel="noopener">Mysql-各种锁区分</a></p>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><p>死锁一般是事务相互等待对方资源，最后形成环路造成的</p>
+<h3 id="尽可能避免死锁"><a href="#尽可能避免死锁" class="headerlink" title="尽可能避免死锁"></a>尽可能避免死锁</h3><ol>
+<li>以固定的顺序访问表和行</li>
+<li>大事务拆小。大事务更倾向于死锁，如果业务允许，将大事务拆小</li>
+<li>在同一个事务中，尽可能做到一次锁定所需要的所有资源，减少死锁概率</li>
+<li>降低隔离级别。如果业务允许，将隔离级别调低也是较好的选择，比如将隔离级别从RR调整为RC，可以避免掉很多因为gap锁造成的死锁</li>
+<li>为表添加合理的索引。可以看到如果不走索引将会为表的每一行记录添加上锁，死锁的概率大大增大</li>
+</ol>
+<h3 id="定位死锁原因"><a href="#定位死锁原因" class="headerlink" title="定位死锁原因"></a>定位死锁原因</h3><ol>
+<li>通过应用业务日志定位到问题代码，找到相应的事务对应的sql</li>
+<li>确定数据库隔离级别</li>
+<li>找DBA执行下show InnoDB STATUS看看最近死锁的日志</li>
+</ol>
+<p>参考：</p>
+<p><a href="https://blog.csdn.net/ty_hf/article/details/55338097" target="_blank" rel="noopener">Mysql-各种锁区分</a><br><a href="https://www.cnblogs.com/LBSer/p/5183300.html" target="_blank" rel="noopener">死锁原因</a></p>
 <h2 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h2><ul>
 <li><p>MyISAM存储引擎只支持表锁</p>
 </li>
@@ -515,7 +529,24 @@
 </blockquote>
 <p>参考：</p>
 <p><a href="https://liuzhengyang.github.io/2017/04/18/innodb-mvcc/" target="_blank" rel="noopener">InnoDB存储引擎MVCC实现原理</a><br><a href="https://juejin.im/post/5cdbfec051882515cc7e4afd" target="_blank" rel="noopener">谈谈你对Mysql的MVCC的理解</a><br><a href="https://www.cnblogs.com/FXqufei/p/9795435.html" target="_blank" rel="noopener">关于mysql行级锁中MVCC的一些理解</a></p>
-<h2 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h2><h1 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h1><h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><h2 id="使用规范"><a href="#使用规范" class="headerlink" title="使用规范"></a>使用规范</h2><p><a href="https://zhuanlan.zhihu.com/p/32586602" target="_blank" rel="noopener">MySQL数据库规范及解读</a></p>
+<h2 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h2><p><img src="/uploads/mysql/geli-level.jpg" alt></p>
+<ul>
+<li>没有提交的事务被其他事务读取到了，这叫做 脏读 </li>
+<li>其它事务提交后的修改，影响了本次事务的读取，这叫不可重复读<blockquote>
+<p>脏读与不可重复读的区别是，脏读是发生在事务没有提交的时候，不可重复读是发生在提交后的</p>
+</blockquote>
+</li>
+<li>同样的条件,第一次和第二次读取的结果集不一样,这叫幻读<blockquote>
+<ul>
+<li>不可重复读与幻读的区别,不可重读是两次读取同一条记录,幻读是两次读取同一范围记录</li>
+<li>幻读是因为其它事务进行insert或者delete,不可重复读是因为其它事务进行了update</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>参考:</p>
+<p><a href="https://www.aneasystone.com/archives/2017/10/solving-dead-locks-one.html" target="_blank" rel="noopener">强烈推荐阅读,读懂即懂</a></p>
+<h1 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h1><h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><h2 id="使用规范"><a href="#使用规范" class="headerlink" title="使用规范"></a>使用规范</h2><p><a href="https://zhuanlan.zhihu.com/p/32586602" target="_blank" rel="noopener">MySQL数据库规范及解读</a></p>
 <h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><ul>
 <li><p>使用InnoDB存储引擎<br>支持事务、行级锁、并发性能更好、CPU与内存缓存页优化使得资源使用率更高</p>
 </li>
@@ -821,7 +852,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MYSQL-5-6-InnoDB"><span class="nav-number">1.</span> <span class="nav-text">MYSQL 5.6 InnoDB</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据类型"><span class="nav-number">2.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储引擎"><span class="nav-number">3.</span> <span class="nav-text">存储引擎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#锁"><span class="nav-number">4.</span> <span class="nav-text">锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#锁的粒度"><span class="nav-number">4.1.</span> <span class="nav-text">锁的粒度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型"><span class="nav-number">4.2.</span> <span class="nav-text">类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁的算法"><span class="nav-number">4.3.</span> <span class="nav-text">锁的算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认的读操作，上锁吗"><span class="nav-number">4.4.</span> <span class="nav-text">默认的读操作，上锁吗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁"><span class="nav-number">4.5.</span> <span class="nav-text">死锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表级锁"><span class="nav-number">4.6.</span> <span class="nav-text">表级锁</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引"><span class="nav-number">5.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务"><span class="nav-number">6.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#四大特性ACID"><span class="nav-number">6.1.</span> <span class="nav-text">四大特性ACID</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么保证一致性？"><span class="nav-number">6.1.1.</span> <span class="nav-text">怎么保证一致性？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么保证原子性？"><span class="nav-number">6.1.2.</span> <span class="nav-text">怎么保证原子性？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么保证持久性？"><span class="nav-number">6.1.3.</span> <span class="nav-text">怎么保证持久性？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么保证隔离性？"><span class="nav-number">6.1.4.</span> <span class="nav-text">怎么保证隔离性？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隔离级别"><span class="nav-number">6.2.</span> <span class="nav-text">隔离级别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主从复制"><span class="nav-number">7.</span> <span class="nav-text">主从复制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优化"><span class="nav-number">8.</span> <span class="nav-text">优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用规范"><span class="nav-number">8.1.</span> <span class="nav-text">使用规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础"><span class="nav-number">8.1.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表和字段设计规范"><span class="nav-number">8.1.2.</span> <span class="nav-text">表和字段设计规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引-1"><span class="nav-number">8.1.3.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL"><span class="nav-number">8.1.4.</span> <span class="nav-text">SQL</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MYSQL-5-6-InnoDB"><span class="nav-number">1.</span> <span class="nav-text">MYSQL 5.6 InnoDB</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据类型"><span class="nav-number">2.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储引擎"><span class="nav-number">3.</span> <span class="nav-text">存储引擎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#锁"><span class="nav-number">4.</span> <span class="nav-text">锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#锁的粒度"><span class="nav-number">4.1.</span> <span class="nav-text">锁的粒度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型"><span class="nav-number">4.2.</span> <span class="nav-text">类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁的算法"><span class="nav-number">4.3.</span> <span class="nav-text">锁的算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认的读操作，上锁吗"><span class="nav-number">4.4.</span> <span class="nav-text">默认的读操作，上锁吗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁"><span class="nav-number">4.5.</span> <span class="nav-text">死锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#尽可能避免死锁"><span class="nav-number">4.5.1.</span> <span class="nav-text">尽可能避免死锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定位死锁原因"><span class="nav-number">4.5.2.</span> <span class="nav-text">定位死锁原因</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表级锁"><span class="nav-number">4.6.</span> <span class="nav-text">表级锁</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引"><span class="nav-number">5.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务"><span class="nav-number">6.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#四大特性ACID"><span class="nav-number">6.1.</span> <span class="nav-text">四大特性ACID</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么保证一致性？"><span class="nav-number">6.1.1.</span> <span class="nav-text">怎么保证一致性？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么保证原子性？"><span class="nav-number">6.1.2.</span> <span class="nav-text">怎么保证原子性？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么保证持久性？"><span class="nav-number">6.1.3.</span> <span class="nav-text">怎么保证持久性？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么保证隔离性？"><span class="nav-number">6.1.4.</span> <span class="nav-text">怎么保证隔离性？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隔离级别"><span class="nav-number">6.2.</span> <span class="nav-text">隔离级别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主从复制"><span class="nav-number">7.</span> <span class="nav-text">主从复制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优化"><span class="nav-number">8.</span> <span class="nav-text">优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用规范"><span class="nav-number">8.1.</span> <span class="nav-text">使用规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础"><span class="nav-number">8.1.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表和字段设计规范"><span class="nav-number">8.1.2.</span> <span class="nav-text">表和字段设计规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引-1"><span class="nav-number">8.1.3.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL"><span class="nav-number">8.1.4.</span> <span class="nav-text">SQL</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
